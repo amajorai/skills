@@ -1,6 +1,6 @@
 ---
 name: email-transactional
-description: Wire up transactional email for any app using Resend or Postmark. Sets up templates for welcome, password reset, notifications, and digests. Handles domain verification, deliverability, and unsubscribe. Use when the app needs to send emails to users.
+description: Wire up transactional email for any app using Resend, Postmark, useSend, or Plunk. Sets up templates for welcome, password reset, notifications, and digests. Handles domain verification, deliverability, and unsubscribe. Use when the app needs to send emails to users.
 argument-hint: <email types needed: welcome | reset | notifications | digest | all>
 ---
 
@@ -15,7 +15,11 @@ You are wiring up transactional email end-to-end. Work through each phase in ord
 
 Ask the user (combine related questions):
 
-- **Provider**: Resend (default, great DX) or Postmark (high deliverability focus)?
+- **Provider**: Which provider?
+  - **Resend** (default, great DX, CLI-driven setup, hosted)
+  - **Postmark** (high deliverability focus, hosted)
+  - **useSend** (self-hosted, open-source, SES-backed — https://github.com/usesend/useSend)
+  - **Plunk** (self-hosted, open-source, Docker — https://github.com/useplunk/plunk)
 - **From address**: What sending domain? Is it already verified with the provider?
 - **Email types**: Which of these are needed — welcome, email verification, password reset, notification, weekly digest, billing receipt, team invitation?
 - **Templates**: Plain text only, or styled HTML? React Email or MJML for templating?
@@ -32,15 +36,76 @@ Spawn **2 parallel subagents**:
 | 2 | Existing email code, env vars, any current email setup |
 
 
-## Phase 3: Domain Verification
+## Phase 3: Provider Setup
 
-1. Install the SDK: `bun add resend` or `bun add postmark`
-2. Guide the user to add DNS records (SPF, DKIM, DMARC) for the sending domain
-   - SPF: `v=spf1 include:amazonses.com ~all` (or provider-specific)
-   - DKIM: TXT record provided by the email provider
-   - DMARC: `v=DMARC1; p=none; rua=mailto:dmarc@yourdomain.com`
-3. Verify domain is confirmed in the provider dashboard before sending real emails
-4. Set `RESEND_API_KEY` (or `POSTMARK_API_KEY`) in env vars
+### Resend (CLI-driven)
+
+```bash
+# Install CLI
+irm https://resend.com/install.ps1 | iex   # Windows
+curl -fsSL https://resend.com/install.sh | bash  # macOS/Linux
+
+# Authenticate
+resend login
+
+# Create and verify sending domain
+resend domains create --name mail.yourdomain.com --region us-east-1
+resend domains list   # get the domain ID
+resend domains verify <id>
+
+# Create an API key and copy it to .env
+resend api-keys create --name "Production" --permission full_access
+```
+
+Install SDK: `bun add resend`
+
+Set `RESEND_API_KEY` in env vars.
+
+---
+
+### Postmark
+
+Install SDK: `bun add postmark`
+
+1. Create a Postmark account and a Server
+2. Add and verify your sending domain in the Postmark dashboard (SPF, DKIM records)
+3. Set `POSTMARK_API_KEY` (Server API token) in env vars
+
+---
+
+### useSend (self-hosted)
+
+Deploy via Docker or Railway (one-click) — see https://docs.usesend.com
+
+```bash
+# After deploy, configure AWS SES credentials in the useSend dashboard
+# Domain setup and DKIM/SPF are managed through the dashboard
+```
+
+Install SDK: `bun add @usesend/sdk`  
+Set `USESEND_API_KEY` and `USESEND_BASE_URL` in env vars.
+
+---
+
+### Plunk (self-hosted)
+
+```bash
+# Deploy via Docker
+docker pull useplunk/plunk
+# Follow https://docs.useplunk.com for full self-hosting setup
+```
+
+Install SDK: `bun add @plunk/node`  
+Set `PLUNK_SECRET_KEY` and `PLUNK_BASE_URL` in env vars.
+
+---
+
+### DNS Records (all providers)
+
+Guide the user to add these DNS records for the sending domain:
+- **SPF**: `v=spf1 include:<provider-include> ~all`
+- **DKIM**: TXT record provided by the provider dashboard
+- **DMARC**: `v=DMARC1; p=none; rua=mailto:dmarc@yourdomain.com`
 
 
 ## Phase 4: Template Setup

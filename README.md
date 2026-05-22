@@ -9,7 +9,7 @@ Simple, minimal, lean skills that people don't think about when shipping apps. T
 | Skill | What it does |
 |-------|-------------|
 | [`ship`](skills/ship/SKILL.md) | Full-cycle workflow: interview, explore, plan (`/model opusplan`), implement (`/batch`), verify (`/goal`), edge cases, simplify, security, final verify |
-| [`ship-simple`](skills/ship-simple/SKILL.md) | Quick implementation for simple features that don't need the full pipeline. No security review, edge cases, or simplify pass |
+| [`ship-fast`](skills/ship-fast/SKILL.md) | Quick implementation for simple features that don't need the full pipeline. No security review, edge cases, or simplify pass |
 | [`vibe`](skills/vibe/SKILL.md) | Set up a full-stack dev and deployment environment. VPS, Bun, GitHub CLI, Dokploy or Coolify |
 
 ### Core
