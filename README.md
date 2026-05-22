@@ -1,6 +1,6 @@
 # A Major Skills
 
-Useful skills that people don't think about when shipping apps — things we use at [A Major](https://amajor.ai).
+Simple, minimal, lean skills that people don't think about when shipping apps. Things we use at [A Major](https://amajor.ai).
 
 ## Skills
 
