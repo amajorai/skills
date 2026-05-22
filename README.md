@@ -1,6 +1,6 @@
 # A Major Skills
 
-A collection of useful skills we use at [A Major](https://amajor.ai).
+Useful skills that people don't think about when shipping apps — things we use at [A Major](https://amajor.ai).
 
 ## Skills
 
