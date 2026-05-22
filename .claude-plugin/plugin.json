@@ -1,0 +1,11 @@
+{
+  "name": "amajor-skills",
+  "description": "A collection of high-quality AI coding agent skills for shipping features with full quality assurance.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Jia Wei Ng"
+  },
+  "repository": "https://github.com/amajorai/skills",
+  "license": "MIT",
+  "keywords": ["workflow", "ship", "quality", "security", "planning"]
+}

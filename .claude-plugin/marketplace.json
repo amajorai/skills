@@ -1,0 +1,13 @@
+{
+  "name": "amajor-skills",
+  "owner": {
+    "name": "Jia Wei Ng"
+  },
+  "plugins": [
+    {
+      "name": "amajor-skills",
+      "description": "High-quality AI coding agent skills for shipping features with full quality assurance.",
+      "source": "."
+    }
+  ]
+}
