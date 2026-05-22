@@ -4,7 +4,7 @@ description: Run Lighthouse audits on a website, analyze the results across all 
 argument-hint: <URL or local dev server address>
 ---
 
-# lighthouse — Lighthouse Audit & Optimization
+# Lighthouse
 
 You are auditing and optimizing a website for Lighthouse scores. Work through each phase in order. Do not skip phases.
 

@@ -4,7 +4,7 @@ description: Set up quality tools designed specifically for AI-generated code â€
 argument-hint: <leave blank to start the interview>
 ---
 
-# agent-quality â€” AI Code Quality Tools
+# Agent Quality
 
 You are setting up quality tools that catch the specific problems AI coding agents introduce. Start with an interview to install only what's relevant.
 

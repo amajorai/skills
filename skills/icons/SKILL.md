@@ -4,7 +4,7 @@ description: Generate app icons, favicons, and splash screens for Tauri, PWA, Ca
 argument-hint: [path/to/source-image.png]
 ---
 
-# icons — App Icon & Favicon Generator
+# Icons
 
 You are generating all platform icons from a single source image. Work through each step in order.
 

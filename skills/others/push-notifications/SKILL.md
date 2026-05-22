@@ -4,7 +4,7 @@ description: Add push notifications to any web or mobile app. Covers web push (s
 argument-hint: <platform: web | expo | both>
 ---
 
-# push-notifications — Push Notifications
+# Push Notifications
 
 You are implementing push notifications end-to-end. Work through each phase in order.
 

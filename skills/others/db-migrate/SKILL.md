@@ -4,7 +4,7 @@ description: Run a database migration safely in production. Covers dry-run, roll
 argument-hint: <migration description or migration file>
 ---
 
-# db-migrate — Safe Production Database Migration
+# DB Migrate
 
 You are running a production database migration. Safety first — data loss is not recoverable. Work through each phase in order.
 

@@ -4,7 +4,7 @@ description: Audit and optimize a web project for SEO. Detects the stack, runs a
 argument-hint: [URL or project path, optional]
 ---
 
-# seo — SEO Optimization Workflow
+# SEO
 
 You are optimizing a web project for search engine visibility and ranking. **Do not change anything until the interview is complete and the user has confirmed their priorities.** Order matters: detect → interview → plan → implement.
 

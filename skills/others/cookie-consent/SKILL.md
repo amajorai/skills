@@ -4,7 +4,7 @@ description: Add a GDPR/CCPA-compliant cookie consent banner to any web app. Imp
 argument-hint: <cookie categories used: analytics | marketing | preferences | all>
 ---
 
-# cookie-consent — GDPR/CCPA Cookie Consent
+# Cookie Consent
 
 You are implementing a compliant cookie consent system. Work through each phase in order.
 

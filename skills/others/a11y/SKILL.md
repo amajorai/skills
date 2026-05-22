@@ -4,7 +4,7 @@ description: Audit and fix accessibility issues in any web app to WCAG 2.2 AA st
 argument-hint: <target area or URL to audit>
 ---
 
-# a11y — Accessibility Audit & Fixes
+# A11y
 
 You are auditing and fixing accessibility issues to WCAG 2.2 AA. Work through each phase in order.
 

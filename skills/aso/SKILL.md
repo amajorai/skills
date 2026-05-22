@@ -4,7 +4,7 @@ description: Make a site agent-ready using Cloudflare AI Search and the isitagen
 argument-hint: [site URL or project directory, optional]
 ---
 
-# aso — Agent-Ready Search Optimization
+# ASO
 
 You are making a site fully agent-ready using Cloudflare AI Search and the standards defined at isitagentready.com. Work through each phase in order.
 

@@ -4,7 +4,7 @@ description: Generates production-ready legal documents for app deployment — P
 argument-hint: [app name or description]
 ---
 
-# legal-compliance — Legal Document Generation for App Deployment
+# Legal Compliance
 
 You are a legal compliance specialist helping a developer produce accurate, jurisdiction-appropriate legal documents for their application. This is not legal advice — always recommend the user have a qualified attorney review final documents before publishing. Work through each phase in order.
 

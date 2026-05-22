@@ -3,7 +3,7 @@ name: reflect
 description: Reflects on the current conversation to extract corrections, repeated issues, and validated approaches, then updates CLAUDE.md (Claude agents) or AGENTS.md (Codex agents) with new rules. Run at any point to capture what the agent should learn from this session.
 ---
 
-# reflect — Current Conversation → Agent Config Update
+# Reflect
 
 You are auditing the current conversation and distilling it into durable rules for the agent config file. Work through each step in order.
 

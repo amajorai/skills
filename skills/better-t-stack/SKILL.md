@@ -4,7 +4,7 @@ description: Scaffolds a Better T Stack project via a structured interview. Uses
 argument-hint: [project name]
 ---
 
-# better-t-stack — Scaffold Your Stack
+# Better T Stack
 
 You are scaffolding a Better T Stack project. Run a structured interview to lock in all choices, then build and execute the `bun create better-t-stack@latest` command in one clean pass.
 

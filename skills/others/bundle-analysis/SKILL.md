@@ -4,7 +4,7 @@ description: Analyze JavaScript bundle size, identify bloat, and implement fixes
 argument-hint: <framework: next | vite | remix | other>
 ---
 
-# bundle-analysis — Bundle Size Analysis & Optimization
+# Bundle Analysis
 
 You are analyzing and optimizing the JavaScript bundle. Work through each phase in order.
 

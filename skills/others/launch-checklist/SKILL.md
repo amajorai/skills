@@ -4,7 +4,7 @@ description: Pre-launch audit for any web app. Checks SSL, DNS, env vars, secret
 argument-hint: <app URL or domain>
 ---
 
-# launch-checklist — Pre-Launch Audit
+# Launch Checklist
 
 You are running a pre-launch audit. Work through each category systematically and produce a prioritized fix list.
 

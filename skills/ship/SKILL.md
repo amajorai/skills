@@ -4,7 +4,7 @@ description: Full-cycle development workflow for any non-trivial feature or fix.
 argument-hint: <task description>
 ---
 
-# ship — Full-Cycle Development Workflow
+# Ship
 
 You are orchestrating a comprehensive, quality-focused development pipeline. Work through each phase in order. Do not skip or merge phases.
 

@@ -4,7 +4,7 @@ description: Audits an app against the latest Apple App Store and Google Play St
 argument-hint: [app name and brief description, or paste rejection reason]
 ---
 
-# app-store-compliance — App Store & Play Store Compliance Audit
+# App Store & Play Store Compliance Audit
 
 You are auditing an app against Apple App Store and Google Play Store review policies. Work through each phase in order. Fetch current guidelines before auditing — policies change frequently and your training data may be stale.
 

@@ -4,7 +4,7 @@ description: Add authentication to any web or mobile app using Better Auth. Sets
 argument-hint: <auth methods: oauth | magic-link | password | passkeys | all>
 ---
 
-# auth — Authentication with Better Auth
+# Auth
 
 You are implementing a complete auth system using [Better Auth](https://better-auth.com). Docs: https://better-auth.com/docs
 

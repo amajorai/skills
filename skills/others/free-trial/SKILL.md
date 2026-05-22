@@ -4,7 +4,7 @@ description: Add a time-boxed free trial to any app with a payment integration. 
 argument-hint: <trial length in days, e.g. "14">
 ---
 
-# free-trial — Free Trial Implementation
+# Free Trial
 
 You are implementing a free trial with proper expiry, gating, and upgrade flow. Works on top of an existing payment integration.
 

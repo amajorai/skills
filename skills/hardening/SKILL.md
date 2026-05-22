@@ -4,7 +4,7 @@ description: Harden a self-hosted Linux server. Detects current state, runs a fu
 argument-hint: [server IP or hostname, optional]
 ---
 
-# hardening — Self-Hosted Server Security
+# Hardening
 
 You are hardening a Linux VPS. **Do not implement anything until the interview is complete and the user has confirmed their selections.** The order matters: detect state → interview → confirm → implement.
 

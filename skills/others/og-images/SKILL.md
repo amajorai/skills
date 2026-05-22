@@ -4,7 +4,7 @@ description: Add dynamic Open Graph images to any web app using an edge function
 argument-hint: <pages or routes that need OG images>
 ---
 
-# og-images — Dynamic Open Graph Images
+# OG Images
 
 You are implementing dynamic OG image generation via an edge function. No external service — images are generated at the edge on demand and cached.
 

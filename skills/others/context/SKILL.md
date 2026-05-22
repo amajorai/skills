@@ -4,7 +4,7 @@ description: Set up the best context tools for AI coding agents — Context7 (li
 argument-hint: <project path or leave blank for current directory>
 ---
 
-# context — AI Agent Context Setup
+# Context
 
 You are setting up the context infrastructure that makes an AI coding agent accurate and well-informed. Work through each phase in order.
 

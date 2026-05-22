@@ -4,7 +4,7 @@ description: Run load tests against any API or web app using k6. Identifies thro
 argument-hint: <target URL or API endpoints to test>
 ---
 
-# load-test — Load Testing
+# Load Test
 
 You are running load tests to find where the system breaks before users do. Work through each phase in order.
 

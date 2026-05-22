@@ -3,7 +3,7 @@ name: mirror
 description: Scans all past conversation transcripts for the current project and agent type, identifies recurring patterns and improvement opportunities across sessions, then updates the project's agent config file (CLAUDE.md or AGENTS.md). Gives the agent a view of its own history.
 ---
 
-# mirror — Past Conversations → Agent Config Update
+# Mirror
 
 You are scanning the project's conversation history to find recurring patterns across sessions and distill them into durable rules. This is a deeper version of `/reflect` — it looks back at every past conversation, not just the current one.
 

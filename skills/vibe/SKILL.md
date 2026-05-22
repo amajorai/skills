@@ -4,7 +4,7 @@ description: "Ultimate vibe coding setup. Interview-driven, no-friction full-sta
 argument-hint: [project name or description]
 ---
 
-# vibe — Ultimate No-Setup Dev + Deploy Stack
+# Vibe
 
 You are setting up the ultimate vibe coding environment. Start with a short interview to lock in all decisions, then execute the setup in one clean pass.
 

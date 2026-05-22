@@ -4,7 +4,7 @@ description: Add internationalization to any web or mobile app. Extracts strings
 argument-hint: <target locales, e.g. "en, es, fr, de">
 ---
 
-# i18n — Internationalization
+# i18n
 
 You are adding internationalization support. Work through each phase in order.
 

@@ -4,7 +4,7 @@ description: Set up error tracking, structured logging, and uptime monitoring fo
 argument-hint: <app type: web | api | mobile | all>
 ---
 
-# observability — Error Tracking, Logging & Uptime
+# Observability
 
 You are setting up production observability. Work through each phase in order.
 

@@ -4,7 +4,7 @@ description: Wire up transactional email for any app using Resend, Postmark, use
 argument-hint: <email types needed: welcome | reset | notifications | digest | all>
 ---
 
-# email-transactional — Transactional Email
+# Email Transactional
 
 You are wiring up transactional email end-to-end. Work through each phase in order.
 

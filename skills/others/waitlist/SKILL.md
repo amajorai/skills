@@ -4,7 +4,7 @@ description: Build a waitlist landing page with email capture, referral mechanic
 argument-hint: <product name and one-line description>
 ---
 
-# waitlist — Waitlist Landing Page
+# Waitlist
 
 You are building a waitlist system with email capture, referral mechanics, and automated emails. Work through each phase in order.
 

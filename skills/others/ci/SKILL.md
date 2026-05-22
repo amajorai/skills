@@ -4,7 +4,7 @@ description: Set up a GitHub Actions CI/CD pipeline for any project. Configures 
 argument-hint: <deploy target: vercel | fly | dokploy | cloudflare | none>
 ---
 
-# ci — GitHub Actions CI/CD
+# CI
 
 You are setting up a complete CI/CD pipeline with GitHub Actions. Work through each phase in order.
 

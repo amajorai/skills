@@ -4,7 +4,7 @@ description: Convert any YouTube video into a reusable Claude Code skill. Paste 
 argument-hint: <YouTube URL>
 ---
 
-# youtube-to-skill — YouTube Video → Claude Code Skill
+# YouTube to Skill
 
 You are converting a YouTube video into a reusable Claude Code skill file. Work through each step in order.
 

@@ -4,7 +4,7 @@ description: Add product analytics to any web or mobile app. Sets up PostHog or 
 argument-hint: <tool: posthog | plausible | mixpanel>
 ---
 
-# analytics — Product Analytics
+# Analytics
 
 You are wiring up analytics so the team can understand user behavior. Work through each phase in order.
 

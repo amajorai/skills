@@ -4,7 +4,7 @@ description: Integrate payments into any web or mobile app. Sets up Stripe, Lemo
 argument-hint: <billing model: subscription | one-time | usage-based>
 ---
 
-# payments — Payment Integration
+# Payments
 
 You are wiring up a complete payment integration. Work through each phase in order.
 
