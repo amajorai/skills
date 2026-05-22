@@ -17,7 +17,7 @@ Simple, minimal, lean skills that people don't think about when shipping apps. T
 | Skill | What it does |
 |-------|-------------|
 | [`edge-cases`](skills/edge-cases/SKILL.md) | Discover and harden edge cases across 8 categories using parallel subagents |
-| [`e2e`](skills/e2e/SKILL.md) | End-to-end test authoring and execution. Discovers flows, writes Playwright/Cypress tests, fixes failures |
+| [`e2e`](skills/e2e/SKILL.md) | End-to-end test authoring and execution. Discovers flows, writes Playwright (web) or Maestro (iOS/Android/React Native/Flutter) tests, fixes failures |
 | [`icons`](skills/icons/SKILL.md) | Generate app icons, favicons, and splash screens for Tauri, PWA, Capacitor, Expo, and Electron |
 | [`legal-compliance`](skills/legal-compliance/SKILL.md) | Generate production-ready Privacy Policy, Terms, and DPA covering 20+ regulations |
 | [`app-store-compliance`](skills/app-store-compliance/SKILL.md) | Audit against Apple App Store and Google Play Store review guidelines with a prioritized fix list |
@@ -55,9 +55,7 @@ Simple, minimal, lean skills that people don't think about when shipping apps. T
 | [`context`](skills/others/context/SKILL.md) | Set up Context7 (live library docs MCP) and opensrc (real package source), plus a project CLAUDE.md |
 | [`agent-quality`](skills/others/agent-quality/SKILL.md) | Set up react-doctor, react-scan, react-grab, expect, and agentation. Quality tools for AI-generated React code |
 
-## Installation
-
-### skills.sh (recommended)
+## Quickstart
 
 ```bash
 npx skills add amajorai/skills
@@ -79,24 +77,3 @@ npx skills add amajorai/skills/skills/ship
 ```
 
 Invoked as `/amajor-skills:ship <task>`.
-
-### install.sh (one-liner)
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/amajorai/skills/main/install.sh | bash
-```
-
-```bash
-# Codex
-curl -fsSL https://raw.githubusercontent.com/amajorai/skills/main/install.sh | bash -s -- --codex
-```
-
-Or clone and run manually:
-
-```bash
-git clone https://github.com/amajorai/skills.git
-cd skills
-
-./install.sh           # Claude Code, copies to ~/.claude/skills/, invoke as /ship
-./install.sh --codex   # Codex, copies to ~/.codex/skills/, invoke as $ship
-```
