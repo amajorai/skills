@@ -82,7 +82,7 @@ Deploy via Docker or Railway (one-click) — see https://docs.usesend.com
 # Domain setup and DKIM/SPF are managed through the dashboard
 ```
 
-Install SDK: `bun add @usesend/sdk`  
+Install SDK: `bun add usesend-js`  
 Set `USESEND_API_KEY` and `USESEND_BASE_URL` in env vars.
 
 ---
