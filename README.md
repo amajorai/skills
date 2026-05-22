@@ -35,11 +35,11 @@ Simple, minimal, lean skills that people don't think about when shipping apps. T
 
 | Skill | What it does |
 |-------|-------------|
-| [`payments`](skills/others/payments/SKILL.md) | Integrate Stripe or LemonSqueezy. Products, webhooks, subscription portal, billing page, live checklist |
-| [`auth`](skills/others/auth/SKILL.md) | Add authentication. OAuth, magic links, sessions, route protection, and the full user model boilerplate |
+| [`payments`](skills/others/payments/SKILL.md) | Integrate Stripe, LemonSqueezy, or Polar.sh (web) or Superwall/RevenueCat (mobile). Products, webhooks, subscription portal, billing page, live checklist |
+| [`auth`](skills/others/auth/SKILL.md) | Add authentication with Better Auth. OAuth, magic links, passkeys, sessions, route protection, and user model boilerplate |
 | [`observability`](skills/others/observability/SKILL.md) | Set up Sentry error tracking, structured logging (pino), and uptime monitoring in one pass |
 | [`analytics`](skills/others/analytics/SKILL.md) | Add product analytics with PostHog or Plausible. Event taxonomy, funnels, and a starter dashboard |
-| [`email-transactional`](skills/others/email-transactional/SKILL.md) | Wire up Resend or Postmark with templates for welcome, reset, notifications, and digest emails |
+| [`email-transactional`](skills/others/email-transactional/SKILL.md) | Wire up Resend (CLI-driven), Postmark, useSend, or Plunk with templates for welcome, reset, notifications, and digest emails |
 | [`launch-checklist`](skills/others/launch-checklist/SKILL.md) | Pre-launch audit. SSL, DNS, secrets, env vars, rate limits, backups, monitoring, and a go/no-go report |
 | [`ci`](skills/others/ci/SKILL.md) | Set up GitHub Actions. Lint, typecheck, test, build, preview deploys on PRs, and production deploy on merge |
 | [`og-images`](skills/others/og-images/SKILL.md) | Dynamic Open Graph images via edge function. No third-party service, cached, 1200x630 |

@@ -1,14 +1,32 @@
 ---
 name: auth
-description: Add authentication to any web or mobile app. Sets up OAuth (Google/GitHub), magic links, session management, and route protection. Handles the full boilerplate — signup, login, logout, protected routes, and user model. Use when starting a new app or adding auth to an existing one.
-argument-hint: <auth methods: oauth | magic-link | password | all>
+description: Add authentication to any web or mobile app using Better Auth. Sets up OAuth (Google/GitHub/Discord), magic links, passkeys, session management, and route protection. Handles the full boilerplate — signup, login, logout, protected routes, and user model. Use when starting a new app or adding auth to an existing one.
+argument-hint: <auth methods: oauth | magic-link | password | passkeys | all>
 ---
 
-# auth — Authentication
+# auth — Authentication with Better Auth
 
-You are implementing a complete auth system. Work through each phase in order.
+You are implementing a complete auth system using [Better Auth](https://better-auth.com). Docs: https://better-auth.com/docs
 
 **Auth methods:** {{args}}
+
+
+## Setup: Better Auth MCP
+
+Before starting, add the Better Auth MCP so you have live, accurate docs throughout:
+
+```json
+{
+  "mcpServers": {
+    "better-auth": {
+      "command": "npx",
+      "args": ["-y", "better-auth-mcp"]
+    }
+  }
+}
+```
+
+Add to `.claude/settings.json` (project) or `~/.claude/settings.json` (global), then restart Claude Code.
 
 
 ## Phase 1: Interview
@@ -16,12 +34,9 @@ You are implementing a complete auth system. Work through each phase in order.
 Ask the user (combine related questions):
 
 - **Methods**: OAuth (which providers — Google, GitHub, Discord?), magic link, username/password, or passkeys?
-- **Library**: Use an existing auth library (Better Auth, Lucia, Auth.js / NextAuth, Clerk) or build with raw JWTs/sessions?
 - **Stack**: Framework, database, ORM?
 - **User model**: What fields beyond email/name are needed? Roles? Teams/orgs?
 - **Session strategy**: Cookie-based sessions or JWT tokens? Expiry preferences?
-
-Recommend: **Better Auth** for full-stack Bun/Node apps (batteries included, no vendor lock-in). Clerk for teams that want hosted UI and want zero auth code.
 
 
 ## Phase 2: Explore
@@ -48,11 +63,11 @@ Confirm before implementing.
 
 ## Phase 4: Implement
 
-### Better Auth (recommended)
-
 ```bash
 bun add better-auth
 ```
+
+Reference the Better Auth MCP and docs at https://better-auth.com/docs throughout.
 
 1. Create `lib/auth.ts` — configure providers, session strategy, database adapter
 2. Create the catch-all API route: `app/api/auth/[...all]/route.ts`
@@ -64,6 +79,7 @@ bun add better-auth
 
 - **Google**: Create OAuth app at console.cloud.google.com, get client ID + secret
 - **GitHub**: Create OAuth app at github.com/settings/developers
+- **Discord**: Create app at discord.com/developers/applications
 - Set callback URL: `https://yourdomain.com/api/auth/callback/<provider>`
 
 ### Route protection
