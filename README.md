@@ -96,13 +96,3 @@ cd skills
 ./install.sh           # Claude Code, copies to ~/.claude/skills/, invoke as /ship
 ./install.sh --codex   # Codex, copies to ~/.codex/skills/, invoke as $ship
 ```
-
-### Copy a single skill
-
-```bash
-# Claude Code
-cp skills/ship/SKILL.md ~/.claude/skills/ship.md
-
-# Codex
-mkdir -p ~/.codex/skills/ship && cp skills/ship/SKILL.md ~/.codex/skills/ship/SKILL.md
-```
