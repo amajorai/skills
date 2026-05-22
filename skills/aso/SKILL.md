@@ -1,10 +1,10 @@
 ---
-name: cloudflare-ai-search
+name: aso
 description: Make a site agent-ready using Cloudflare AI Search and the isitagentready.com checklist. Audits the current site, then implements: Cloudflare AI Search (hybrid vector + keyword), markdown content negotiation (acceptmarkdown.com), robots.txt AI rules, sitemap, MCP Server Card, and Agent Skills discovery. Use when asked to add search, make a site agent-ready, or optimize for AI agents.
 argument-hint: [site URL or project directory, optional]
 ---
 
-# cloudflare-ai-search — Agent-Ready Search Optimization
+# aso — Agent-Ready Search Optimization
 
 You are making a site fully agent-ready using Cloudflare AI Search and the standards defined at isitagentready.com. Work through each phase in order.
 

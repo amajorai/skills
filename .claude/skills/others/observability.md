@@ -1,0 +1,1 @@
+../../../skills/others/observability/SKILL.md

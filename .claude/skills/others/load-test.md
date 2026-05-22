@@ -1,0 +1,1 @@
+../../../skills/others/load-test/SKILL.md

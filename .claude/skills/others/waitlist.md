@@ -1,0 +1,1 @@
+../../../skills/others/waitlist/SKILL.md

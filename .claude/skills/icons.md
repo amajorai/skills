@@ -1,0 +1,1 @@
+../../skills/icons/SKILL.md

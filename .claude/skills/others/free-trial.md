@@ -1,0 +1,1 @@
+../../../skills/others/free-trial/SKILL.md

@@ -1,0 +1,1 @@
+../../../skills/others/og-images/SKILL.md

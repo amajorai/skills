@@ -1,0 +1,1 @@
+../../../skills/others/payments/SKILL.md

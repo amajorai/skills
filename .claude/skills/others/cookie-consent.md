@@ -1,0 +1,1 @@
+../../../skills/others/cookie-consent/SKILL.md

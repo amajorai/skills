@@ -1,0 +1,1 @@
+../../skills/legal-compliance/SKILL.md

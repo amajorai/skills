@@ -1,0 +1,1 @@
+../../../skills/others/email-transactional/SKILL.md

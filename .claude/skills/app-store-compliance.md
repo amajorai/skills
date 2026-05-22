@@ -1,0 +1,1 @@
+../../skills/app-store-compliance/SKILL.md
