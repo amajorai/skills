@@ -1,6 +1,6 @@
 ---
 name: vibe
-description: Ultimate vibe coding setup — interview-driven, no-friction full-stack dev and deployment. Asks the user upfront which cloud provider (Hetzner/OVH/AWS) and deployment platform (Dokploy/Coolify) they want, then fully installs and configures the chosen stack: Better T Stack, GitHub CLI, Wrangler, and all relevant CLIs. Detects local vs. server environment automatically.
+description: "Ultimate vibe coding setup. Interview-driven, no-friction full-stack dev and deployment. Asks the user upfront which cloud provider (Hetzner/OVH/AWS) and deployment platform (Dokploy/Coolify) they want, then fully installs and configures the chosen stack: Better T Stack, GitHub CLI, Wrangler, and all relevant CLIs. Detects local vs. server environment automatically."
 argument-hint: [project name or description]
 ---
 
