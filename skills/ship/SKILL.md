@@ -1,6 +1,6 @@
 ---
 name: ship
-description: Full-cycle development workflow for any non-trivial feature or fix. Runs 8 phases — interview, explore, plan, implement, verify, simplify, security review, final verify — using the strongest available model for planning and autonomous goal loops for quality gates. Use when asked to implement a feature, fix a bug, or ship something with full quality assurance.
+description: Full-cycle development workflow for any non-trivial feature or fix. Runs 9 phases — interview, explore, plan, implement, verify, edge cases, simplify, security review, final verify — using the strongest available model for planning and autonomous goal loops for quality gates. Use when asked to implement a feature, fix a bug, or ship something with full quality assurance.
 argument-hint: <task description>
 ---
 
@@ -84,7 +84,21 @@ Do not proceed until every criterion passes.
 
 ---
 
-## Phase 6: Simplify
+## Phase 6: Edge Cases
+
+Invoke the `edge-cases` skill, targeting the files and feature area changed in Phase 4:
+
+```
+/edge-cases <feature area or changed files>
+```
+
+This runs 8 parallel subagents to enumerate edge cases across boundary values, null inputs, invalid types, error states, concurrency, adversarial data, state machine violations, and auth boundaries. It then writes tests for every unhandled P0/P1 case, confirms each test fails before the fix and passes after, and verifies no regressions.
+
+Do not proceed until all P0 and P1 edge cases are covered and the full test suite passes.
+
+---
+
+## Phase 7: Simplify
 
 Run `/goal` with this condition:
 
@@ -96,7 +110,7 @@ Do not accept simplifications that break correctness — `/goal` will keep itera
 
 ---
 
-## Phase 7: Security Review
+## Phase 8: Security Review
 
 - **Claude Code:** Invoke the built-in `security-review` skill.
 - **Codex / fallback:** Run `/goal` with this condition:
@@ -109,20 +123,22 @@ Document any accepted LOW or MEDIUM findings with explicit rationale before proc
 
 ---
 
-## Phase 8: Final Verify
+## Phase 9: Final Verify
 
-Repeat Phase 5. Confirm the codebase is shippable after simplification and security fixes:
+Repeat Phase 5. Confirm the codebase is shippable after edge case hardening, simplification, and security fixes:
 
 1. All original acceptance criteria still pass
-2. No regressions from Phase 6 (simplify)
-3. No regressions from Phase 7 (security)
-4. Application is in a clean, deployable state
+2. No regressions from Phase 6 (edge cases)
+3. No regressions from Phase 7 (simplify)
+4. No regressions from Phase 8 (security)
+5. Application is in a clean, deployable state
 
 ---
 
 ## Completion Report
 
 - What was implemented and which files changed
+- Edge cases found and hardened (count by priority tier)
 - Test coverage added or modified
 - Security findings and their resolutions
 - Any open limitations or recommended follow-up tasks
