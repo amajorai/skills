@@ -15,18 +15,11 @@ You are implementing a complete auth system using [Better Auth](https://better-a
 
 Before starting, add the Better Auth MCP so you have live, accurate docs throughout:
 
-```json
-{
-  "mcpServers": {
-    "better-auth": {
-      "command": "npx",
-      "args": ["-y", "better-auth-mcp"]
-    }
-  }
-}
+```bash
+npx auth@latest mcp --claude-code
 ```
 
-Add to `.claude/settings.json` (project) or `~/.claude/settings.json` (global), then restart Claude Code.
+This command auto-configures the remote Better Auth docs MCP server in Claude Code. Restart Claude Code after running it.
 
 
 ## Phase 1: Interview

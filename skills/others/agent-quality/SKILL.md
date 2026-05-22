@@ -295,7 +295,7 @@ If the user wants MCP integration, add to `.claude/settings.json`:
   "mcpServers": {
     "agentation": {
       "command": "npx",
-      "args": ["-y", "@agentation/mcp@latest"]
+      "args": ["-y", "agentation-mcp", "server"]
     }
   }
 }
