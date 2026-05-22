@@ -4,7 +4,7 @@ A collection of reusable AI coding agent skills for **Claude Code** and **Codex*
 
 ## Skills
 
-### Core
+### Flagship
 
 | Skill | What it does |
 |-------|-------------|
@@ -12,7 +12,7 @@ A collection of reusable AI coding agent skills for **Claude Code** and **Codex*
 | [`ship-simple`](skills/ship-simple/SKILL.md) | Quick implementation for simple features that don't need the full pipeline. No security review, edge cases, or simplify pass |
 | [`vibe`](skills/vibe/SKILL.md) | Set up a full-stack dev and deployment environment. VPS, Bun, GitHub CLI, Dokploy or Coolify |
 
-### Extras
+### Core
 
 | Skill | What it does |
 |-------|-------------|
