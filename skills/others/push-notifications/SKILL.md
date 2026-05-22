@@ -10,7 +10,6 @@ You are implementing push notifications end-to-end. Work through each phase in o
 
 **Platform:** {{args}}
 
----
 
 ## Phase 1: Interview
 
@@ -21,7 +20,6 @@ Ask the user (combine related questions):
 - **Opt-in strategy**: Ask permission immediately, or wait for a meaningful moment (after user completes first action)?
 - **Backend**: Does a backend exist for sending notifications server-side?
 
----
 
 ## Phase 2: Explore
 
@@ -30,7 +28,6 @@ Spawn **1 subagent** to:
 - Check for existing service worker setup (web) or Expo config
 - Identify the user model for storing push tokens
 
----
 
 ## Phase 3: Web Push Setup
 
@@ -88,7 +85,6 @@ if (permission === 'granted') {
 
 Save subscription to DB linked to the user.
 
----
 
 ## Phase 4: Expo Push Setup
 
@@ -112,7 +108,6 @@ Request permission on iOS (Android grants automatically):
 await Notifications.requestPermissionsAsync()
 ```
 
----
 
 ## Phase 5: Database
 
@@ -129,7 +124,6 @@ CREATE TABLE push_subscriptions (
 );
 ```
 
----
 
 ## Phase 6: Server-Side Sending
 
@@ -160,7 +154,6 @@ async function sendPushNotification(userId: string, notification: {
 
 Handle expired/invalid tokens: catch `410 Gone` errors and delete the subscription from DB.
 
----
 
 ## Phase 7: Notification Preferences UI
 
@@ -172,7 +165,6 @@ Build a preferences page where users can:
 
 Store preferences in a `notification_preferences` table linked to the user.
 
----
 
 ## Phase 8: Permission UX
 
@@ -183,7 +175,6 @@ Instead:
 2. Show an in-app prompt explaining the value: "Get notified when someone replies to your post"
 3. Only call `Notification.requestPermission()` after the user clicks "Enable notifications"
 
----
 
 ## Phase 9: Verify
 
@@ -195,7 +186,6 @@ Instead:
 - [ ] Preference toggles correctly suppress/allow notifications
 - [ ] Expired tokens are cleaned up automatically
 
----
 
 ## Completion Report
 

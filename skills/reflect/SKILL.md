@@ -7,7 +7,6 @@ description: Reflects on the current conversation to extract corrections, repeat
 
 You are auditing the current conversation and distilling it into durable rules for the agent config file. Work through each step in order.
 
----
 
 ## Step 1: Detect the Current Agent
 
@@ -25,7 +24,6 @@ Determine which agent is running by checking in this order:
 
 Record: **Agent type** and **Target config file path**.
 
----
 
 ## Step 2: Read the Target Config File
 
@@ -33,7 +31,6 @@ Read the current contents of the target config file so you can append or update 
 
 If the file does not exist, treat its contents as empty.
 
----
 
 ## Step 3: Audit the Current Conversation
 
@@ -63,7 +60,6 @@ Facts the user told you that aren't obvious from the code:
 - Tools or patterns that are off-limits or required
 - External dependencies or environment constraints
 
----
 
 ## Step 4: Determine What Is Worth Persisting
 
@@ -79,7 +75,6 @@ Discard:
 - Things already documented in the config file
 - Things that are standard practice (no extra value in restating them)
 
----
 
 ## Step 5: Draft New Rules
 
@@ -98,7 +93,6 @@ Examples of good rules:
 **No trailing summaries:** Don't end responses with "In summary, I did X." The user finds these redundant and prefers terse responses.
 ```
 
----
 
 ## Step 6: Merge Into the Config File
 
@@ -111,7 +105,6 @@ Update the target config file:
 
 Keep the config file readable: no duplicate entries, no bloated prose.
 
----
 
 ## Step 7: Report Back
 

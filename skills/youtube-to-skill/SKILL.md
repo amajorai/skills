@@ -10,7 +10,6 @@ You are converting a YouTube video into a reusable Claude Code skill file. Work 
 
 **YouTube URL:** {{args}}
 
----
 
 ## Step 1: Extract Video ID
 
@@ -23,7 +22,6 @@ Parse the video ID from the URL. Handle all common YouTube URL formats:
 
 Extract `VIDEO_ID` and confirm it looks valid (11 alphanumeric characters).
 
----
 
 ## Step 2: Fetch Video Metadata and Transcript
 
@@ -49,7 +47,6 @@ If Source B fails, try fetching:
 
 Parse the `events[].segs[].utf8` fields to reconstruct the full transcript text.
 
----
 
 ## Step 3: Understand the Content
 
@@ -64,7 +61,6 @@ Read through everything collected. Determine:
 
 If the transcript is available, extract all concrete steps, commands, code snippets, and decision points verbatim. Do not paraphrase away specifics.
 
----
 
 ## Step 4: Design the Skill
 
@@ -80,18 +76,15 @@ Before writing, decide:
 
 **Does it need `{{args}}`?** Only if the skill is parameterized (e.g., project name, target URL). If the skill is self-contained, omit `{{args}}`.
 
----
 
 ## Step 5: Write the Skill File
 
 Write the skill to `.claude/skills/<name>.md` using this structure:
 
 ```markdown
----
 name: <kebab-case-name>
 description: <One sentence: what it does and when to use it. Include key tech names so the trigger is precise.>
 argument-hint: <optional: what args the user should pass>
----
 
 # <name> — <Human-Readable Title>
 
@@ -99,7 +92,6 @@ argument-hint: <optional: what args the user should pass>
 
 **Source:** [Video Title]({{args}}) by [Channel Name]
 
----
 
 <Skill body — structured content extracted from the video>
 ```
@@ -114,7 +106,6 @@ argument-hint: <optional: what args the user should pass>
 - **Strip filler.** Don't include the presenter's personal anecdotes, channel intros/outros, or ad reads.
 - **If transcript was unavailable**, note it at the top: `> Note: Transcript was unavailable. This skill is based on the video title and description only. Verify steps before running.`
 
----
 
 ## Step 6: Confirm and Save
 

@@ -10,7 +10,6 @@ You are analyzing and optimizing the JavaScript bundle. Work through each phase 
 
 **Framework:** {{args}}
 
----
 
 ## Phase 1: Measure Baseline
 
@@ -40,7 +39,6 @@ Record baseline metrics:
 - First Load JS (if Next.js)
 - Lighthouse Performance score
 
----
 
 ## Phase 2: Identify Top Offenders
 
@@ -53,7 +51,6 @@ Spawn **2 parallel subagents**:
 
 Produce a ranked list of optimizations by estimated savings.
 
----
 
 ## Phase 3: Code Splitting
 
@@ -67,7 +64,6 @@ For routes/pages that are not on the critical path:
 3. **Vendor chunk splitting** — ensure large dependencies (React, charting libs) are split into their own chunks for long-term caching
 4. **Conditional imports** — only import heavy polyfills or libs when the browser actually needs them
 
----
 
 ## Phase 4: Dependency Swaps
 
@@ -86,7 +82,6 @@ Common swaps:
 - `uuid` → `crypto.randomUUID()` (native)
 - Full `@mui/material` → pick only needed components
 
----
 
 ## Phase 5: Tree Shaking
 
@@ -97,7 +92,6 @@ Verify tree shaking is working:
 3. For barrel files (`index.ts` that re-exports everything), consider direct imports instead
 4. Verify `browserslist` target is set — shipping modern JS to modern browsers saves size
 
----
 
 ## Phase 6: Image & Font Optimization (bonus)
 
@@ -108,7 +102,6 @@ While in the performance mindset:
 - [ ] Fonts use `font-display: swap` and are subsetted to used characters
 - [ ] No unused CSS (check with PurgeCSS or built-in framework tooling)
 
----
 
 ## Phase 7: Measure After
 
@@ -121,7 +114,6 @@ Re-run the bundle analyzer and Lighthouse:
 
 Present a before/after comparison table.
 
----
 
 ## Completion Report
 

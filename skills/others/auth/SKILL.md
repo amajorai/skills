@@ -10,7 +10,6 @@ You are implementing a complete auth system. Work through each phase in order.
 
 **Auth methods:** {{args}}
 
----
 
 ## Phase 1: Interview
 
@@ -24,7 +23,6 @@ Ask the user (combine related questions):
 
 Recommend: **Better Auth** for full-stack Bun/Node apps (batteries included, no vendor lock-in). Clerk for teams that want hosted UI and want zero auth code.
 
----
 
 ## Phase 2: Explore
 
@@ -35,7 +33,6 @@ Spawn **2 parallel subagents**:
 | 1 | Existing user model, database schema, ORM setup |
 | 2 | Existing route structure, middleware patterns, protected pages |
 
----
 
 ## Phase 3: Plan
 
@@ -48,7 +45,6 @@ Define:
 
 Confirm before implementing.
 
----
 
 ## Phase 4: Implement
 
@@ -82,7 +78,6 @@ bun add better-auth
 2. `/signup` — same as login if using OAuth/magic link; separate form if password
 3. Post-auth redirect to the intended destination (save `?next=` param)
 
----
 
 ## Phase 5: Security Hardening
 
@@ -94,7 +89,6 @@ bun add better-auth
 - [ ] Secure + HttpOnly + SameSite=Lax cookies for session tokens
 - [ ] No user enumeration — same error message for "user not found" and "wrong password"
 
----
 
 ## Phase 6: Verify
 
@@ -105,7 +99,6 @@ bun add better-auth
 - [ ] Session persists across page refreshes
 - [ ] OAuth callback handles errors gracefully (user cancels, invalid state)
 
----
 
 ## Completion Report
 

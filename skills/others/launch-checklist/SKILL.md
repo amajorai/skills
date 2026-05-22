@@ -10,7 +10,6 @@ You are running a pre-launch audit. Work through each category systematically an
 
 **Target:** {{args}}
 
----
 
 ## Phase 1: Gather Context
 
@@ -29,7 +28,6 @@ Spawn **2 parallel subagents** to explore:
 | 1 | Env var files, config files, secrets in code (grep for hardcoded keys/tokens) |
 | 2 | Package.json scripts, deployment config, infrastructure files |
 
----
 
 ## Phase 2: Security
 
@@ -42,7 +40,6 @@ Spawn **2 parallel subagents** to explore:
 - [ ] **CSP headers** — Content-Security-Policy set, at minimum `default-src 'self'`
 - [ ] **Dependencies** — run `bun audit` or equivalent; no critical CVEs
 
----
 
 ## Phase 3: Infrastructure
 
@@ -54,7 +51,6 @@ Spawn **2 parallel subagents** to explore:
 - [ ] **Log access** — production logs are accessible (not just local stdout)
 - [ ] **Backups** — database has automated backups with tested restore procedure
 
----
 
 ## Phase 4: Application
 
@@ -66,7 +62,6 @@ Spawn **2 parallel subagents** to explore:
 - [ ] **Cron jobs / workers** — background jobs are running and monitored
 - [ ] **404 / error pages** — custom error pages exist and don't expose stack traces
 
----
 
 ## Phase 5: Performance
 
@@ -76,7 +71,6 @@ Spawn **2 parallel subagents** to explore:
 - [ ] **CDN** — static assets served from CDN, not the origin server
 - [ ] **Database indexes** — queries on user-facing paths have appropriate indexes
 
----
 
 ## Phase 6: Legal & Compliance
 
@@ -85,7 +79,6 @@ Spawn **2 parallel subagents** to explore:
 - [ ] **Cookie consent** — if using cookies beyond strictly necessary, banner present
 - [ ] **GDPR/CCPA** — data deletion mechanism exists for user data
 
----
 
 ## Phase 7: Payments (if applicable)
 
@@ -94,7 +87,6 @@ Spawn **2 parallel subagents** to explore:
 - [ ] **Test purchase** — a real card charge completes end-to-end
 - [ ] **Receipt emails** — customer receives a receipt after purchase
 
----
 
 ## Phase 8: Go / No-Go Report
 

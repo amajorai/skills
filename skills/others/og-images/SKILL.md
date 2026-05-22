@@ -10,7 +10,6 @@ You are implementing dynamic OG image generation via an edge function. No extern
 
 **Target pages:** {{args}}
 
----
 
 ## Phase 1: Audit Current State
 
@@ -23,7 +22,6 @@ Spawn **2 parallel subagents**:
 
 Identify: which pages need unique images vs. a shared template, what dynamic data to include.
 
----
 
 ## Phase 2: Design the Template
 
@@ -49,7 +47,6 @@ Sketch the layout in ASCII before building:
 
 Confirm with the user before implementing.
 
----
 
 ## Phase 3: Implement the Image Endpoint
 
@@ -78,7 +75,6 @@ bun add @cloudflare/workers-og
 4. Set cache headers: `Cache-Control: public, max-age=86400, s-maxage=604800`
 5. Return the image as `image/png` with 1200×630 dimensions
 
----
 
 ## Phase 4: Wire Up Meta Tags
 
@@ -91,7 +87,6 @@ For each page:
 
 For dynamic routes (blog posts, user profiles), populate params from the page's data fetch.
 
----
 
 ## Phase 5: Verify
 
@@ -104,7 +99,6 @@ Test with real tools — not just looking at the HTML source:
 - [ ] Confirm image loads in < 1s on first hit (edge cold start)
 - [ ] Confirm subsequent hits are fast (CDN cache hit)
 
----
 
 ## Completion Report
 

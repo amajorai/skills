@@ -10,7 +10,6 @@ You are running a production database migration. Safety first — data loss is n
 
 **Migration:** {{args}}
 
----
 
 ## Phase 1: Understand the Migration
 
@@ -26,7 +25,6 @@ Assess risk level:
 - **Medium**: Adding NOT NULL columns with defaults, renaming columns with a deprecation period
 - **High**: Dropping columns/tables, changing column types, removing constraints, backfilling large tables
 
----
 
 ## Phase 2: Interview
 
@@ -39,7 +37,6 @@ Ask the user (combine related questions):
 
 Do not proceed to Phase 3 without confirming a backup exists.
 
----
 
 ## Phase 3: Dry Run
 
@@ -64,7 +61,6 @@ Verify:
 
 If staging fails, stop. Fix the migration and repeat.
 
----
 
 ## Phase 4: Zero-Downtime Patterns (if required)
 
@@ -93,7 +89,6 @@ CREATE INDEX CONCURRENTLY idx_users_email ON users(email);
 2. Confirm no queries hit the table for 24 hours (check logs)
 3. Drop the table
 
----
 
 ## Phase 5: Backup Verification
 
@@ -110,7 +105,6 @@ pg_restore --list backup_pre_migration_*.sql | head -20
 
 Do not proceed without a fresh backup taken within the last hour.
 
----
 
 ## Phase 6: Production Run
 
@@ -127,7 +121,6 @@ Run the migration with monitoring:
    - Key user flows work (login, core action)
    - Error rate unchanged in Sentry/logs
 
----
 
 ## Phase 7: Rollback Procedure
 
@@ -145,7 +138,6 @@ bun drizzle-kit migrate --rollback
 
 Document the rollback script and verify it works on staging before going to production.
 
----
 
 ## Phase 8: Post-Migration Verification
 
@@ -155,7 +147,6 @@ Document the rollback script and verify it works on staging before going to prod
 - [ ] No orphaned data from dropped constraints
 - [ ] Backup retained for at least 7 days post-migration
 
----
 
 ## Completion Report
 

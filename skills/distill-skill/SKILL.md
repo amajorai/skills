@@ -7,7 +7,6 @@ description: Scans conversation history (current session and/or past transcripts
 
 You are mining conversation history to find workflows that were done more than once and are good candidates to become reusable skills. Work through each step.
 
----
 
 ## Step 1: Scope — What to Scan
 
@@ -19,7 +18,6 @@ Determine the scan scope:
 
 **Args:** {{args}}
 
----
 
 ## Step 2: Locate Transcript Files (if scanning history)
 
@@ -38,7 +36,6 @@ find ~/.claude/projects -name "*.jsonl" | xargs ls -t | head -20
 
 Read the most recent 10–20 files. Skip files under 1KB.
 
----
 
 ## Step 3: Read Existing Skills
 
@@ -51,7 +48,6 @@ ls .claude/skills/
 
 Note what each existing skill covers (from its `description:` frontmatter field).
 
----
 
 ## Step 4: Identify Candidate Workflows
 
@@ -81,7 +77,6 @@ Scan the conversation(s) for sequences that:
 - Workflows that are just "run these 2 commands" — too simple to be a skill
 - Workflows that already have a `/slash-command` equivalent
 
----
 
 ## Step 5: Score Each Candidate
 
@@ -98,7 +93,6 @@ For each candidate, score it:
 
 Build skills for candidates scoring **5 or higher**. Skip the rest.
 
----
 
 ## Step 6: Design Each Skill
 
@@ -115,36 +109,30 @@ For each candidate that passes Step 5:
 - **Audit**: Checks something for quality or correctness
 - **Deploy**: Gets code running somewhere
 
----
 
 ## Step 7: Write Each Skill File
 
 For each skill, write `.claude/skills/<name>.md`:
 
 ```markdown
----
 name: <kebab-case-name>
 description: <One sentence: what it does, when to use it, key tech names for precise triggering.>
 argument-hint: <optional: what the user should pass>
----
 
 # <name> — <Human-Readable Title>
 
 <One paragraph: what this skill does, what it produces, and why it exists. Mention that it was distilled from repeated usage patterns.>
 
----
 
 ## Phase 1: <First Phase Name>
 
 <Steps — concrete, executable, with code blocks for every command>
 
----
 
 ## Phase 2: <Second Phase Name>
 
 <Steps>
 
----
 
 ## Completion Checklist
 
@@ -159,7 +147,6 @@ argument-hint: <optional: what the user should pass>
 - **`{{args}}` only where needed** — use it for the parameter that varies across invocations
 - **No filler** — no "Great! Now we'll..." transitions
 
----
 
 ## Step 8: Report Back
 

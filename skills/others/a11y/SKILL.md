@@ -10,7 +10,6 @@ You are auditing and fixing accessibility issues to WCAG 2.2 AA. Work through ea
 
 **Target:** {{args}}
 
----
 
 ## Phase 1: Automated Audit
 
@@ -26,7 +25,6 @@ Run automated tools first to find the easy wins:
 
 Automated tools catch ~30% of issues. Manual testing is required for the rest.
 
----
 
 ## Phase 2: Manual Audit
 
@@ -40,7 +38,6 @@ Spawn **3 parallel subagents** to check different categories:
 
 Each subagent returns: specific violations with file locations and WCAG criteria violated.
 
----
 
 ## Phase 3: Prioritize
 
@@ -63,7 +60,6 @@ Classify all findings:
 
 Fix all P0 and P1 findings. Present P2 and P3 for user decision.
 
----
 
 ## Phase 4: Fix
 
@@ -102,7 +98,6 @@ For each finding, apply the standard fix:
 <a href="#main-content" class="sr-only focus:not-sr-only">Skip to main content</a>
 ```
 
----
 
 ## Phase 5: Screen Reader Testing
 
@@ -119,7 +114,6 @@ Verify:
 - [ ] Modal open/close announced
 - [ ] Dynamic content changes announced via `aria-live` regions
 
----
 
 ## Phase 6: Verify
 
@@ -131,7 +125,6 @@ Re-run automated audit after fixes:
 - [ ] Focus visible on all interactive elements
 - [ ] Core user flows completable with keyboard only
 
----
 
 ## Completion Report
 

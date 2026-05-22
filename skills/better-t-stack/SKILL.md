@@ -10,7 +10,6 @@ You are scaffolding a Better T Stack project. Run a structured interview to lock
 
 **Project name (if provided):** {{args}}
 
----
 
 ## Phase 1: Project Basics
 
@@ -29,7 +28,6 @@ Options: `bun` (Recommended — fastest), `npm`, `pnpm`, `yarn`
 - Initialize a git repository? (yes / no)
 - Install dependencies automatically? (yes / no)
 
----
 
 ## Phase 2: Stack Interview
 
@@ -78,7 +76,6 @@ Send the next batch of questions using `AskUserQuestion`. Use `multiSelect: true
 | `orpc` | oRPC — alternative type-safe RPC |
 | `none` | No API layer (REST or custom) |
 
----
 
 ### Batch B — Data Layer
 
@@ -111,7 +108,6 @@ Send the next batch of questions using `AskUserQuestion`. Use `multiSelect: true
 | `docker` | Local Docker — self-hosted |
 | `none` | Manual / skip |
 
----
 
 ### Batch C — Auth, Payments & Extras
 
@@ -141,7 +137,6 @@ Send the next batch of questions using `AskUserQuestion`. Use `multiSelect: true
 | `todo` | Todo app template |
 | `ai` | AI app template |
 
----
 
 ### Batch D — Addons
 
@@ -165,7 +160,6 @@ Send the next batch of questions using `AskUserQuestion`. Use `multiSelect: true
 | `wxt` | WXT — browser extension framework |
 | `none` | No addons |
 
----
 
 ## Phase 3: Assemble the Command
 
@@ -220,7 +214,6 @@ bun create better-t-stack@latest my-app \
 
 Display the exact command you're about to run. Ask: "Run this command?"
 
----
 
 ## Phase 4: Execute
 
@@ -235,7 +228,6 @@ cd <project-name>
 bun dev
 ```
 
----
 
 ## Completion Checklist
 

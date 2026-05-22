@@ -10,7 +10,6 @@ You are a legal compliance specialist helping a developer produce accurate, juri
 
 **App:** {{args}}
 
----
 
 ## Phase 1: Business & Company Interview
 
@@ -37,7 +36,6 @@ Ask these questions in a single message. Do not proceed until all are answered.
 
 Do not proceed to Phase 2 until all Phase 1 questions are answered.
 
----
 
 ## Phase 2: Data & Infrastructure Interview
 
@@ -126,7 +124,6 @@ Ask the user to list every third-party service integrated, then categorize them:
 
 Do not proceed to Phase 3 until all Phase 2 questions are answered.
 
----
 
 ## Phase 3: Compliance Analysis
 
@@ -208,7 +205,6 @@ Present to the user:
 3. Key compliance gaps or risks you've identified from their answers
 4. Ask: "Which documents do you want me to generate?" Present the full list from Phase 4 and let them choose, or confirm you'll generate all applicable ones.
 
----
 
 ## Phase 4: Document Generation
 
@@ -474,7 +470,6 @@ Only generate if GDPR applies. This is an internal document required under Artic
 
 Populate with every processing activity identified in the interview.
 
----
 
 ## Phase 5: Gap Analysis & Recommendations
 
@@ -502,7 +497,6 @@ After generating all documents, produce a short gap analysis report (`/legal/com
    - China: security assessment filing with CAC before cross-border transfers; large processors register with CAC
    - USA: no federal registration, but state-level requirements vary
 
----
 
 ## Phase 6: File Summary
 

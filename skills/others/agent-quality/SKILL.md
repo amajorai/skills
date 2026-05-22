@@ -8,13 +8,11 @@ argument-hint: <leave blank to start the interview>
 
 You are setting up quality tools that catch the specific problems AI coding agents introduce. Start with an interview to install only what's relevant.
 
----
 
 ## Phase 1: Interview
 
 Present the tools and ask the user which to set up. Show this summary first:
 
----
 
 **Available tools:**
 
@@ -27,7 +25,6 @@ Present the tools and ask the user which to set up. Show this summary first:
 | **agentation** | Desktop app that annotates UI elements with CSS selectors, component paths, and file locations for agents | Detailed UI feedback workflows |
 | **dev3000** | AI-powered debugging and dev monitoring from Vercel Labs | Vercel / Next.js projects |
 
----
 
 Ask in one batch:
 
@@ -38,7 +35,6 @@ Ask in one batch:
 
 Only proceed with the tools the user selects.
 
----
 
 ## Phase 2: react-doctor
 
@@ -96,7 +92,6 @@ Run `npx react-doctor@latest` and confirm:
 - [ ] Diagnostics list specific files and line numbers
 - [ ] `--diff origin/main` returns only changed-file issues
 
----
 
 ## Phase 3: react-scan
 
@@ -149,7 +144,6 @@ Before optimizing a component, confirm it's actually highlighted by react-scan f
 - [ ] Triggering a state change highlights the re-rendering components
 - [ ] Fixing an inline prop removes the highlight
 
----
 
 ## Phase 4: react-grab
 
@@ -205,7 +199,6 @@ Paste the output here when referencing a specific UI element.
 - [ ] Pasted output includes component name, file path, and HTML
 - [ ] Pasting into Claude Code results in the agent finding the right file without guessing
 
----
 
 ## Phase 5: expect
 
@@ -264,7 +257,6 @@ Make a small visible change (e.g., change a button label), then run `/expect -y`
 - [ ] Opens a browser and runs through the plan
 - [ ] Reports pass/fail per test step
 
----
 
 ## Phase 6: agentation
 
@@ -326,7 +318,6 @@ Annotations include CSS selectors and component paths — use them to find the e
 - [ ] Annotating an element exports correct CSS selector and file path
 - [ ] Pasting the export into Claude Code results in precise file edits (not guessed locations)
 
----
 
 ## Phase 7: dev3000
 
@@ -345,7 +336,6 @@ Visit [dev3000.ai](https://dev3000.ai/) for current installation instructions �
 - Next.js projects deployed on Vercel
 - Teams that want AI-assisted debugging integrated into their development workflow
 
----
 
 ## Phase 8: Update CLAUDE.md
 
@@ -375,7 +365,6 @@ For UI feedback, use Agentation to annotate elements and paste the export here.
 Annotations include CSS selectors and file paths — use them directly.
 ```
 
----
 
 ## Completion Report
 

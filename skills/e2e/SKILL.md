@@ -10,7 +10,6 @@ You are writing end-to-end tests that simulate real user behavior. Work through 
 
 **Target:** {{args}}
 
----
 
 ## Phase 1: Discover
 
@@ -43,7 +42,6 @@ If a framework already exists, use it. If not, choose based on platform:
 
 **Always confirm the framework choice with the user before setup.**
 
----
 
 ## Phase 2: Framework Setup (if needed)
 
@@ -68,7 +66,6 @@ If a framework already exists, use it. If not, choose based on platform:
 
 If a framework already exists, read its config and confirm the test directory and launch settings before proceeding.
 
----
 
 ## Phase 3: Plan Test Scenarios
 
@@ -88,7 +85,6 @@ For the target area, define test scenarios at two levels:
 
 Present the scenario list to the user and confirm scope before writing any tests. Note which flows are already covered by existing tests.
 
----
 
 ## Phase 4: Write Tests
 
@@ -136,7 +132,6 @@ Present the scenario list to the user and confirm scope before writing any tests
 
 Run every flow immediately after writing it. A passing golden-path flow is the baseline.
 
----
 
 ## Phase 5: Fix Failures
 
@@ -152,7 +147,6 @@ Do not modify assertions to make tests pass — assertions represent the correct
 
 Fix → run → fix → run. One failure at a time.
 
----
 
 ## Phase 6: Run Full Suite & Confirm
 
@@ -174,7 +168,6 @@ Report:
 - Any bugs found in the app during testing
 - Any flows intentionally deferred (with reason)
 
----
 
 ## Completion Checklist
 

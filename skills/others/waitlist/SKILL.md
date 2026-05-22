@@ -10,7 +10,6 @@ You are building a waitlist system with email capture, referral mechanics, and a
 
 **Product:** {{args}}
 
----
 
 ## Phase 1: Interview
 
@@ -22,7 +21,6 @@ Ask the user (combine related questions):
 - **Design**: Does the user have brand assets (colors, logo, copy)?
 - **Launch timeline**: When is the product launching? (affects urgency messaging)
 
----
 
 ## Phase 2: Plan
 
@@ -36,7 +34,6 @@ Define the components:
 6. **Welcome email** — confirms signup, shows position, shares referral link
 7. **Admin view** — count of signups, referral leaderboard (optional)
 
----
 
 ## Phase 3: Database
 
@@ -55,7 +52,6 @@ CREATE TABLE waitlist (
 
 Position is assigned at insert time (use `count(*) + 1` or a sequence). If referred, insert the referrer ahead of new organic signups.
 
----
 
 ## Phase 4: API
 
@@ -67,7 +63,6 @@ Create `POST /api/waitlist`:
 5. Send welcome email asynchronously (don't block the response)
 6. Return `{ position, referral_link, total_count }`
 
----
 
 ## Phase 5: Landing Page
 
@@ -85,7 +80,6 @@ After signup, show a confirmation state:
 - Pre-written share text for Twitter/X and LinkedIn
 - Progress bar showing how many spots are "reserved"
 
----
 
 ## Phase 6: Welcome Email
 
@@ -97,7 +91,6 @@ Send immediately after signup:
 - What to expect (launch timeline, what early access means)
 - Unsubscribe link
 
----
 
 ## Phase 7: Referral Mechanics
 
@@ -108,7 +101,6 @@ When a referred user signs up:
 
 Cap position at 1 to prevent going to 0 or negative.
 
----
 
 ## Phase 8: Verify
 
@@ -119,7 +111,6 @@ Cap position at 1 to prevent going to 0 or negative.
 - [ ] Share buttons pre-populate correct copy
 - [ ] Mobile layout looks correct
 
----
 
 ## Completion Report
 

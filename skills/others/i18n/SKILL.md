@@ -10,7 +10,6 @@ You are adding internationalization support. Work through each phase in order.
 
 **Target locales:** {{args}}
 
----
 
 ## Phase 1: Interview
 
@@ -24,7 +23,6 @@ Ask the user (combine related questions):
 
 Recommend: **Paraglide** for new projects (compile-time, zero runtime overhead, fully type-safe). **next-intl** for Next.js projects that want ecosystem familiarity.
 
----
 
 ## Phase 2: Explore
 
@@ -37,7 +35,6 @@ Spawn **2 parallel subagents**:
 
 Produce a string inventory: estimated count of strings, location of most-used ones.
 
----
 
 ## Phase 3: Setup
 
@@ -70,7 +67,6 @@ Set up locale-aware routing so `/en/about` and `/fr/about` work. Configure:
 - Locale detection from `Accept-Language` header
 - Locale switcher component
 
----
 
 ## Phase 4: Extract Strings
 
@@ -93,7 +89,6 @@ For each hardcoded string found in Phase 2:
 
 Work through files systematically. Do not leave hardcoded strings — they will show in English to non-English users.
 
----
 
 ## Phase 5: Translate
 
@@ -106,7 +101,6 @@ For each non-English locale:
    - Flag all machine-translated strings for human review
 4. Preserve format strings: `"greeting": "Hello, {name}!"` → `"greeting": "Hola, {name}!"`
 
----
 
 ## Phase 6: Plurals & Formatting
 
@@ -118,7 +112,6 @@ Handle edge cases:
 - **Currency**: Use `Intl.NumberFormat` with `style: 'currency'`
 - **RTL**: Add `dir="rtl"` to `<html>` for RTL locales; verify layout doesn't break
 
----
 
 ## Phase 7: Locale Switcher
 
@@ -128,7 +121,6 @@ Build a locale switcher component:
 - Persists preference to localStorage or cookie
 - Place in the app's navigation
 
----
 
 ## Phase 8: Verify
 
@@ -140,7 +132,6 @@ Build a locale switcher component:
 - [ ] Locale switcher persists across navigation
 - [ ] Page `<title>` and `<meta>` tags are also translated
 
----
 
 ## Completion Report
 

@@ -10,7 +10,6 @@ You are setting up the ultimate vibe coding environment. Start with a short inte
 
 **Project:** {{args}}
 
----
 
 ## Phase 0: Environment Detection
 
@@ -29,13 +28,11 @@ Determine:
 
 Confirm with the user: "I see you're on [local machine / a server]. Is that right?"
 
----
 
 ## Phase 1: Interview — Lock In All Choices
 
 Ask all questions up front in a single message. Do not start any installation until answers are confirmed.
 
----
 
 **Ask the user:**
 
@@ -66,7 +63,6 @@ Ask all questions up front in a single message. Do not start any installation un
 
 Once the user answers, proceed to the appropriate phases below.
 
----
 
 ## Phase 2A: Provision a VPS (local machine only)
 
@@ -136,7 +132,6 @@ aws ec2 describe-instances \
 
 SSH into the server, then continue to Phase 2B.
 
----
 
 ## Phase 2B: Server Setup
 
@@ -238,7 +233,6 @@ unzip awscliv2.zip && ./aws/install
 aws configure
 ```
 
----
 
 ## Phase 3: Scaffold the Project
 
@@ -262,7 +256,6 @@ Create the GitHub repo:
 gh repo create {{args}} --public --source=. --remote=origin --push
 ```
 
----
 
 ## Phase 4: Spec-Driven Development
 
@@ -302,7 +295,6 @@ gh pr create --title "feat: <name>" --body "Closes #<issue-number>"
 # Merge → deployment platform auto-deploys via webhook
 ```
 
----
 
 ## Phase 5: Deploy
 
@@ -351,7 +343,6 @@ wrangler pages deploy ./dist --project-name={{args}}
 wrangler secret put DATABASE_URL
 ```
 
----
 
 ## Phase 6: Scale — Spin Up More Servers (orchestrator only)
 
@@ -367,7 +358,6 @@ hcloud server create \
 # Register in Coolify: UI → Servers → Add Server → paste IP
 ```
 
----
 
 ## Daily Workflow Cheat Sheet
 
@@ -381,7 +371,6 @@ dokploy application deploy --applicationId <ID>   # or trigger manually
 coolify deploy application <UUID>       # or via Coolify
 ```
 
----
 
 ## Completion Checklist
 

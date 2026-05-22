@@ -10,7 +10,6 @@ You are auditing and optimizing a website for Lighthouse scores. Work through ea
 
 **Target:** {{args}}
 
----
 
 ## Phase 0: Setup & Baseline
 
@@ -58,7 +57,6 @@ Also extract and show Core Web Vitals:
 - **TTFB** (Time to First Byte) — target < 800ms
 - **TBT** (Total Blocking Time) — target < 200ms
 
----
 
 ## Phase 1: Spawn Analysis Subagents
 
@@ -73,7 +71,6 @@ Spawn **4 parallel subagents** to read the baseline JSON and identify issues per
 
 Each subagent reads `./lighthouse-baseline.json` and returns a prioritized list of findings.
 
----
 
 ## Phase 2: Prioritize & Plan
 
@@ -94,7 +91,6 @@ Ask the user: **"Which issues should I fix? (all / just Performance / select num
 
 Do not implement anything until the user answers.
 
----
 
 ## Phase 3: Implement Fixes
 
@@ -234,7 +230,6 @@ Work through selected fixes one at a time. For each fix:
 - Ensure `<meta name="viewport" content="width=device-width, initial-scale=1">` is present
 - Confirm tap targets are at least 48×48px with 8px spacing
 
----
 
 ## Phase 4: Re-audit & Compare
 
@@ -262,7 +257,6 @@ Also compare Core Web Vitals before/after.
 
 If any score went **down**, investigate why and fix before reporting done.
 
----
 
 ## Phase 5: Verify in Browser
 
@@ -273,7 +267,6 @@ If the app is running locally:
 3. Manually verify the golden path still works (navigation, forms, key interactions)
 4. Check for any visual regressions caused by the changes
 
----
 
 ## Completion Checklist
 

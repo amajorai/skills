@@ -10,7 +10,6 @@ You are setting up production observability. Work through each phase in order.
 
 **Target:** {{args}}
 
----
 
 ## Phase 1: Interview
 
@@ -24,7 +23,6 @@ Ask the user (combine related questions):
 
 Confirm tools and alert destinations before proceeding.
 
----
 
 ## Phase 2: Explore
 
@@ -37,7 +35,6 @@ Spawn **2 parallel subagents**:
 
 Identify: where to initialize SDKs, what's unhandled, what context (user ID, request ID) is available.
 
----
 
 ## Phase 3: Error Tracking (Sentry)
 
@@ -51,7 +48,6 @@ Identify: where to initialize SDKs, what's unhandled, what context (user ID, req
 5. For API routes: wrap handlers with Sentry request tracing
 6. Verify: trigger a test error, confirm it appears in Sentry dashboard
 
----
 
 ## Phase 4: Structured Logging
 
@@ -64,7 +60,6 @@ Identify: where to initialize SDKs, what's unhandled, what context (user ID, req
 5. Log levels: `error` for exceptions, `warn` for degraded state, `info` for key events, `debug` for dev only
 6. Never log sensitive fields — add a redact list to the logger config for passwords, tokens, PII
 
----
 
 ## Phase 5: Uptime Monitoring
 
@@ -79,7 +74,6 @@ Identify: where to initialize SDKs, what's unhandled, what context (user ID, req
    - Alert destination: the channel confirmed in Phase 1
 4. Add a status page if the user wants one (BetterStack provides this free)
 
----
 
 ## Phase 6: Alerting Rules
 
@@ -89,7 +83,6 @@ Set up alert fatigue prevention:
 - **Warning** (Slack/email): error spike, latency P95 > threshold, disk/memory pressure
 - **Noise suppression**: ignore known flaky endpoints, bot traffic, health check errors
 
----
 
 ## Phase 7: Verify
 
@@ -99,7 +92,6 @@ Set up alert fatigue prevention:
 - [ ] Uptime monitor fires an alert when the endpoint is manually taken down (test mode)
 - [ ] Alert reaches the correct destination
 
----
 
 ## Completion Report
 

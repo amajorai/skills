@@ -10,7 +10,6 @@ You are optimizing a web project for search engine visibility and ranking. **Do 
 
 **Target:** {{args}}
 
----
 
 ## Phase 0: Detect Current State
 
@@ -58,13 +57,11 @@ Analyze and note:
 - Images missing `alt` attributes?
 - Is the site internationalized?
 
----
 
 ## Phase 1: Full Interview
 
 Present everything in one message. Tailor the checklist based on what you detected in Phase 0. Flag any detected gaps as ⚠️.
 
----
 
 > **SEO optimization setup — tell me what you want and I'll implement it all in one pass.**
 >
@@ -154,7 +151,6 @@ Present everything in one message. Tailor the checklist based on what you detect
 
 Wait for the user's answers. Once confirmed, summarize the plan and ask: **"Ready to proceed?"**
 
----
 
 ## Phase 2: Pre-flight Notes
 
@@ -168,7 +164,6 @@ Before writing anything, flag these based on the user's selections:
 
 **If hreflang:** Confirm all locale URLs exist and are accessible — broken hreflang tags can confuse Google's locale detection.
 
----
 
 ## Phase 3: Meta Tags & Open Graph (if selected — A)
 
@@ -225,10 +220,8 @@ import Head from 'next/head'
 
 ### Astro
 ```astro
----
 // src/layouts/BaseLayout.astro
 const { title, description, image = '/og-image.png', canonicalURL } = Astro.props
----
 <head>
   <title>{title} | Site Name</title>
   <meta name="description" content={description} />
@@ -257,7 +250,6 @@ const { title, description, image = '/og-image.png', canonicalURL } = Astro.prop
 
 Audit all page templates and ensure every page has unique title and description. Identical titles across pages are a ranking signal problem.
 
----
 
 ## Phase 4: Sitemap (if selected — B)
 
@@ -351,7 +343,6 @@ After generating, add the sitemap URL to `robots.txt`:
 Sitemap: https://example.com/sitemap.xml
 ```
 
----
 
 ## Phase 5: robots.txt (if selected — C)
 
@@ -372,7 +363,6 @@ Place in `public/robots.txt` for Next.js/Astro/Vite projects, or at the server r
 
 Verify it is accessible at `https://example.com/robots.txt` before declaring done.
 
----
 
 ## Phase 6: Structured Data (if selected — E)
 
@@ -479,7 +469,6 @@ Inject via `<script type="application/ld+json">`. For frameworks: inject in the 
 
 Validate all structured data with Google's Rich Results Test: https://search.google.com/test/rich-results
 
----
 
 ## Phase 7: Image Optimization (if selected — F)
 
@@ -514,7 +503,6 @@ import Image from 'next/image'
 />
 ```
 
----
 
 ## Phase 8: Performance / Core Web Vitals (if selected — G)
 
@@ -543,7 +531,6 @@ import Image from 'next/image'
 <script src="/chat-widget.js" async></script>
 ```
 
----
 
 ## Phase 9: hreflang (if selected — H)
 
@@ -573,7 +560,6 @@ export const metadata: Metadata = {
 }
 ```
 
----
 
 ## Phase 10: Heading Audit (if selected — I)
 
@@ -588,7 +574,6 @@ grep -rn "<h1" src/ app/ pages/ --include="*.tsx" --include="*.jsx" --include="*
 
 Fix: ensure each page has exactly one `<h1>` that contains the primary keyword. Subheadings use `<h2>`–`<h6>` in logical order without skipping levels.
 
----
 
 ## Phase 11: noindex Tags (if selected — K)
 
@@ -609,7 +594,6 @@ export const metadata: Metadata = {
 }
 ```
 
----
 
 ## Phase 12: Final Verification
 
@@ -630,7 +614,6 @@ grep -rn "<img " src/ app/ pages/ --include="*.tsx" --include="*.jsx" --include=
 grep -rn "<h1" src/ app/ pages/ --include="*.tsx" --include="*.jsx" --include="*.astro" 2>/dev/null | head -20
 ```
 
----
 
 ## Completion Checklist
 

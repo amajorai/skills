@@ -10,7 +10,6 @@ You are wiring up a complete payment integration. Work through each phase in ord
 
 **Billing model:** {{args}}
 
----
 
 ## Phase 1: Interview
 
@@ -32,7 +31,6 @@ Ask the user (combine related questions):
 
 Confirm the product catalog and gating rules before proceeding.
 
----
 
 ## Phase 2: Explore
 
@@ -46,7 +44,6 @@ Spawn **3 parallel subagents**:
 
 Synthesize: data model changes needed, API route plan, frontend gating strategy.
 
----
 
 ## Phase 3: Plan
 
@@ -76,7 +73,6 @@ Define the full implementation surface based on provider:
 
 Present the plan and confirm before implementing.
 
----
 
 ## Phase 4: Implement
 
@@ -136,7 +132,6 @@ Present the plan and confirm before implementing.
 3. Billing page (link to portal endpoint)
 4. Show current plan in account settings
 
----
 
 ## Phase 5: Test Mode Verification
 
@@ -172,7 +167,6 @@ Present the plan and confirm before implementing.
 - [ ] Sandbox purchase through paywall completes
 - [ ] Free user blocked, paid user passes gate
 
----
 
 ## Phase 6: Live Checklist
 
@@ -194,7 +188,6 @@ Present the plan and confirm before implementing.
 - [ ] RevenueCat webhooks wired to backend (if mirroring state server-side)
 - [ ] Superwall paywalls reviewed and published in dashboard
 
----
 
 ## Completion Report
 

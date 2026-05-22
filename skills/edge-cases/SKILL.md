@@ -10,7 +10,6 @@ You are running a thorough edge case audit. Work through each phase in order. Do
 
 **Target:** {{args}}
 
----
 
 ## Phase 1: Catalog
 
@@ -31,7 +30,6 @@ Spawn **8 parallel subagents**, one per category. Each enumerates every edge cas
 
 Each subagent must read the relevant source files before enumerating — do not guess based on category alone.
 
----
 
 ## Phase 2: Prioritize & Deduplicate
 
@@ -46,7 +44,6 @@ Consolidate all findings into a single master list:
 
 Present the prioritized list to the user and confirm before writing any tests. Note which cases are already handled and which are unhandled gaps.
 
----
 
 ## Phase 3: Write Tests
 
@@ -64,7 +61,6 @@ For each unhandled P0 and P1 case (and any P2/P3 cases the user flags):
 
 Run the tests immediately after writing them. A failing test is the goal for unhandled cases — it proves the gap is real.
 
----
 
 ## Phase 4: Harden
 
@@ -77,7 +73,6 @@ For every test that fails (unhandled edge case confirmed):
 
 Do not batch fixes. Fix → test → fix → test. One at a time.
 
----
 
 ## Phase 5: Full Test Run & Coverage Report
 
@@ -95,7 +90,6 @@ Summarize:
 - How many new tests were written
 - Any P2/P3 cases intentionally deferred (with rationale)
 
----
 
 ## Phase 6: Document Remaining Gaps
 
@@ -107,7 +101,6 @@ For any edge cases intentionally **not** handled (deferred P2/P3 or out-of-scope
 
 Do not write TODO comments for cases that are now handled — they just add noise.
 
----
 
 ## Completion Checklist
 

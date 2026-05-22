@@ -10,7 +10,6 @@ You are setting up a complete CI/CD pipeline with GitHub Actions. Work through e
 
 **Deploy target:** {{args}}
 
----
 
 ## Phase 1: Explore
 
@@ -23,7 +22,6 @@ Spawn **2 parallel subagents**:
 
 Identify: which checks to run, how to run them, what secrets the deploy needs.
 
----
 
 ## Phase 2: Interview
 
@@ -35,7 +33,6 @@ Ask the user (combine related questions):
 - **Secrets needed**: What API keys does the deploy step need?
 - **Monorepo**: Is this a monorepo? Which packages need CI?
 
----
 
 ## Phase 3: CI Workflow (checks on every PR)
 
@@ -69,7 +66,6 @@ Rules:
 - Cache `~/.bun/install/cache` with a cache key on `bun.lockb`
 - Fail fast: if build fails, no point running deploy
 
----
 
 ## Phase 4: Preview Deploy (optional, per PR)
 
@@ -94,7 +90,6 @@ Rules:
 
 Post the preview URL as a PR comment using `peter-evans/create-or-update-comment`.
 
----
 
 ## Phase 5: Production Deploy (on merge to main)
 
@@ -120,7 +115,6 @@ jobs:
 
 Deploy only runs when checks pass. Never deploy a broken build.
 
----
 
 ## Phase 6: Secrets Setup
 
@@ -132,7 +126,6 @@ List all secrets needed and guide the user to add them:
    - App secrets needed at build time
 3. Reference in workflow as `${{ secrets.SECRET_NAME }}`
 
----
 
 ## Phase 7: Branch Protection
 
@@ -143,7 +136,6 @@ Recommend enabling branch protection on `main`:
 - Require at least 1 approval (optional for solo projects)
 - Do not allow force pushes
 
----
 
 ## Phase 8: Verify
 
@@ -156,7 +148,6 @@ Push a PR and confirm:
 - [ ] Production deploy completes successfully
 - [ ] A broken build (introduce a syntax error) correctly fails CI and blocks merge
 
----
 
 ## Completion Report
 

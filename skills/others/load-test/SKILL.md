@@ -10,7 +10,6 @@ You are running load tests to find where the system breaks before users do. Work
 
 **Target:** {{args}}
 
----
 
 ## Phase 1: Define Test Scenarios
 
@@ -26,7 +25,6 @@ Identify 2–3 scenarios to test:
 2. **Spike**: Sudden traffic burst (launch day, viral moment)
 3. **Soak**: Sustained load over 30+ minutes (memory leaks, connection pool exhaustion)
 
----
 
 ## Phase 2: Explore
 
@@ -35,7 +33,6 @@ Spawn **1 subagent** to:
 - Identify any obvious bottlenecks: N+1 queries, missing indexes, synchronous operations in request path
 - Check connection pool settings and any rate limiting in place
 
----
 
 ## Phase 3: Install k6
 
@@ -52,7 +49,6 @@ docker run --rm -i grafana/k6 run - <script.js
 
 k6 is a JavaScript-based load testing tool. Tests are JS files that describe virtual user behavior.
 
----
 
 ## Phase 4: Write Test Scripts
 
@@ -98,7 +94,6 @@ export const options = {
 
 Write one script per endpoint or user flow to test.
 
----
 
 ## Phase 5: Run Tests
 
@@ -118,7 +113,6 @@ Monitor during the run:
 - Error logs
 - Response time dashboard (if available)
 
----
 
 ## Phase 6: Interpret Results
 
@@ -136,7 +130,6 @@ Identify:
 - What error messages appear under load?
 - Does performance degrade gradually (capacity limit) or suddenly (connection pool exhausted, OOM)?
 
----
 
 ## Phase 7: Fix Bottlenecks
 
@@ -152,7 +145,6 @@ Common findings and fixes:
 
 After each fix, re-run the test that exposed the issue and confirm improvement.
 
----
 
 ## Phase 8: Report
 
@@ -164,7 +156,6 @@ Produce a load test report:
 - Bottlenecks found and fixed
 - Recommended scale-up trigger (CPU%, memory%, requests/s)
 
----
 
 ## Completion Report
 

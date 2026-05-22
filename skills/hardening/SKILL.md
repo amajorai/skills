@@ -10,7 +10,6 @@ You are hardening a Linux VPS. **Do not implement anything until the interview i
 
 **Target:** {{args}}
 
----
 
 ## Phase 0: Detect Current State
 
@@ -56,13 +55,11 @@ Analyze the output and note:
 - What cloud provider?
 - What ports are open?
 
----
 
 ## Phase 1: Full Interview
 
 Present everything in one message. Tailor the warnings based on what you detected in Phase 0.
 
----
 
 > **Server hardening setup — tell me what you want and I'll implement it all in one pass.**
 >
@@ -136,7 +133,6 @@ Present everything in one message. Tailor the warnings based on what you detecte
 
 Wait for the user's answers. Once confirmed, summarize the plan and ask: **"Ready to proceed?"**
 
----
 
 ## Phase 2: Pre-flight Safety Checks
 
@@ -159,7 +155,6 @@ Before writing a single config file, run these checks based on what was selected
 **If no SSH key and they skipped key setup:**
 > ❌ Cannot disable password auth safely. Either help them set up keys first or skip that step.
 
----
 
 ## Phase 3: SSH Key Setup (if selected — A)
 
@@ -175,7 +170,6 @@ ssh -i ~/.ssh/id_ed25519_vps USER@{{args}} echo "Key auth confirmed"
 
 **Do not continue until the user confirms key login works.**
 
----
 
 ## Phase 4: Create Non-Root Sudo User (if selected — B)
 
@@ -190,7 +184,6 @@ chmod 700 /home/USERNAME/.ssh && chmod 600 /home/USERNAME/.ssh/authorized_keys
 
 Instruct user: **Open a new terminal and confirm you can SSH as USERNAME before continuing.**
 
----
 
 ## Phase 5: Harden SSH (if selected — C)
 
@@ -226,7 +219,6 @@ sshd -t && echo "Config OK"
 
 **Do not restart sshd here — do it after UFW is configured.**
 
----
 
 ## Phase 6: UFW Firewall (if selected — D)
 
@@ -264,7 +256,6 @@ ss -tlnp | grep ssh
 Instruct user: **Open a new terminal and SSH on the new port: `ssh -p NEW_PORT USERNAME@{{args}}`**
 Do not close the current session until confirmed.
 
----
 
 ## Phase 7: Provider Firewall (if selected — E)
 
@@ -323,7 +314,6 @@ ovhcloud login
 > OVH firewall CLI varies by product. If CLI doesn't work for your product type, go to:
 > OVH Manager → Bare Metal Cloud → IP → Firewall → add rule for NEW_PORT
 
----
 
 ## Phase 8: fail2ban (if selected — F)
 
@@ -349,7 +339,6 @@ systemctl enable fail2ban && systemctl restart fail2ban
 fail2ban-client status sshd
 ```
 
----
 
 ## Phase 9: Unattended Security Updates (if selected — G)
 
@@ -376,7 +365,6 @@ unattended-upgrade --dry-run --debug
 systemctl enable unattended-upgrades
 ```
 
----
 
 ## Phase 10: System Hardening (if selected — H)
 
@@ -418,7 +406,6 @@ aa-enforce /etc/apparmor.d/* 2>/dev/null || true
 aa-status | head -5
 ```
 
----
 
 ## Phase 11: Login Banner (if selected — I)
 
@@ -439,7 +426,6 @@ grep -q "^Banner" /etc/ssh/sshd_config \
 sshd -t && systemctl reload sshd
 ```
 
----
 
 ## Phase 12: Optional Extras (if selected — J)
 
@@ -491,7 +477,6 @@ sshd -t && systemctl restart sshd
 
 > ⚠️ Test 2FA in a new terminal before closing your current session.
 
----
 
 ## Phase 13: Final Verification
 
@@ -511,7 +496,6 @@ echo "=== ClamAV ===" && systemctl is-active clamav-daemon 2>/dev/null || echo "
 echo "=== 2FA ===" && grep AuthenticationMethods /etc/ssh/sshd_config 2>/dev/null || echo "not configured"
 ```
 
----
 
 ## Completion Checklist
 

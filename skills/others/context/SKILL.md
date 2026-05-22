@@ -10,7 +10,6 @@ You are setting up the context infrastructure that makes an AI coding agent accu
 
 **Project:** {{args}}
 
----
 
 ## Phase 1: Interview
 
@@ -21,7 +20,6 @@ Ask the user (combine related questions):
 - **opensrc**: Is Node.js 18+ installed? (required for opensrc CLI)
 - **CLAUDE.md**: Does a `CLAUDE.md` already exist for this project? Should we create or update one?
 
----
 
 ## Phase 2: Context7 — Live Library Docs
 
@@ -71,7 +69,6 @@ What changed in React 19 for forms? use context7
 
 To target a specific library: `use context7 library /vercel/next.js`
 
----
 
 ## Phase 3: opensrc — Real Package Source Code
 
@@ -109,7 +106,6 @@ Tell the agent: "Use `opensrc path <package>` to read the source of <package> be
 
 Add to `CLAUDE.md` so the agent uses it automatically — see Phase 4.
 
----
 
 ## Phase 4: CLAUDE.md — Project Context File
 
@@ -143,7 +139,6 @@ A `CLAUDE.md` at the project root is loaded into Claude Code's context on every 
 
 If a `CLAUDE.md` already exists, add the Context Tools section to it rather than overwriting.
 
----
 
 ## Phase 5: Explore the Project
 
@@ -157,7 +152,6 @@ With context tools in place, run a structured codebase exploration so the agent 
 
 Synthesize findings into a **Context Summary** and offer to write it into `CLAUDE.md`.
 
----
 
 ## Phase 6: Verify Everything Works
 
@@ -168,7 +162,6 @@ Run these checks:
 - [ ] `CLAUDE.md` exists with stack, architecture, conventions, and context tool instructions
 - [ ] Restart Claude Code and confirm MCP servers load (check `/mcp` status)
 
----
 
 ## Completion Report
 

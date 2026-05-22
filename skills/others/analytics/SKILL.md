@@ -10,7 +10,6 @@ You are wiring up analytics so the team can understand user behavior. Work throu
 
 **Tool:** {{args}} (default: PostHog)
 
----
 
 ## Phase 1: Interview
 
@@ -22,7 +21,6 @@ Ask the user (combine related questions):
 - **Privacy**: Any GDPR/CCPA constraints on tracking? Cookie consent required?
 - **Stack**: SPA, SSR, or mobile?
 
----
 
 ## Phase 2: Define Event Taxonomy
 
@@ -41,7 +39,6 @@ Identify:
 
 Confirm the taxonomy with the user before implementing. Over-tracking is as bad as under-tracking.
 
----
 
 ## Phase 3: Explore
 
@@ -52,7 +49,6 @@ Spawn **2 parallel subagents**:
 | 1 | User flows: auth, onboarding, core features, upgrade path |
 | 2 | Existing analytics code, env vars, and where events would fire |
 
----
 
 ## Phase 4: Install & Initialize
 
@@ -72,7 +68,6 @@ bun add posthog-node  # backend (server-side events)
 - Add the script tag to the HTML head (no npm package needed)
 - Enable custom events via `plausible('event_name', { props: {...} })`
 
----
 
 ## Phase 5: Instrument
 
@@ -88,7 +83,6 @@ For each event in the taxonomy:
 
 Identify events and add them throughout the codebase — do not leave stubs.
 
----
 
 ## Phase 6: Dashboards
 
@@ -101,7 +95,6 @@ Set up a minimum viable dashboard:
 
 Document the dashboard URL and share it with the user.
 
----
 
 ## Phase 7: Verify
 
@@ -111,7 +104,6 @@ Document the dashboard URL and share it with the user.
 - [ ] Anonymous users are not creating unnecessary profiles
 - [ ] Dashboard shows data within 5 minutes of events firing
 
----
 
 ## Completion Report
 

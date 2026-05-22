@@ -10,7 +10,6 @@ You are making a site fully agent-ready using Cloudflare AI Search and the stand
 
 **Target:** {{args}}
 
----
 
 ## Phase 0: Detect Current State
 
@@ -44,7 +43,6 @@ grep -r "text/markdown" src/ app/ pages/ 2>/dev/null | head -10
 
 Note: Is this a Workers project? What framework? What's already done vs. missing?
 
----
 
 ## Phase 1: Audit Against isitagentready.com
 
@@ -81,7 +79,6 @@ Search:            [0/1 done]
 
 Ask: "Which of these do you want me to implement? I can do all of them, or we can start with the highest-impact ones first." Default recommendation: all.
 
----
 
 ## Phase 2: Cloudflare AI Search Setup
 
@@ -194,7 +191,6 @@ await env.SEARCH_NS.create({
 - `rrf` (reciprocal rank fusion) — balanced hybrid, best default
 - `max` — prefer whichever signal scores higher
 
----
 
 ## Phase 3: Markdown Content Negotiation
 
@@ -249,7 +245,6 @@ curl -sI -H "Accept: text/markdown" https://yoursite.com/docs/getting-started
 # Should return Content-Type: text/markdown; charset=utf-8
 ```
 
----
 
 ## Phase 4: robots.txt AI Rules
 
@@ -293,7 +288,6 @@ User-agent: GPTBot
 Allow: /docs/
 ```
 
----
 
 ## Phase 5: XML Sitemap
 
@@ -330,7 +324,6 @@ ${urls}
 
 Serve at `/sitemap.xml` and reference it in `robots.txt`.
 
----
 
 ## Phase 6: MCP Server Card
 
@@ -363,7 +356,6 @@ If you're using `cloudflare/agents-starter`, the MCP endpoint is auto-provisione
 // Access it at: https://<worker>.workers.dev/mcp
 ```
 
----
 
 ## Phase 7: Agent Skills Listing
 
@@ -390,7 +382,6 @@ Publish at `/.well-known/agent-skills.json` to advertise what actions agents can
 }
 ```
 
----
 
 ## Phase 8: Verification
 
@@ -435,7 +426,6 @@ curl -s https://yoursite.com/.well-known/agent-skills.json | jq .
 
 **Full audit:** Paste your URL at https://isitagentready.com/ and confirm all checks pass.
 
----
 
 ## Completion Checklist
 

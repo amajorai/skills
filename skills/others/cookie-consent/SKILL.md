@@ -10,7 +10,6 @@ You are implementing a compliant cookie consent system. Work through each phase 
 
 **Cookie categories:** {{args}}
 
----
 
 ## Phase 1: Audit Cookies
 
@@ -26,7 +25,6 @@ Produce a cookie inventory:
 | `_ph_*` | PostHog | Analytics | User tracking | 1 year |
 | ... | ... | ... | ... | ... |
 
----
 
 ## Phase 2: Interview
 
@@ -39,7 +37,6 @@ Ask the user (combine related questions):
 
 For most indie apps: recommend building a lightweight custom banner (~50 lines) rather than a heavy third-party widget.
 
----
 
 ## Phase 3: Implement Consent Store
 
@@ -50,7 +47,6 @@ Create a consent store that:
 4. Fires a `consent_updated` event when consent changes (so scripts can initialize)
 5. Provides `hasConsented()`, `grantConsent(categories)`, `revokeConsent(categories)` functions
 
----
 
 ## Phase 4: Block Scripts Until Consent
 
@@ -64,7 +60,6 @@ For each non-essential script:
 2. **Third-party scripts**: Change `type="text/javascript"` to `type="text/plain"` and add `data-category="analytics"` — the consent manager activates them after consent
 3. **Server-side tracking**: Check consent header or cookie before processing
 
----
 
 ## Phase 5: Build the Banner
 
@@ -79,7 +74,6 @@ Create a consent banner component with:
 3. **Footer link**: "Cookie Settings" that reopens the preferences modal at any time
 4. **No dark patterns**: Accept and Reject buttons must be equal prominence (GDPR requirement)
 
----
 
 ## Phase 6: CCPA (if applicable)
 
@@ -89,7 +83,6 @@ For California users:
 - [ ] Clicking it sets marketing consent to false and persists the choice
 - [ ] No selling/sharing of data when this opt-out is active
 
----
 
 ## Phase 7: Verify
 
@@ -101,7 +94,6 @@ For California users:
 - [ ] Revoking consent stops tracking and clears existing tracking cookies
 - [ ] No console errors on any consent state
 
----
 
 ## Completion Report
 

@@ -10,7 +10,6 @@ You are wiring up transactional email end-to-end. Work through each phase in ord
 
 **Email types:** {{args}}
 
----
 
 ## Phase 1: Interview
 
@@ -22,7 +21,6 @@ Ask the user (combine related questions):
 - **Templates**: Plain text only, or styled HTML? React Email or MJML for templating?
 - **Stack**: Framework and language?
 
----
 
 ## Phase 2: Explore
 
@@ -33,7 +31,6 @@ Spawn **2 parallel subagents**:
 | 1 | Auth flows (signup, password reset), notification trigger points in the codebase |
 | 2 | Existing email code, env vars, any current email setup |
 
----
 
 ## Phase 3: Domain Verification
 
@@ -45,7 +42,6 @@ Spawn **2 parallel subagents**:
 3. Verify domain is confirmed in the provider dashboard before sending real emails
 4. Set `RESEND_API_KEY` (or `POSTMARK_API_KEY`) in env vars
 
----
 
 ## Phase 4: Template Setup
 
@@ -62,7 +58,6 @@ Create `emails/` directory with one file per template. Each template:
 - Matches the app's brand (colors, fonts, logo)
 - Includes a footer with unsubscribe link (required for bulk emails; best practice for all)
 
----
 
 ## Phase 5: Implement Email Functions
 
@@ -82,7 +77,6 @@ sendNotificationEmail(user: { email }, notification: Notification)
 
 Wire each wrapper to the correct trigger point in the codebase.
 
----
 
 ## Phase 6: Deliverability
 
@@ -93,7 +87,6 @@ Wire each wrapper to the correct trigger point in the codebase.
 - [ ] Unsubscribe link in every email (required by CAN-SPAM, GDPR)
 - [ ] Test deliverability at [mail-tester.com](https://www.mail-tester.com) — aim for 9+/10
 
----
 
 ## Phase 7: Verify
 
@@ -104,7 +97,6 @@ Wire each wrapper to the correct trigger point in the codebase.
 - [ ] Unsubscribe link works
 - [ ] Bounced/failed sends are logged and don't crash the app
 
----
 
 ## Completion Report
 

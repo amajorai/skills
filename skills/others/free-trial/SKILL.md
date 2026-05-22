@@ -10,7 +10,6 @@ You are implementing a free trial with proper expiry, gating, and upgrade flow. 
 
 **Trial length:** {{args}} days
 
----
 
 ## Phase 1: Interview
 
@@ -22,7 +21,6 @@ Ask the user (combine related questions):
 - **Behavior at expiry**: Hard block (can't use app), soft block (read-only mode), or grace period?
 - **Existing setup**: Is there already a payment integration (Stripe/LemonSqueezy)?
 
----
 
 ## Phase 2: Explore
 
@@ -33,7 +31,6 @@ Spawn **2 parallel subagents**:
 | 1 | User model, subscription status fields, any existing plan gating |
 | 2 | Auth flow, onboarding steps, where trial would start |
 
----
 
 ## Phase 3: Database Changes
 
@@ -47,7 +44,6 @@ ALTER TABLE users ADD COLUMN trial_expired     BOOLEAN DEFAULT false;
 
 Or use Stripe's built-in trial support: when creating a subscription, set `trial_end: Math.floor(Date.now() / 1000) + 14 * 86400`. Stripe will handle the trial period and send a `customer.subscription.trial_will_end` webhook 3 days before expiry.
 
----
 
 ## Phase 4: Trial Start
 
@@ -58,7 +54,6 @@ Trigger trial start at the right moment (signup or first meaningful action):
 3. If no card required: just set the database fields — prompt for card when trial expires
 4. Send welcome email with trial end date prominently displayed
 
----
 
 ## Phase 5: Access Gating
 
@@ -80,7 +75,6 @@ if (['full', 'trial'].includes(getAccessLevel(user))) {
 
 Update all existing plan-gated routes to use `getAccessLevel`.
 
----
 
 ## Phase 6: Trial Expiry
 
@@ -91,7 +85,6 @@ Run a background job (cron, every hour) that:
 
 Alternatively use Stripe webhooks: `customer.subscription.trial_will_end` (3 days before) and `customer.subscription.updated` (when trial converts or cancels).
 
----
 
 ## Phase 7: Upgrade Prompt
 
@@ -104,7 +97,6 @@ Build an upgrade prompt component shown when a trial user hits a paywall:
 
 Show a persistent banner in the header for the last 3 days of trial.
 
----
 
 ## Phase 8: Emails
 
@@ -117,7 +109,6 @@ Send these emails automatically:
 | 2 days before expiry | "2 days left in your trial" | Urgency, upgrade CTA |
 | Trial expired | "Your trial has ended" | What you lose, upgrade CTA, FAQ |
 
----
 
 ## Phase 9: Verify
 
@@ -129,7 +120,6 @@ Send these emails automatically:
 - [ ] Upgrading during trial converts correctly (immediate access, no double charge)
 - [ ] Trial expiry does not affect already-paying users
 
----
 
 ## Completion Report
 

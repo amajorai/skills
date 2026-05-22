@@ -10,7 +10,6 @@ You are auditing an app against Apple App Store and Google Play Store review pol
 
 **App:** {{args}}
 
----
 
 ## Phase 1: Fetch Current Guidelines
 
@@ -23,7 +22,6 @@ Before asking the user anything, fetch the current official guidelines. Run thes
 
 Summarize what version/date of guidelines you retrieved. If a fetch fails, note it and proceed with your training data, flagging it as potentially outdated.
 
----
 
 ## Phase 2: App Interview
 
@@ -103,7 +101,6 @@ Ask all questions in a single message. Tell the user: detailed answers prevent f
 
 Do not proceed to Phase 3 until all Phase 2 questions are answered.
 
----
 
 ## Phase 3: Apple App Store Audit
 
@@ -228,7 +225,6 @@ Apply only the sections relevant to this app based on Phase 2 answers:
 - [ ] No purchase prompts directed at children
 - [ ] Parental gate on any external links or purchases
 
----
 
 ## Phase 4: Google Play Store Audit
 
@@ -322,7 +318,6 @@ Apply only the sections relevant to this app based on Phase 2 answers:
 - [ ] Clearly attribute content to original publisher
 - [ ] Does not misrepresent sources as original reporting
 
----
 
 ## Phase 5: Compliance Report
 
@@ -336,7 +331,6 @@ Generate a structured report saved to `/app-store-compliance-report.md`.
 ## Generated: [today's date]
 ## Guidelines Version: [version/date retrieved in Phase 1]
 
----
 
 ## Executive Summary
 
@@ -362,7 +356,6 @@ Generate a structured report saved to `/app-store-compliance-report.md`.
 | Design | PASS/FAIL/RISK | |
 | Legal & Privacy | PASS/FAIL/RISK | |
 
----
 
 ## Google Play Store: [PASS / CONDITIONAL / FAIL]
 
@@ -385,7 +378,6 @@ Generate a structured report saved to `/app-store-compliance-report.md`.
 | Families Policy | N/A or status | |
 | Technical Requirements | | |
 
----
 
 ## Priority Fix List
 
@@ -396,7 +388,6 @@ Ordered by urgency (blocking → high → medium → low):
 | 1 | [issue] | iOS/Android/Both | Blocking | [specific action] |
 ...
 
----
 
 ## Metadata to Complete in App Store Connect / Play Console
 
@@ -416,7 +407,6 @@ List every metadata field the user still needs to fill in:
 - [ ] Financial features declaration (if applicable)
 - [ ] News app declaration (if applicable)
 
----
 
 ## Before You Submit
 
@@ -429,7 +419,6 @@ List every metadata field the user still needs to fill in:
 - [ ] Verify Privacy Manifest and SDK manifests are included (iOS 17+)
 - [ ] Run through the app as a first-time user — onboarding must be clear without external context
 
----
 
 ## Resources
 
@@ -439,7 +428,6 @@ List every metadata field the user still needs to fill in:
 - Google Play appeals: https://support.google.com/googleplay/android-developer/answer/9899234
 ```
 
----
 
 ## Phase 6: Rejection Response (if applicable)
 
@@ -474,7 +462,6 @@ Thank you for your time and consideration.
 [Developer/Company Name]
 ```
 
----
 
 ## Ongoing Compliance Note
 

@@ -7,7 +7,6 @@ description: Scans all past conversation transcripts for the current project and
 
 You are scanning the project's conversation history to find recurring patterns across sessions and distill them into durable rules. This is a deeper version of `/reflect` — it looks back at every past conversation, not just the current one.
 
----
 
 ## Step 1: Detect the Current Agent
 
@@ -25,7 +24,6 @@ Determine which agent is running:
 
 Record: **Agent type**, **Target config file**, **Transcript directory**.
 
----
 
 ## Step 2: Locate Transcript Files
 
@@ -51,7 +49,6 @@ find ~/.codex -name "*.json" -o -name "*.jsonl" 2>/dev/null | head -50
 
 Read the most recent 10–20 transcript files (or all of them if fewer than 10 exist). Skip files that are empty or under 1KB.
 
----
 
 ## Step 3: Read the Transcripts
 
@@ -69,13 +66,11 @@ Focus on:
 
 You do not need to read transcripts exhaustively — scan for signal, not every word.
 
----
 
 ## Step 4: Read the Current Config File
 
 Read the existing contents of the target config file so you can see what rules are already documented and avoid adding duplicates.
 
----
 
 ## Step 5: Find Cross-Session Patterns
 
@@ -102,7 +97,6 @@ Types of problems where the agent consistently needed more turns than expected:
 - Repeatedly misunderstood the same domain concept
 - Consistently needed the user to clarify the same type of ambiguity
 
----
 
 ## Step 6: Score and Filter
 
@@ -117,7 +111,6 @@ Discard anything that:
 - Is standard practice (not project-specific)
 - Cannot be expressed as a clear rule
 
----
 
 ## Step 7: Draft Rules
 
@@ -129,7 +122,6 @@ For each pattern that passes Step 6, write a rule:
 
 Group related rules under a section header if the config file uses sections.
 
----
 
 ## Step 8: Merge Into the Config File
 
@@ -139,7 +131,6 @@ Update the target config file:
 3. Remove any rule that the transcript history shows was consistently wrong or ignored
 4. Keep the file readable — no duplicate entries
 
----
 
 ## Step 9: Report Back
 

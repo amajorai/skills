@@ -10,7 +10,6 @@ You are generating all platform icons from a single source image. Work through e
 
 **Source image:** {{args}}
 
----
 
 ## Step 1: Locate the Source Image
 
@@ -32,7 +31,6 @@ ls "{{args}}"
 
 If the image is too small or non-square, warn the user and ask if they want to continue anyway.
 
----
 
 ## Step 2: Detect Project Type
 
@@ -59,13 +57,11 @@ Identify which platforms apply — a project can have **multiple** (e.g. Tauri +
 | `vite.config.*` with `VitePWA` / `next.config.*` / `astro.config.*` / any web `index.html` | **PWA + Favicon** (web) |
 | No matches | Ask user which platform(s) to target |
 
----
 
 ## Step 3: Generate Icons Per Platform
 
 Run the relevant sections below. If multiple platforms apply, do them in parallel.
 
----
 
 ### Tauri
 
@@ -84,7 +80,6 @@ Verify output:
 ls src-tauri/icons/
 ```
 
----
 
 ### Capacitor (iOS + Android)
 
@@ -115,7 +110,6 @@ This generates icons for both iOS (`ios/App/App/Assets.xcassets/`) and Android (
 
 If `ios/` or `android/` folders don't exist yet, tell the user to run `bunx cap add ios` / `bunx cap add android` first.
 
----
 
 ### Expo
 
@@ -161,7 +155,6 @@ bunx expo prebuild --clean
 ```
 (This regenerates native folders with correct icon sizes.)
 
----
 
 ### Electron
 
@@ -186,7 +179,6 @@ If using `electron-builder`, verify `package.json` has:
 }
 ```
 
----
 
 ### PWA + Favicon (Web)
 
@@ -231,7 +223,6 @@ export const metadata = {
 }
 ```
 
----
 
 ## Step 4: Verify Output
 
@@ -254,7 +245,6 @@ Report back:
 - Any warnings (image too small, missing native folders, etc.)
 - What the user should do next (e.g. rebuild the app, run `bunx cap sync`)
 
----
 
 ## Common Issues
 
