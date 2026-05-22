@@ -1,6 +1,6 @@
 # A Major Skills
 
-A collection of reusable AI coding agent skills for **Claude Code** and **Codex**. Each skill is a single unified `SKILL.md` file with common phases up top and platform-specific notes inline.
+A collection of useful skills we use at [A Major](https://amajor.ai).
 
 ## Skills
 
