@@ -11,6 +11,11 @@ A collection of reusable AI coding agent skills for **Claude Code** and **Codex*
 | [`ship`](skills/ship/SKILL.md) | Full-cycle workflow: interview, explore, plan (`/model opusplan`), implement (`/batch`), verify (`/goal`), edge cases, simplify, security, final verify |
 | [`ship-simple`](skills/ship-simple/SKILL.md) | Quick implementation for simple features that don't need the full pipeline — no security review, edge cases, or simplify pass |
 | [`vibe`](skills/vibe/SKILL.md) | Set up a full-stack dev and deployment environment — VPS, Bun, GitHub CLI, Dokploy or Coolify |
+
+### Extras
+
+| Skill | What it does |
+|-------|-------------|
 | [`edge-cases`](skills/edge-cases/SKILL.md) | Discover and harden edge cases across 8 categories using parallel subagents |
 | [`e2e`](skills/e2e/SKILL.md) | End-to-end test authoring and execution — discovers flows, writes Playwright/Cypress tests, fixes failures |
 | [`icons`](skills/icons/SKILL.md) | Generate app icons, favicons, and splash screens for Tauri, PWA, Capacitor, Expo, and Electron |
@@ -20,7 +25,7 @@ A collection of reusable AI coding agent skills for **Claude Code** and **Codex*
 | [`youtube-to-skill`](skills/youtube-to-skill/SKILL.md) | Convert a YouTube video into a reusable Claude Code / Codex skill file |
 | [`lighthouse`](skills/lighthouse/SKILL.md) | Audit with Lighthouse across performance, accessibility, best practices, and SEO — then fix and re-verify |
 | [`seo`](skills/seo/SKILL.md) | Optimize for search — meta tags, structured data, sitemap, robots.txt, Core Web Vitals, hreflang |
-| [`cloudflare-ai-search`](skills/cloudflare-ai-search/SKILL.md) | Make a site agent-ready with Cloudflare AI Search, markdown negotiation, MCP card, and agent skills listing |
+| [`aso`](skills/aso/SKILL.md) | Make a site agent-ready with Cloudflare AI Search, markdown negotiation, MCP card, and agent skills listing |
 
 ### Others
 
