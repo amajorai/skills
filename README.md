@@ -2,16 +2,6 @@
 
 A collection of reusable AI coding agent skills for **Claude Code** and **Codex**. Each skill is a single unified `SKILL.md` file with common phases up top and platform-specific notes inline.
 
-```
-skills/
-  <skill-name>/
-    SKILL.md
-.claude-plugin/
-  plugin.json
-  marketplace.json
-install.sh
-```
-
 ## Skills
 
 ### Core
@@ -53,7 +43,7 @@ install.sh
 | [`db-migrate`](skills/others/db-migrate/SKILL.md) | Run a production database migration safely — dry-run, rollback plan, zero-downtime patterns, verification |
 | [`load-test`](skills/others/load-test/SKILL.md) | Load test with k6 — baseline, spike, and soak scenarios; find throughput limits before users do |
 | [`push-notifications`](skills/others/push-notifications/SKILL.md) | Web push (service worker + VAPID) or Expo mobile push — with preferences UI and server-side sending |
-| [`context-tools`](skills/others/context-tools/SKILL.md) | Set up Context7 (live library docs MCP) and opensrc (real package source), plus a project CLAUDE.md |
+| [`context`](skills/others/context/SKILL.md) | Set up Context7 (live library docs MCP) and opensrc (real package source), plus a project CLAUDE.md |
 | [`agent-quality`](skills/others/agent-quality/SKILL.md) | Set up react-doctor, react-scan, react-grab, expect, and agentation — quality tools for AI-generated React code |
 
 ## Installation
