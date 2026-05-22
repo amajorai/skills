@@ -2,20 +2,35 @@
 
 Simple, minimal, lean skills that people don't think about when shipping apps. Things we use at [A Major](https://amajor.ai).
 
+## Flagship
+
+### 📦 [ship.md](https://github.com/amajorai/ship.md)
+
+Full-cycle development workflow. 10 phases from interview to final verify — explore, plan (`/model opusplan`), implement (`/batch`), verify (`/goal`), edge cases, E2E tests, simplify, security review.
+
+```bash
+npx skills add amajorai/ship.md
+```
+
+---
+
+### 🪅 [vibe.md](https://github.com/amajorai/vibe.md)
+
+Ultimate vibe coding setup. One interview, one clean pass — VPS provisioned, Bun + GitHub CLI installed, Dokploy or Coolify deployed, Better T Stack scaffolded and wired to auto-deploy.
+
+```bash
+npx skills add amajorai/vibe.md
+```
+
+---
+
 ## Skills
-
-### Flagship
-
-| Skill | What it does |
-|-------|-------------|
-| [`ship`](skills/ship/SKILL.md) | Full-cycle workflow: interview, explore, plan (`/model opusplan`), implement (`/batch`), verify (`/goal`), edge cases, simplify, security, final verify |
-| [`ship-fast`](skills/ship-fast/SKILL.md) | Quick implementation for simple features that don't need the full pipeline. No security review, edge cases, or simplify pass |
-| [`vibe`](skills/vibe/SKILL.md) | Set up a full-stack dev and deployment environment. VPS, Bun, GitHub CLI, Dokploy or Coolify |
 
 ### Core
 
 | Skill | What it does |
 |-------|-------------|
+| [`ship-fast`](skills/ship-fast/SKILL.md) | Quick implementation for simple features that don't need the full pipeline. No security review, edge cases, or simplify pass |
 | [`edge-cases`](skills/edge-cases/SKILL.md) | Discover and harden edge cases across 8 categories using parallel subagents |
 | [`e2e`](skills/e2e/SKILL.md) | End-to-end test authoring and execution. Discovers flows, writes Playwright (web) or Maestro (iOS/Android/React Native/Flutter) tests, fixes failures |
 | [`icons`](skills/icons/SKILL.md) | Generate app icons, favicons, and splash screens for Tauri, PWA, Capacitor, Expo, and Electron |
