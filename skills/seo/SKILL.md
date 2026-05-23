@@ -11,7 +11,17 @@ You are optimizing a web project for search engine visibility and ranking. **Do 
 **Target:** {{args}}
 
 
-## Phase 0: Detect Current State
+## Phase 0: Auto-Update
+
+*Skip if `{{args}}` contains `--no-update`, or if `SKILLS_AUTO_UPDATE: false` is set in your project CLAUDE.md.*
+
+```bash
+npx skills update seo -y
+```
+
+If the skill was updated, stop here and tell the user: **"This skill was just updated. Re-run your command to use the new version."** Otherwise continue silently.
+
+## Phase 1: Detect Current State
 
 Scan silently before asking anything. Adapt commands to the detected stack.
 
@@ -58,9 +68,9 @@ Analyze and note:
 - Is the site internationalized?
 
 
-## Phase 1: Full Interview
+## Phase 2: Full Interview
 
-Present everything in one message. Tailor the checklist based on what you detected in Phase 0. Flag any detected gaps as ⚠️.
+Present everything in one message. Tailor the checklist based on what you detected in Phase 1. Flag any detected gaps as ⚠️.
 
 
 > **SEO optimization setup: tell me what you want and I'll implement it all in one pass.**
@@ -152,7 +162,7 @@ Present everything in one message. Tailor the checklist based on what you detect
 Wait for the user's answers. Once confirmed, summarize the plan and ask: **"Ready to proceed?"**
 
 
-## Phase 2: Pre-flight Notes
+## Phase 3: Pre-flight Notes
 
 Before writing anything, flag these based on the user's selections:
 
@@ -165,7 +175,7 @@ Before writing anything, flag these based on the user's selections:
 **If hreflang:** Confirm all locale URLs exist and are accessible: broken hreflang tags can confuse Google's locale detection.
 
 
-## Phase 3: Meta Tags & Open Graph (if selected: A)
+## Phase 4: Meta Tags & Open Graph (if selected: A)
 
 Adapt to the detected framework.
 
@@ -251,7 +261,7 @@ const { title, description, image = '/og-image.png', canonicalURL } = Astro.prop
 Audit all page templates and ensure every page has unique title and description. Identical titles across pages are a ranking signal problem.
 
 
-## Phase 4: Sitemap (if selected: B)
+## Phase 5: Sitemap (if selected: B)
 
 ### Next.js App Router: `app/sitemap.ts`
 ```ts
@@ -344,7 +354,7 @@ Sitemap: https://example.com/sitemap.xml
 ```
 
 
-## Phase 5: robots.txt (if selected: C)
+## Phase 6: robots.txt (if selected: C)
 
 ```
 # public/robots.txt
@@ -364,7 +374,7 @@ Place in `public/robots.txt` for Next.js/Astro/Vite projects, or at the server r
 Verify it is accessible at `https://example.com/robots.txt` before declaring done.
 
 
-## Phase 6: Structured Data (if selected: E)
+## Phase 7: Structured Data (if selected: E)
 
 Inject via `<script type="application/ld+json">`. For frameworks: inject in the page `<head>` using the appropriate mechanism (Next.js `metadata` / `Script`, Astro `<head>`, etc.).
 
@@ -470,7 +480,7 @@ Inject via `<script type="application/ld+json">`. For frameworks: inject in the 
 Validate all structured data with Google's Rich Results Test: https://search.google.com/test/rich-results
 
 
-## Phase 7: Image Optimization (if selected: F)
+## Phase 8: Image Optimization (if selected: F)
 
 For each `<img>` without `alt`:
 - Derive a descriptive alt from surrounding context or filename.
@@ -504,7 +514,7 @@ import Image from 'next/image'
 ```
 
 
-## Phase 8: Performance / Core Web Vitals (if selected: G)
+## Phase 9: Performance / Core Web Vitals (if selected: G)
 
 ```html
 <!-- Preconnect to external origins -->
@@ -532,7 +542,7 @@ import Image from 'next/image'
 ```
 
 
-## Phase 9: hreflang (if selected: H)
+## Phase 10: hreflang (if selected: H)
 
 ```html
 <head>
@@ -561,7 +571,7 @@ export const metadata: Metadata = {
 ```
 
 
-## Phase 10: Heading Audit (if selected: I)
+## Phase 11: Heading Audit (if selected: I)
 
 ```bash
 # Pages with no h1
@@ -575,7 +585,7 @@ grep -rn "<h1" src/ app/ pages/ --include="*.tsx" --include="*.jsx" --include="*
 Fix: ensure each page has exactly one `<h1>` that contains the primary keyword. Subheadings use `<h2>`–`<h6>` in logical order without skipping levels.
 
 
-## Phase 11: noindex Tags (if selected: K)
+## Phase 12: noindex Tags (if selected: K)
 
 ```html
 <meta name="robots" content="noindex, nofollow" />
@@ -595,7 +605,7 @@ export const metadata: Metadata = {
 ```
 
 
-## Phase 12: Final Verification
+## Phase 13: Final Verification
 
 ```bash
 # Sitemap accessible

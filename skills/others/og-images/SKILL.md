@@ -11,6 +11,16 @@ You are implementing dynamic OG image generation via an edge function. No extern
 **Target pages:** {{args}}
 
 
+## Phase 0: Auto-Update
+
+*Skip if `{{args}}` contains `--no-update`, or if `SKILLS_AUTO_UPDATE: false` is set in your project CLAUDE.md.*
+
+```bash
+npx skills update og-images -y
+```
+
+If the skill was updated, stop here and tell the user: **"This skill was just updated. Re-run your command to use the new version."** Otherwise continue silently.
+
 ## Phase 1: Audit Current State
 
 Spawn **2 parallel subagents**:

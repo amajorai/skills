@@ -11,7 +11,17 @@ You are making a site fully agent-ready using Cloudflare AI Search and the stand
 **Target:** {{args}}
 
 
-## Phase 0: Detect Current State
+## Phase 0: Auto-Update
+
+*Skip if `{{args}}` contains `--no-update`, or if `SKILLS_AUTO_UPDATE: false` is set in your project CLAUDE.md.*
+
+```bash
+npx skills update aso -y
+```
+
+If the skill was updated, stop here and tell the user: **"This skill was just updated. Re-run your command to use the new version."** Otherwise continue silently.
+
+## Phase 1: Detect Current State
 
 Run silently before asking anything. Check what's already in place:
 
@@ -44,7 +54,7 @@ grep -r "text/markdown" src/ app/ pages/ 2>/dev/null | head -10
 Note: Is this a Workers project? What framework? What's already done vs. missing?
 
 
-## Phase 1: Audit Against isitagentready.com
+## Phase 2: Audit Against isitagentready.com
 
 Check each category and mark as DONE / MISSING:
 
@@ -80,7 +90,7 @@ Search:            [0/1 done]
 Ask: "Which of these do you want me to implement? I can do all of them, or we can start with the highest-impact ones first." Default recommendation: all.
 
 
-## Phase 2: Cloudflare AI Search Setup
+## Phase 3: Cloudflare AI Search Setup
 
 ### 2a. Install Wrangler (if not already installed)
 
@@ -192,7 +202,7 @@ await env.SEARCH_NS.create({
 - `max` - prefer whichever signal scores higher
 
 
-## Phase 3: Markdown Content Negotiation
+## Phase 4: Markdown Content Negotiation
 
 AI agents save tokens when they receive Markdown instead of HTML. Implement `Accept: text/markdown` content negotiation per [acceptmarkdown.com](https://acceptmarkdown.com/).
 
@@ -246,7 +256,7 @@ curl -sI -H "Accept: text/markdown" https://yoursite.com/docs/getting-started
 ```
 
 
-## Phase 4: robots.txt AI Rules
+## Phase 5: robots.txt AI Rules
 
 Add AI bot directives alongside a sitemap reference:
 
@@ -289,7 +299,7 @@ Allow: /docs/
 ```
 
 
-## Phase 5: XML Sitemap
+## Phase 6: XML Sitemap
 
 ### For static sites (Astro, Hugo, etc.)
 
@@ -325,7 +335,7 @@ ${urls}
 Serve at `/sitemap.xml` and reference it in `robots.txt`.
 
 
-## Phase 6: MCP Server Card
+## Phase 7: MCP Server Card
 
 Publish at `/.well-known/mcp.json` so AI agents can discover your MCP capabilities:
 
@@ -357,7 +367,7 @@ If you're using `cloudflare/agents-starter`, the MCP endpoint is auto-provisione
 ```
 
 
-## Phase 7: Agent Skills Listing
+## Phase 8: Agent Skills Listing
 
 Publish at `/.well-known/agent-skills.json` to advertise what actions agents can take on your site:
 
@@ -383,7 +393,7 @@ Publish at `/.well-known/agent-skills.json` to advertise what actions agents can
 ```
 
 
-## Phase 8: Verification
+## Phase 9: Verification
 
 Run these checks and confirm each passes:
 

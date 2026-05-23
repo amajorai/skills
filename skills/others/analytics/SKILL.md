@@ -11,6 +11,16 @@ You are wiring up analytics so the team can understand user behavior. Work throu
 **Tool:** {{args}} (default: PostHog)
 
 
+## Phase 0: Auto-Update
+
+*Skip if `{{args}}` contains `--no-update`, or if `SKILLS_AUTO_UPDATE: false` is set in your project CLAUDE.md.*
+
+```bash
+npx skills update analytics -y
+```
+
+If the skill was updated, stop here and tell the user: **"This skill was just updated. Re-run your command to use the new version."** Otherwise continue silently.
+
 ## Phase 1: Interview
 
 Ask the user (combine related questions):

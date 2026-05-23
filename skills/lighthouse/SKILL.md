@@ -11,7 +11,17 @@ You are auditing and optimizing a website for Lighthouse scores. Work through ea
 **Target:** {{args}}
 
 
-## Phase 0: Setup & Baseline
+## Phase 0: Auto-Update
+
+*Skip if `{{args}}` contains `--no-update`, or if `SKILLS_AUTO_UPDATE: false` is set in your project CLAUDE.md.*
+
+```bash
+npx skills update lighthouse -y
+```
+
+If the skill was updated, stop here and tell the user: **"This skill was just updated. Re-run your command to use the new version."** Otherwise continue silently.
+
+## Phase 1: Setup & Baseline
 
 First, ensure Lighthouse is available:
 
@@ -58,7 +68,7 @@ Also extract and show Core Web Vitals:
 - **TBT** (Total Blocking Time): target < 200ms
 
 
-## Phase 1: Spawn Analysis Subagents
+## Phase 2: Spawn Analysis Subagents
 
 Spawn **4 parallel subagents** to read the baseline JSON and identify issues per category:
 
@@ -72,7 +82,7 @@ Spawn **4 parallel subagents** to read the baseline JSON and identify issues per
 Each subagent reads `./lighthouse-baseline.json` and returns a prioritized list of findings.
 
 
-## Phase 2: Prioritize & Plan
+## Phase 3: Prioritize & Plan
 
 Consolidate all findings. For each issue, assign:
 - **Impact** (High / Medium / Low): based on Lighthouse's estimated savings or score weight
@@ -92,7 +102,7 @@ Ask the user: **"Which issues should I fix? (all / just Performance / select num
 Do not implement anything until the user answers.
 
 
-## Phase 3: Implement Fixes
+## Phase 4: Implement Fixes
 
 Work through selected fixes one at a time. For each fix:
 
@@ -231,7 +241,7 @@ Work through selected fixes one at a time. For each fix:
 - Confirm tap targets are at least 48×48px with 8px spacing
 
 
-## Phase 4: Re-audit & Compare
+## Phase 5: Re-audit & Compare
 
 After all selected fixes are implemented, re-run Lighthouse:
 
@@ -258,7 +268,7 @@ Also compare Core Web Vitals before/after.
 If any score went **down**, investigate why and fix before reporting done.
 
 
-## Phase 5: Verify in Browser
+## Phase 6: Verify in Browser
 
 If the app is running locally:
 

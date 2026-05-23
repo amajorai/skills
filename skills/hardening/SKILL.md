@@ -11,7 +11,17 @@ You are hardening a Linux VPS. **Do not implement anything until the interview i
 **Target:** {{args}}
 
 
-## Phase 0: Detect Current State
+## Phase 0: Auto-Update
+
+*Skip if `{{args}}` contains `--no-update`, or if `SKILLS_AUTO_UPDATE: false` is set in your project CLAUDE.md.*
+
+```bash
+npx skills update hardening -y
+```
+
+If the skill was updated, stop here and tell the user: **"This skill was just updated. Re-run your command to use the new version."** Otherwise continue silently.
+
+## Phase 1: Detect Current State
 
 Run silently before asking anything:
 
@@ -56,9 +66,9 @@ Analyze the output and note:
 - What ports are open?
 
 
-## Phase 1: Full Interview
+## Phase 2: Full Interview
 
-Present everything in one message. Tailor the warnings based on what you detected in Phase 0.
+Present everything in one message. Tailor the warnings based on what you detected in Phase 1.
 
 
 > **Server hardening setup: tell me what you want and I'll implement it all in one pass.**
@@ -134,7 +144,7 @@ Present everything in one message. Tailor the warnings based on what you detecte
 Wait for the user's answers. Once confirmed, summarize the plan and ask: **"Ready to proceed?"**
 
 
-## Phase 2: Pre-flight Safety Checks
+## Phase 3: Pre-flight Safety Checks
 
 Before writing a single config file, run these checks based on what was selected:
 
@@ -156,7 +166,7 @@ Before writing a single config file, run these checks based on what was selected
 > ❌ Cannot disable password auth safely. Either help them set up keys first or skip that step.
 
 
-## Phase 3: SSH Key Setup (if selected: A)
+## Phase 4: SSH Key Setup (if selected: A)
 
 Run on the **local machine**:
 
@@ -171,7 +181,7 @@ ssh -i ~/.ssh/id_ed25519_vps USER@{{args}} echo "Key auth confirmed"
 **Do not continue until the user confirms key login works.**
 
 
-## Phase 4: Create Non-Root Sudo User (if selected: B)
+## Phase 5: Create Non-Root Sudo User (if selected: B)
 
 ```bash
 adduser --gecos "" USERNAME
@@ -185,7 +195,7 @@ chmod 700 /home/USERNAME/.ssh && chmod 600 /home/USERNAME/.ssh/authorized_keys
 Instruct user: **Open a new terminal and confirm you can SSH as USERNAME before continuing.**
 
 
-## Phase 5: Harden SSH (if selected: C)
+## Phase 6: Harden SSH (if selected: C)
 
 ```bash
 cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak
@@ -220,7 +230,7 @@ sshd -t && echo "Config OK"
 **Do not restart sshd here: do it after UFW is configured.**
 
 
-## Phase 6: UFW Firewall (if selected: D)
+## Phase 7: UFW Firewall (if selected: D)
 
 ```bash
 apt-get install -y ufw
@@ -257,7 +267,7 @@ Instruct user: **Open a new terminal and SSH on the new port: `ssh -p NEW_PORT U
 Do not close the current session until confirmed.
 
 
-## Phase 7: Provider Firewall (if selected: E)
+## Phase 8: Provider Firewall (if selected: E)
 
 ### AWS Lightsail
 
@@ -315,7 +325,7 @@ ovhcloud login
 > OVH Manager → Bare Metal Cloud → IP → Firewall → add rule for NEW_PORT
 
 
-## Phase 8: fail2ban (if selected: F)
+## Phase 9: fail2ban (if selected: F)
 
 ```bash
 apt-get install -y fail2ban
@@ -340,7 +350,7 @@ fail2ban-client status sshd
 ```
 
 
-## Phase 9: Unattended Security Updates (if selected: G)
+## Phase 10: Unattended Security Updates (if selected: G)
 
 ```bash
 apt-get install -y unattended-upgrades apt-listchanges
@@ -366,7 +376,7 @@ systemctl enable unattended-upgrades
 ```
 
 
-## Phase 10: System Hardening (if selected: H)
+## Phase 11: System Hardening (if selected: H)
 
 Apply only the sub-options the user selected:
 
@@ -407,7 +417,7 @@ aa-status | head -5
 ```
 
 
-## Phase 11: Login Banner (if selected: I)
+## Phase 12: Login Banner (if selected: I)
 
 Use the user's provided text, or this default:
 
@@ -427,7 +437,7 @@ sshd -t && systemctl reload sshd
 ```
 
 
-## Phase 12: Optional Extras (if selected: J)
+## Phase 13: Optional Extras (if selected: J)
 
 ### Lynis
 
@@ -478,7 +488,7 @@ sshd -t && systemctl restart sshd
 > ⚠️ Test 2FA in a new terminal before closing your current session.
 
 
-## Phase 13: Final Verification
+## Phase 14: Final Verification
 
 Run only the checks relevant to what was installed:
 

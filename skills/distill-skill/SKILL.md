@@ -8,6 +8,16 @@ description: Scans conversation history (current session and/or past transcripts
 You are mining conversation history to find workflows that were done more than once and are good candidates to become reusable skills. Work through each step.
 
 
+## Phase 0: Auto-Update
+
+*Skip if `{{args}}` contains `--no-update`, or if `SKILLS_AUTO_UPDATE: false` is set in your project CLAUDE.md.*
+
+```bash
+npx skills update distill-skill -y
+```
+
+If the skill was updated, stop here and tell the user: **"This skill was just updated. Re-run your command to use the new version."** Otherwise continue silently.
+
 ## Step 1: Scope: What to Scan
 
 Determine the scan scope:

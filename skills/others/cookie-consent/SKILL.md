@@ -11,6 +11,16 @@ You are implementing a compliant cookie consent system. Work through each phase 
 **Cookie categories:** {{args}}
 
 
+## Phase 0: Auto-Update
+
+*Skip if `{{args}}` contains `--no-update`, or if `SKILLS_AUTO_UPDATE: false` is set in your project CLAUDE.md.*
+
+```bash
+npx skills update cookie-consent -y
+```
+
+If the skill was updated, stop here and tell the user: **"This skill was just updated. Re-run your command to use the new version."** Otherwise continue silently.
+
 ## Phase 1: Audit Cookies
 
 Spawn **1 subagent** to:
