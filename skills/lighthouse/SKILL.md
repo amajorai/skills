@@ -50,12 +50,12 @@ Parse and display the baseline scores in a table:
 Score legend: 🔴 0–49, 🟡 50–89, 🟢 90–100
 
 Also extract and show Core Web Vitals:
-- **LCP** (Largest Contentful Paint) — target < 2.5s
-- **INP** (Interaction to Next Paint) — target < 200ms
-- **CLS** (Cumulative Layout Shift) — target < 0.1
-- **FCP** (First Contentful Paint) — target < 1.8s
-- **TTFB** (Time to First Byte) — target < 800ms
-- **TBT** (Total Blocking Time) — target < 200ms
+- **LCP** (Largest Contentful Paint): target < 2.5s
+- **INP** (Interaction to Next Paint): target < 200ms
+- **CLS** (Cumulative Layout Shift): target < 0.1
+- **FCP** (First Contentful Paint): target < 1.8s
+- **TTFB** (Time to First Byte): target < 800ms
+- **TBT** (Total Blocking Time): target < 200ms
 
 
 ## Phase 1: Spawn Analysis Subagents
@@ -64,7 +64,7 @@ Spawn **4 parallel subagents** to read the baseline JSON and identify issues per
 
 | Subagent | Category | What to extract |
 |----------|----------|-----------------|
-| 1 | **Performance** | Failed audits, opportunity savings (ms/KB), diagnostics — sorted by estimated impact |
+| 1 | **Performance** | Failed audits, opportunity savings (ms/KB), diagnostics: sorted by estimated impact |
 | 2 | **Accessibility** | Failed audits, affected element counts, WCAG failure type |
 | 3 | **Best Practices** | Failed audits, deprecation warnings, console errors, security issues |
 | 4 | **SEO** | Failed audits, missing meta tags, crawlability issues, structured data problems |
@@ -75,9 +75,9 @@ Each subagent reads `./lighthouse-baseline.json` and returns a prioritized list 
 ## Phase 2: Prioritize & Plan
 
 Consolidate all findings. For each issue, assign:
-- **Impact** (High / Medium / Low) — based on Lighthouse's estimated savings or score weight
-- **Effort** (Low / Medium / High) — based on how invasive the fix is
-- **Category** — P (Performance), A (Accessibility), B (Best Practices), S (SEO)
+- **Impact** (High / Medium / Low): based on Lighthouse's estimated savings or score weight
+- **Effort** (Low / Medium / High): based on how invasive the fix is
+- **Category**: P (Performance), A (Accessibility), B (Best Practices), S (SEO)
 
 Present a ranked table to the user:
 
@@ -113,7 +113,7 @@ Work through selected fixes one at a time. For each fix:
 **JavaScript**
 - Move non-critical `<script>` tags to `defer` or `async`
 - Identify and remove unused JS: check Lighthouse "Reduce unused JavaScript" audit
-- Split large bundles — check if the framework supports dynamic `import()`
+- Split large bundles: check if the framework supports dynamic `import()`
 - Add `rel="modulepreload"` for critical JS modules
 
 **CSS**
@@ -138,7 +138,7 @@ Work through selected fixes one at a time. For each fix:
 - Add `ETag` or `Last-Modified` for HTML responses
 
 **Server / TTFB**
-- Check if responses are gzip/brotli compressed — add if missing
+- Check if responses are gzip/brotli compressed: add if missing
 - Add `rel="dns-prefetch"` or `rel="preconnect"` for third-party origins
 - If server-side: check for slow database queries or missing indexes
 - Consider adding a CDN or edge caching layer if TTFB is consistently > 800ms
@@ -157,7 +157,7 @@ Work through selected fixes one at a time. For each fix:
 **Color contrast**
 - Check Lighthouse's contrast ratio findings
 - Increase foreground/background contrast to meet WCAG AA (4.5:1 for normal text, 3:1 for large text)
-- Never fix by removing the color — fix the specific hex values
+- Never fix by removing the color: fix the specific hex values
 
 **Keyboard navigation**
 - Ensure all interactive elements are reachable via Tab
@@ -190,7 +190,7 @@ Work through selected fixes one at a time. For each fix:
 
 **Console errors**
 - Open the Lighthouse JSON and find any logged console errors
-- Fix the underlying JS errors — never suppress them silently
+- Fix the underlying JS errors: never suppress them silently
 
 **Deprecated APIs**
 - Update any APIs flagged as deprecated (check the audit's `items` for specifics)
@@ -283,6 +283,6 @@ If the app is running locally:
 - [ ] `<meta name="description">` and viewport tag present
 - [ ] `target="_blank"` links have `rel="noopener noreferrer"`
 - [ ] Console errors resolved
-- [ ] Re-audit completed — all scores equal or better than before
+- [ ] Re-audit completed: all scores equal or better than before
 - [ ] No visual or functional regressions introduced
 - [ ] Final scores reported with before/after comparison

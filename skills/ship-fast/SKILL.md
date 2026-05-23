@@ -1,6 +1,6 @@
 ---
 name: ship-fast
-description: Quick implementation workflow for simple features and fixes that don't need the full pipeline. Skips security review, edge case hardening, and simplification — explore, plan, implement, verify and done.
+description: Quick implementation workflow for simple features and fixes that don't need the full pipeline. Skips security review, edge case hardening, and simplification: explore, plan, implement, verify and done.
 argument-hint: <task description>
 ---
 
@@ -13,9 +13,9 @@ argument-hint: <task description>
 
 Spawn **2–3 parallel subagents** to map the relevant parts of the codebase:
 
-- **Feature area** — the code most directly relevant to the task
-- **Tests and patterns** — how similar things are tested and implemented elsewhere
-- **Dependencies** — what the affected code connects to upstream and downstream
+- **Feature area**: the code most directly relevant to the task
+- **Tests and patterns**: how similar things are tested and implemented elsewhere
+- **Dependencies**: what the affected code connects to upstream and downstream
 
 Each subagent returns: what it found, what's relevant, and any risks or surprises.
 
@@ -28,7 +28,7 @@ Produce a concrete plan specifying:
 
 1. Exact files to create or modify
 2. Implementation order respecting the dependency graph
-3. Test strategy — new tests to write, existing tests to update
+3. Test strategy: new tests to write, existing tests to update
 
 Do not begin implementation until the user explicitly approves the plan.
 

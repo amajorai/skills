@@ -36,25 +36,25 @@ If the file does not exist, treat its contents as empty.
 
 Review the full conversation that just happened. Identify:
 
-### 3a — Corrections (what went wrong)
+### 3a: Corrections (what went wrong)
 Things the user had to correct, redirect, or explicitly tell you not to do:
 - Direct corrections: "no, don't do X", "stop doing Y", "that's wrong"
 - Implicit corrections: user rewrote something you wrote, user undid a change you made
 - Wasted effort: you did work the user immediately discarded
 
-### 3b — Validated approaches (what worked)
+### 3b: Validated approaches (what worked)
 Non-obvious choices the user accepted or confirmed:
 - User said "yes, exactly" or "perfect" after an unusual approach
 - User accepted a non-default choice without pushback
 - A technique that resolved a problem that had previously failed
 
-### 3c — Repeated issues
+### 3c: Repeated issues
 Things that came up multiple times in the conversation:
 - You asked the same clarifying question more than once
 - The user explained the same constraint more than once
 - You made the same mistake twice
 
-### 3d — Revealed constraints
+### 3d: Revealed constraints
 Facts the user told you that aren't obvious from the code:
 - Project-specific rules, architectural decisions, team preferences
 - Tools or patterns that are off-limits or required
@@ -65,10 +65,10 @@ Facts the user told you that aren't obvious from the code:
 
 Filter the findings. Only persist something if it meets ALL of these criteria:
 
-1. **Not derivable from code** — can't be learned by reading files
-2. **Likely to recur** — would affect future sessions, not just this one
-3. **Non-obvious** — a new agent wouldn't know this by default
-4. **Actionable** — stated as a clear rule, not vague advice
+1. **Not derivable from code**: can't be learned by reading files
+2. **Likely to recur**: would affect future sessions, not just this one
+3. **Non-obvious**: a new agent wouldn't know this by default
+4. **Actionable**: stated as a clear rule, not vague advice
 
 Discard:
 - Task-specific details ("in this PR we did X")
@@ -81,7 +81,7 @@ Discard:
 For each item that passed Step 4, write a rule in this format:
 
 ```
-**[Short rule label]:** <imperative statement of the rule>. [One sentence on why — the incident or preference that drove it.]
+**[Short rule label]:** <imperative statement of the rule>. [One sentence on why: the incident or preference that drove it.]
 ```
 
 Examples of good rules:

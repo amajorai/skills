@@ -184,12 +184,12 @@ await env.SEARCH_NS.create({
 ```
 
 **Tokenizer guide:**
-- `porter` — natural language prose (stems words: "running" → "run")
-- `trigram` — code search (character-level substring matching)
+- `porter`: natural language prose (stems words: "running" → "run")
+- `trigram`: code search (character-level substring matching)
 
 **Fusion methods:**
-- `rrf` (reciprocal rank fusion) — balanced hybrid, best default
-- `max` — prefer whichever signal scores higher
+- `rrf` (reciprocal rank fusion): balanced hybrid, best default
+- `max`: prefer whichever signal scores higher
 
 
 ## Phase 3: Markdown Content Negotiation
@@ -293,7 +293,7 @@ Allow: /docs/
 
 ### For static sites (Astro, Hugo, etc.)
 
-Most frameworks auto-generate a sitemap via plugin — enable it:
+Most frameworks auto-generate a sitemap via plugin: enable it:
 
 ```js
 // astro.config.mjs
@@ -352,7 +352,7 @@ Publish at `/.well-known/mcp.json` so AI agents can discover your MCP capabiliti
 If you're using `cloudflare/agents-starter`, the MCP endpoint is auto-provisioned. Expose it:
 
 ```typescript
-// wrangler.jsonc — AI Search instances include a built-in MCP endpoint
+// wrangler.jsonc: AI Search instances include a built-in MCP endpoint
 // Access it at: https://<worker>.workers.dev/mcp
 ```
 

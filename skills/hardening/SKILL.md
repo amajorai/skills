@@ -61,7 +61,7 @@ Analyze the output and note:
 Present everything in one message. Tailor the warnings based on what you detected in Phase 0.
 
 
-> **Server hardening setup — tell me what you want and I'll implement it all in one pass.**
+> **Server hardening setup: tell me what you want and I'll implement it all in one pass.**
 >
 > I've scanned your server. Here's what I found:
 > - **Current SSH port:** [detected port]
@@ -78,13 +78,13 @@ Present everything in one message. Tailor the warnings based on what you detecte
 > **A. SSH Key Setup**
 > *(Only shown if no keys detected)*
 > ⚠️ You have no SSH keys configured. If we disable password auth without setting up keys first, you will be **permanently locked out**.
-> - [ ] Yes — generate a key pair and add it before anything else (required if you want to disable password auth)
-> - [ ] Skip — I'll add my own key manually before we proceed
+> - [ ] Yes: generate a key pair and add it before anything else (required if you want to disable password auth)
+> - [ ] Skip: I'll add my own key manually before we proceed
 >
 > **B. Non-root sudo user**
 > *(Only shown if currently running as root)*
 > Running as root is dangerous. We'll create a regular user with sudo access.
-> - [ ] Yes — create a non-root sudo user (recommended)
+> - [ ] Yes: create a non-root sudo user (recommended)
 > - [ ] Skip
 > → If yes: **What username?** (e.g. `deploy`)
 >
@@ -101,10 +101,10 @@ Present everything in one message. Tailor the warnings based on what you detecte
 >
 > **E. Provider-level Firewall**
 > *(Only shown for AWS/Hetzner/OVH)*
-> [For AWS Lightsail]: ⚠️ Lightsail has its own firewall that overrides UFW — if we change the SSH port, we MUST update it here too or you'll lose access.
+> [For AWS Lightsail]: ⚠️ Lightsail has its own firewall that overrides UFW: if we change the SSH port, we MUST update it here too or you'll lose access.
 > [For EC2]: Security Groups also need to be updated.
-> - [ ] Yes — install + authenticate the provider CLI and configure the firewall from here
-> - [ ] No — I'll update the provider firewall manually
+> - [ ] Yes: install + authenticate the provider CLI and configure the firewall from here
+> - [ ] No: I'll update the provider firewall manually
 >
 > **F. fail2ban**
 > Bans IPs that fail SSH login too many times.
@@ -123,13 +123,13 @@ Present everything in one message. Tailor the warnings based on what you detecte
 >
 > **I. Login banner**
 > Shows a warning message to anyone who connects via SSH.
-> - [ ] Yes — set up a login banner
+> - [ ] Yes: set up a login banner
 >   → **What text?** (or leave blank and I'll generate a standard legal warning)
 >
 > **J. Optional extras**
-> - [ ] Lynis — run a full security audit after hardening (shows a score + recommendations)
-> - [ ] ClamAV — install antivirus with daily scans
-> - [ ] SSH 2FA — require TOTP authenticator app on top of SSH key
+> - [ ] Lynis: run a full security audit after hardening (shows a score + recommendations)
+> - [ ] ClamAV: install antivirus with daily scans
+> - [ ] SSH 2FA: require TOTP authenticator app on top of SSH key
 
 Wait for the user's answers. Once confirmed, summarize the plan and ask: **"Ready to proceed?"**
 
@@ -156,7 +156,7 @@ Before writing a single config file, run these checks based on what was selected
 > ❌ Cannot disable password auth safely. Either help them set up keys first or skip that step.
 
 
-## Phase 3: SSH Key Setup (if selected — A)
+## Phase 3: SSH Key Setup (if selected: A)
 
 Run on the **local machine**:
 
@@ -171,7 +171,7 @@ ssh -i ~/.ssh/id_ed25519_vps USER@{{args}} echo "Key auth confirmed"
 **Do not continue until the user confirms key login works.**
 
 
-## Phase 4: Create Non-Root Sudo User (if selected — B)
+## Phase 4: Create Non-Root Sudo User (if selected: B)
 
 ```bash
 adduser --gecos "" USERNAME
@@ -185,7 +185,7 @@ chmod 700 /home/USERNAME/.ssh && chmod 600 /home/USERNAME/.ssh/authorized_keys
 Instruct user: **Open a new terminal and confirm you can SSH as USERNAME before continuing.**
 
 
-## Phase 5: Harden SSH (if selected — C)
+## Phase 5: Harden SSH (if selected: C)
 
 ```bash
 cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak
@@ -217,10 +217,10 @@ grep -q "^LoginGraceTime" /etc/ssh/sshd_config \
 sshd -t && echo "Config OK"
 ```
 
-**Do not restart sshd here — do it after UFW is configured.**
+**Do not restart sshd here: do it after UFW is configured.**
 
 
-## Phase 6: UFW Firewall (if selected — D)
+## Phase 6: UFW Firewall (if selected: D)
 
 ```bash
 apt-get install -y ufw
@@ -257,11 +257,11 @@ Instruct user: **Open a new terminal and SSH on the new port: `ssh -p NEW_PORT U
 Do not close the current session until confirmed.
 
 
-## Phase 7: Provider Firewall (if selected — E)
+## Phase 7: Provider Firewall (if selected: E)
 
 ### AWS Lightsail
 
-⚠️ Lightsail's firewall is separate from UFW and must be updated — otherwise the new SSH port is blocked at the provider level.
+⚠️ Lightsail's firewall is separate from UFW and must be updated: otherwise the new SSH port is blocked at the provider level.
 
 ```bash
 # If no AWS CLI, install it
@@ -273,7 +273,7 @@ aws configure
 If user wants to use the console instead:
 > Lightsail Console → your instance → Networking → Firewall → Add rule → Custom TCP, port NEW_PORT
 
-### AWS EC2 — Security Groups
+### AWS EC2: Security Groups
 
 ```bash
 INSTANCE_ID=$(curl -s http://169.254.169.254/latest/meta-data/instance-id)
@@ -315,7 +315,7 @@ ovhcloud login
 > OVH Manager → Bare Metal Cloud → IP → Firewall → add rule for NEW_PORT
 
 
-## Phase 8: fail2ban (if selected — F)
+## Phase 8: fail2ban (if selected: F)
 
 ```bash
 apt-get install -y fail2ban
@@ -340,7 +340,7 @@ fail2ban-client status sshd
 ```
 
 
-## Phase 9: Unattended Security Updates (if selected — G)
+## Phase 9: Unattended Security Updates (if selected: G)
 
 ```bash
 apt-get install -y unattended-upgrades apt-listchanges
@@ -366,7 +366,7 @@ systemctl enable unattended-upgrades
 ```
 
 
-## Phase 10: System Hardening (if selected — H)
+## Phase 10: System Hardening (if selected: H)
 
 Apply only the sub-options the user selected:
 
@@ -400,14 +400,14 @@ passwd -l root
 # Restrict su to sudo group
 dpkg-statoverride --update --add root sudo 4750 /bin/su
 
-# AppArmor — ensure enforcing
+# AppArmor: ensure enforcing
 systemctl enable --now apparmor
 aa-enforce /etc/apparmor.d/* 2>/dev/null || true
 aa-status | head -5
 ```
 
 
-## Phase 11: Login Banner (if selected — I)
+## Phase 11: Login Banner (if selected: I)
 
 Use the user's provided text, or this default:
 
@@ -427,7 +427,7 @@ sshd -t && systemctl reload sshd
 ```
 
 
-## Phase 12: Optional Extras (if selected — J)
+## Phase 12: Optional Extras (if selected: J)
 
 ### Lynis
 
@@ -459,7 +459,7 @@ echo "0 3 * * * root clamscan --recursive --infected --quiet /home /var/www >> /
 ```bash
 apt-get install -y libpam-google-authenticator
 
-# Run as the non-root user — each user sets up their own TOTP
+# Run as the non-root user: each user sets up their own TOTP
 google-authenticator
 # Scan the QR code with Google Authenticator / Authy, then answer y to all prompts
 

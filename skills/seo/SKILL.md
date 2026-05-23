@@ -1,6 +1,6 @@
 ---
 name: seo
-description: Audit and optimize a web project for SEO. Detects the stack, runs a structured interview, then implements only the selected improvements — meta tags, structured data, sitemaps, robots.txt, page speed, Core Web Vitals, and more.
+description: Audit and optimize a web project for SEO. Detects the stack, runs a structured interview, then implements only the selected improvements: meta tags, structured data, sitemaps, robots.txt, page speed, Core Web Vitals, and more.
 argument-hint: [URL or project path, optional]
 ---
 
@@ -23,7 +23,7 @@ cat package.json 2>/dev/null | grep -E '"next"|"astro"|"nuxt"|"gatsby"|"remix"|"
 # Existing SEO files
 ls -la robots.txt sitemap.xml sitemap*.xml public/robots.txt public/sitemap*.xml 2>/dev/null
 
-# Meta tags — sample a few pages
+# Meta tags: sample a few pages
 grep -r "og:" src/ app/ pages/ --include="*.html" --include="*.tsx" --include="*.jsx" --include="*.astro" --include="*.vue" --include="*.svelte" -l 2>/dev/null | head -5
 grep -r "<title" src/ app/ pages/ --include="*.html" --include="*.tsx" --include="*.jsx" --include="*.astro" --include="*.vue" -l 2>/dev/null | head -5
 grep -r "description" src/ app/ pages/ --include="*.tsx" --include="*.jsx" --include="*.astro" -l 2>/dev/null | head -5
@@ -31,7 +31,7 @@ grep -r "description" src/ app/ pages/ --include="*.tsx" --include="*.jsx" --inc
 # Structured data
 grep -r "application/ld+json" src/ app/ pages/ -l 2>/dev/null | head -5
 
-# Images — check for alt text and next/image usage
+# Images: check for alt text and next/image usage
 grep -rn "<img " src/ app/ pages/ --include="*.tsx" --include="*.jsx" --include="*.astro" 2>/dev/null | grep -v "alt=" | head -10
 
 # Canonical tags
@@ -63,7 +63,7 @@ Analyze and note:
 Present everything in one message. Tailor the checklist based on what you detected in Phase 0. Flag any detected gaps as ⚠️.
 
 
-> **SEO optimization setup — tell me what you want and I'll implement it all in one pass.**
+> **SEO optimization setup: tell me what you want and I'll implement it all in one pass.**
 >
 > I've scanned your project. Here's what I found:
 > - **Framework / rendering:** [Next.js SSR / Astro SSG / SPA / etc.]
@@ -89,15 +89,15 @@ Present everything in one message. Tailor the checklist based on what you detect
 >
 > **A. Meta tags & Open Graph**
 > *(Flag if missing or incomplete)*
-> - [ ] Add/fix `<title>` tags — unique, ≤60 chars, keyword-first
-> - [ ] Add/fix `<meta name="description">` — 120–160 chars, CTA-oriented
+> - [ ] Add/fix `<title>` tags: unique, ≤60 chars, keyword-first
+> - [ ] Add/fix `<meta name="description">`: 120–160 chars, CTA-oriented
 > - [ ] Add/fix Open Graph (`og:title`, `og:description`, `og:image`, `og:url`)
 > - [ ] Add Twitter Card tags (`twitter:card`, `twitter:title`, `twitter:image`)
 > → If yes: **What is the default OG image URL?** (e.g. `/og-image.png`)
 >
 > **B. Sitemap**
 > *(Flag if not found)*
-> - [ ] Generate `sitemap.xml` — lists all indexable URLs
+> - [ ] Generate `sitemap.xml`: lists all indexable URLs
 > → For dynamic sites: generate programmatically from routes/pages
 > → For static sites: use a build-time plugin or script
 > - [ ] Submit sitemap URL to Google Search Console (provide instructions)
@@ -112,13 +112,13 @@ Present everything in one message. Tailor the checklist based on what you detect
 >
 > **E. Structured Data (JSON-LD)**
 > Select schema types relevant to your site:
-> - [ ] `WebSite` — site name, search action
-> - [ ] `Organization` / `Person` — brand identity, social profiles
-> - [ ] `Article` / `BlogPosting` — for blog posts
-> - [ ] `Product` — for e-commerce (name, price, availability, reviews)
-> - [ ] `BreadcrumbList` — breadcrumb navigation
-> - [ ] `FAQPage` — FAQ sections
-> - [ ] `LocalBusiness` — address, hours, phone (local SEO)
+> - [ ] `WebSite`: site name, search action
+> - [ ] `Organization` / `Person`: brand identity, social profiles
+> - [ ] `Article` / `BlogPosting`: for blog posts
+> - [ ] `Product`: for e-commerce (name, price, availability, reviews)
+> - [ ] `BreadcrumbList`: breadcrumb navigation
+> - [ ] `FAQPage`: FAQ sections
+> - [ ] `LocalBusiness`: address, hours, phone (local SEO)
 >
 > **F. Image Optimization**
 > - [ ] Add missing `alt` attributes (descriptive, keyword-relevant)
@@ -140,7 +140,7 @@ Present everything in one message. Tailor the checklist based on what you detect
 > - [ ] Add `x-default` hreflang for the default locale
 >
 > **I. Heading Hierarchy**
-> - [ ] Audit `<h1>`–`<h6>` structure — ensure exactly one `<h1>` per page, logical nesting
+> - [ ] Audit `<h1>`–`<h6>` structure: ensure exactly one `<h1>` per page, logical nesting
 >
 > **J. Internal Linking**
 > - [ ] Audit pages with no inbound internal links (orphan pages)
@@ -156,16 +156,16 @@ Wait for the user's answers. Once confirmed, summarize the plan and ask: **"Read
 
 Before writing anything, flag these based on the user's selections:
 
-**If meta tags on an SSR/SSG framework:** Confirm where `<head>` is managed — layout file, `_document.tsx`, `<Head>` component, or a meta framework like `react-helmet` / `next/head` / Astro's `<head>`.
+**If meta tags on an SSR/SSG framework:** Confirm where `<head>` is managed: layout file, `_document.tsx`, `<Head>` component, or a meta framework like `react-helmet` / `next/head` / Astro's `<head>`.
 
-**If sitemap generation:** Confirm whether it should be static (generated at build time) or dynamic (served at runtime). For dynamic sites with a CMS, a build-time approach may miss new content — recommend a scheduled regeneration or ISR.
+**If sitemap generation:** Confirm whether it should be static (generated at build time) or dynamic (served at runtime). For dynamic sites with a CMS, a build-time approach may miss new content: recommend a scheduled regeneration or ISR.
 
-**If structured data for Product:** Confirm price currency and whether reviews are available — incomplete Product schema can trigger Google rich result errors.
+**If structured data for Product:** Confirm price currency and whether reviews are available: incomplete Product schema can trigger Google rich result errors.
 
-**If hreflang:** Confirm all locale URLs exist and are accessible — broken hreflang tags can confuse Google's locale detection.
+**If hreflang:** Confirm all locale URLs exist and are accessible: broken hreflang tags can confuse Google's locale detection.
 
 
-## Phase 3: Meta Tags & Open Graph (if selected — A)
+## Phase 3: Meta Tags & Open Graph (if selected: A)
 
 Adapt to the detected framework.
 
@@ -177,11 +177,11 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: {
     template: '%s | Site Name',
-    default: 'Site Name — Tagline',
+    default: 'Site Name: Tagline',
   },
   description: '120–160 char description with primary keyword.',
   openGraph: {
-    title: 'Site Name — Tagline',
+    title: 'Site Name: Tagline',
     description: '120–160 char description.',
     url: 'https://example.com',
     siteName: 'Site Name',
@@ -191,7 +191,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Site Name — Tagline',
+    title: 'Site Name: Tagline',
     description: '120–160 char description.',
     images: ['https://example.com/og-image.png'],
   },
@@ -251,9 +251,9 @@ const { title, description, image = '/og-image.png', canonicalURL } = Astro.prop
 Audit all page templates and ensure every page has unique title and description. Identical titles across pages are a ranking signal problem.
 
 
-## Phase 4: Sitemap (if selected — B)
+## Phase 4: Sitemap (if selected: B)
 
-### Next.js App Router — `app/sitemap.ts`
+### Next.js App Router: `app/sitemap.ts`
 ```ts
 import { MetadataRoute } from 'next'
 
@@ -276,7 +276,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 }
 ```
 
-### Next.js Pages Router — `pages/sitemap.xml.tsx`
+### Next.js Pages Router: `pages/sitemap.xml.tsx`
 ```tsx
 import { GetServerSideProps } from 'next'
 
@@ -303,7 +303,7 @@ ${pages.map(path => `  <url>
 export default Sitemap
 ```
 
-### Astro — `src/pages/sitemap.xml.ts`
+### Astro: `src/pages/sitemap.xml.ts`
 ```ts
 import type { APIRoute } from 'astro'
 
@@ -344,7 +344,7 @@ Sitemap: https://example.com/sitemap.xml
 ```
 
 
-## Phase 5: robots.txt (if selected — C)
+## Phase 5: robots.txt (if selected: C)
 
 ```
 # public/robots.txt
@@ -364,7 +364,7 @@ Place in `public/robots.txt` for Next.js/Astro/Vite projects, or at the server r
 Verify it is accessible at `https://example.com/robots.txt` before declaring done.
 
 
-## Phase 6: Structured Data (if selected — E)
+## Phase 6: Structured Data (if selected: E)
 
 Inject via `<script type="application/ld+json">`. For frameworks: inject in the page `<head>` using the appropriate mechanism (Next.js `metadata` / `Script`, Astro `<head>`, etc.).
 
@@ -470,7 +470,7 @@ Inject via `<script type="application/ld+json">`. For frameworks: inject in the 
 Validate all structured data with Google's Rich Results Test: https://search.google.com/test/rich-results
 
 
-## Phase 7: Image Optimization (if selected — F)
+## Phase 7: Image Optimization (if selected: F)
 
 For each `<img>` without `alt`:
 - Derive a descriptive alt from surrounding context or filename.
@@ -504,7 +504,7 @@ import Image from 'next/image'
 ```
 
 
-## Phase 8: Performance / Core Web Vitals (if selected — G)
+## Phase 8: Performance / Core Web Vitals (if selected: G)
 
 ```html
 <!-- Preconnect to external origins -->
@@ -532,7 +532,7 @@ import Image from 'next/image'
 ```
 
 
-## Phase 9: hreflang (if selected — H)
+## Phase 9: hreflang (if selected: H)
 
 ```html
 <head>
@@ -545,7 +545,7 @@ import Image from 'next/image'
 Rules:
 - Every localized page must include `hreflang` for ALL locales (including itself).
 - `x-default` points to the default/fallback locale.
-- Each alternate URL must return a 200 — no redirects.
+- Each alternate URL must return a 200: no redirects.
 
 For Next.js App Router, use `alternates.languages` in metadata:
 ```tsx
@@ -561,7 +561,7 @@ export const metadata: Metadata = {
 ```
 
 
-## Phase 10: Heading Audit (if selected — I)
+## Phase 10: Heading Audit (if selected: I)
 
 ```bash
 # Pages with no h1
@@ -575,16 +575,16 @@ grep -rn "<h1" src/ app/ pages/ --include="*.tsx" --include="*.jsx" --include="*
 Fix: ensure each page has exactly one `<h1>` that contains the primary keyword. Subheadings use `<h2>`–`<h6>` in logical order without skipping levels.
 
 
-## Phase 11: noindex Tags (if selected — K)
+## Phase 11: noindex Tags (if selected: K)
 
 ```html
 <meta name="robots" content="noindex, nofollow" />
 ```
 
 Common candidates:
-- `/thank-you`, `/order-confirmation` — no search value, creates duplicate intent
-- `/login`, `/signup`, `/dashboard` — gated content
-- Paginated pages beyond page 2 (`?page=3`, etc.) — thin content
+- `/thank-you`, `/order-confirmation`: no search value, creates duplicate intent
+- `/login`, `/signup`, `/dashboard`: gated content
+- Paginated pages beyond page 2 (`?page=3`, etc.): thin content
 - Tag/category archive pages with little unique content
 
 For Next.js App Router:

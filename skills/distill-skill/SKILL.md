@@ -8,7 +8,7 @@ description: Scans conversation history (current session and/or past transcripts
 You are mining conversation history to find workflows that were done more than once and are good candidates to become reusable skills. Work through each step.
 
 
-## Step 1: Scope — What to Scan
+## Step 1: Scope: What to Scan
 
 Determine the scan scope:
 
@@ -53,10 +53,10 @@ Note what each existing skill covers (from its `description:` frontmatter field)
 
 Scan the conversation(s) for sequences that:
 
-1. **Appeared more than once** — the same type of task was done in 2+ turns or 2+ sessions
-2. **Have clear phases** — the workflow has a beginning, middle, and end
-3. **Are general enough** — the workflow applies to any project, not just this specific ticket
-4. **Are not already a skill** — not covered by existing `.claude/skills/*.md` files
+1. **Appeared more than once**: the same type of task was done in 2+ turns or 2+ sessions
+2. **Have clear phases**: the workflow has a beginning, middle, and end
+3. **Are general enough**: the workflow applies to any project, not just this specific ticket
+4. **Are not already a skill**: not covered by existing `.claude/skills/*.md` files
 
 ### Signals to look for:
 - The user invoked the same sequence of steps manually in multiple sessions
@@ -66,15 +66,15 @@ Scan the conversation(s) for sequences that:
 - The user copy-pasted a workflow from an earlier session
 
 ### Workflow types worth extracting:
-- **Setup flows** — install, configure, authenticate a tool
-- **Scaffold flows** — create a new thing (project, module, config file) from scratch
-- **Audit flows** — check something for correctness, security, or completeness
-- **Deploy flows** — get code running somewhere
-- **Integration flows** — connect two systems together
+- **Setup flows**: install, configure, authenticate a tool
+- **Scaffold flows**: create a new thing (project, module, config file) from scratch
+- **Audit flows**: check something for correctness, security, or completeness
+- **Deploy flows**: get code running somewhere
+- **Integration flows**: connect two systems together
 
 ### Do NOT extract:
 - One-off tasks tied to a specific bug or feature
-- Workflows that are just "run these 2 commands" — too simple to be a skill
+- Workflows that are just "run these 2 commands": too simple to be a skill
 - Workflows that already have a `/slash-command` equivalent
 
 
@@ -119,14 +119,14 @@ name: <kebab-case-name>
 description: <One sentence: what it does, when to use it, key tech names for precise triggering.>
 argument-hint: <optional: what the user should pass>
 
-# <name> — <Human-Readable Title>
+# <name>: <Human-Readable Title>
 
 <One paragraph: what this skill does, what it produces, and why it exists. Mention that it was distilled from repeated usage patterns.>
 
 
 ## Phase 1: <First Phase Name>
 
-<Steps — concrete, executable, with code blocks for every command>
+<Steps: concrete, executable, with code blocks for every command>
 
 
 ## Phase 2: <Second Phase Name>
@@ -141,11 +141,11 @@ argument-hint: <optional: what the user should pass>
 ```
 
 ### Body writing rules:
-- **Every command in a code block** — even single-line ones
-- **Decision branches preserved** — if the workflow varies by environment or choice, keep the branches
-- **Concrete, not abstract** — no "configure as appropriate", always say what to actually do
-- **`{{args}}` only where needed** — use it for the parameter that varies across invocations
-- **No filler** — no "Great! Now we'll..." transitions
+- **Every command in a code block**: even single-line ones
+- **Decision branches preserved**: if the workflow varies by environment or choice, keep the branches
+- **Concrete, not abstract**: no "configure as appropriate", always say what to actually do
+- **`{{args}}` only where needed**: use it for the parameter that varies across invocations
+- **No filler**: no "Great! Now we'll..." transitions
 
 
 ## Step 8: Report Back
@@ -159,4 +159,4 @@ Tell the user:
 
 For each new skill, show how to invoke it: `/<name>` or `/<name> <args>`.
 
-If no candidates passed the threshold, tell the user what the highest-scoring candidate was and why it didn't qualify — they may want to lower the bar.
+If no candidates passed the threshold, tell the user what the highest-scoring candidate was and why it didn't qualify: they may want to lower the bar.

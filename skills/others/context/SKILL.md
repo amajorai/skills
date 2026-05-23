@@ -1,6 +1,6 @@
 ---
 name: context
-description: Set up the best context tools for AI coding agents — Context7 (live library docs via MCP), opensrc (real package source code), and a project CLAUDE.md. Use when starting a new project or when the agent keeps hallucinating outdated API usage.
+description: Set up the best context tools for AI coding agents: Context7 (live library docs via MCP), opensrc (real package source code), and a project CLAUDE.md. Use when starting a new project or when the agent keeps hallucinating outdated API usage.
 argument-hint: <project path or leave blank for current directory>
 ---
 
@@ -21,20 +21,20 @@ Ask the user (combine related questions):
 - **CLAUDE.md**: Does a `CLAUDE.md` already exist for this project? Should we create or update one?
 
 
-## Phase 2: Context7 — Live Library Docs
+## Phase 2: Context7: Live Library Docs
 
 Context7 is an MCP server that pulls up-to-date, version-specific library documentation directly into the agent's context. It eliminates hallucinated APIs and outdated usage patterns.
 
 ### Install
 
-**Option A — Automatic (recommended):**
+**Option A: Automatic (recommended):**
 ```bash
 npx ctx7 setup
 # or explicitly for Claude Code:
 npx ctx7 setup --claude
 ```
 
-**Option B — Manual config:**
+**Option B: Manual config:**
 
 Add to `.claude/settings.json` (project-level) or `~/.claude/settings.json` (user-level):
 
@@ -70,9 +70,9 @@ What changed in React 19 for forms? use context7
 To target a specific library: `use context7 library /vercel/next.js`
 
 
-## Phase 3: opensrc — Real Package Source Code
+## Phase 3: opensrc: Real Package Source Code
 
-opensrc gives the agent access to the actual source code of any npm, PyPI, or Rust crate — not just types or docs. Useful when you need to understand exactly how a library works internally, trace a bug into a dependency, or find real usage examples.
+opensrc gives the agent access to the actual source code of any npm, PyPI, or Rust crate: not just types or docs. Useful when you need to understand exactly how a library works internally, trace a bug into a dependency, or find real usage examples.
 
 ### Install
 
@@ -104,10 +104,10 @@ ls $(opensrc path better-auth)/packages/better-auth/src
 
 Tell the agent: "Use `opensrc path <package>` to read the source of <package> before implementing."
 
-Add to `CLAUDE.md` so the agent uses it automatically — see Phase 4.
+Add to `CLAUDE.md` so the agent uses it automatically: see Phase 4.
 
 
-## Phase 4: CLAUDE.md — Project Context File
+## Phase 4: CLAUDE.md: Project Context File
 
 A `CLAUDE.md` at the project root is loaded into Claude Code's context on every session. It is the most reliable way to give the agent persistent, project-specific knowledge.
 
@@ -131,9 +131,9 @@ A `CLAUDE.md` at the project root is loaded into Claude Code's context on every 
   - Example: `cat $(opensrc path hono)/src/router/trie-router/router.ts`
 
 ## Commands
-- `bun dev` — start dev server
-- `bun test` — run tests
-- `bun run db:migrate` — run migrations
+- `bun dev`: start dev server
+- `bun test`: run tests
+- `bun run db:migrate`: run migrations
 [Add the actual commands for this project]
 ```
 
@@ -146,9 +146,9 @@ With context tools in place, run a structured codebase exploration so the agent 
 
 | Subagent | Focus |
 |----------|-------|
-| 1 | **Stack inventory** — read `package.json` / `Cargo.toml` / `requirements.txt`, identify all key dependencies and their versions |
-| 2 | **Architecture** — read entry points, main config files, directory structure, understand how the pieces connect |
-| 3 | **Conventions** — find coding patterns, naming conventions, how tests are structured, any existing documentation |
+| 1 | **Stack inventory**: read `package.json` / `Cargo.toml` / `requirements.txt`, identify all key dependencies and their versions |
+| 2 | **Architecture**: read entry points, main config files, directory structure, understand how the pieces connect |
+| 3 | **Conventions**: find coding patterns, naming conventions, how tests are structured, any existing documentation |
 
 Synthesize findings into a **Context Summary** and offer to write it into `CLAUDE.md`.
 
@@ -157,8 +157,8 @@ Synthesize findings into a **Context Summary** and offer to write it into `CLAUD
 
 Run these checks:
 
-- [ ] Context7 MCP responds — ask a library question with `use context7` and confirm it cites live docs
-- [ ] opensrc resolves a package — run `opensrc path <main framework>` and confirm a path is returned
+- [ ] Context7 MCP responds: ask a library question with `use context7` and confirm it cites live docs
+- [ ] opensrc resolves a package: run `opensrc path <main framework>` and confirm a path is returned
 - [ ] `CLAUDE.md` exists with stack, architecture, conventions, and context tool instructions
 - [ ] Restart Claude Code and confirm MCP servers load (check `/mcp` status)
 

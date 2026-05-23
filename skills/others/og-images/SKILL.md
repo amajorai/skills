@@ -6,7 +6,7 @@ argument-hint: <pages or routes that need OG images>
 
 # OG Images
 
-You are implementing dynamic OG image generation via an edge function. No external service — images are generated at the edge on demand and cached.
+You are implementing dynamic OG image generation via an edge function. No external service: images are generated at the edge on demand and cached.
 
 **Target pages:** {{args}}
 
@@ -52,17 +52,17 @@ Confirm with the user before implementing.
 
 ### Framework-specific setup
 
-**Next.js** — use `next/og` with `ImageResponse`:
+**Next.js**: use `next/og` with `ImageResponse`:
 ```
 app/og/route.tsx  (or pages/api/og.tsx for Pages Router)
 ```
 
-**Hono / Bun server** — use `@vercel/og` or `satori` + `sharp`:
+**Hono / Bun server**: use `@vercel/og` or `satori` + `sharp`:
 ```bash
 bun add satori @resvg/resvg-js
 ```
 
-**Cloudflare Workers** — use `@cloudflare/workers-og` (built on Satori):
+**Cloudflare Workers**: use `@cloudflare/workers-og` (built on Satori):
 ```bash
 bun add @cloudflare/workers-og
 ```
@@ -70,7 +70,7 @@ bun add @cloudflare/workers-og
 ### Implementation steps
 
 1. Create the `/og` route that accepts query params: `?title=...&description=...`
-2. Build the JSX template using inline styles (Satori only supports a subset of CSS — no flexbox gap, no grid)
+2. Build the JSX template using inline styles (Satori only supports a subset of CSS: no flexbox gap, no grid)
 3. Embed the font as a base64 string or fetch it from a CDN (fonts must be loaded explicitly)
 4. Set cache headers: `Cache-Control: public, max-age=86400, s-maxage=604800`
 5. Return the image as `image/png` with 1200×630 dimensions
@@ -90,9 +90,9 @@ For dynamic routes (blog posts, user profiles), populate params from the page's 
 
 ## Phase 5: Verify
 
-Test with real tools — not just looking at the HTML source:
+Test with real tools: not just looking at the HTML source:
 
-- [ ] Open [opengraph.xyz](https://www.opengraph.xyz) and enter the URL — confirm image renders
+- [ ] Open [opengraph.xyz](https://www.opengraph.xyz) and enter the URL: confirm image renders
 - [ ] Twitter card validator: paste URL, confirm large image appears
 - [ ] Check iMessage / Slack preview by sharing a link
 - [ ] Verify 1200×630 dimensions (not stretched)

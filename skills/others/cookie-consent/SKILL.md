@@ -31,7 +31,7 @@ Produce a cookie inventory:
 Ask the user (combine related questions):
 
 - **Jurisdictions**: EU/UK (GDPR), California (CCPA), or global?
-- **Categories**: Which categories apply — Strictly Necessary, Analytics, Marketing, Preferences?
+- **Categories**: Which categories apply: Strictly Necessary, Analytics, Marketing, Preferences?
 - **Library**: Use a pre-built library (Cookiebot, CookieYes) or build a lightweight custom banner?
 - **Design**: Match the app's design system or use a minimal default?
 
@@ -57,7 +57,7 @@ For each non-essential script:
    if (consent.analytics) { posthog.init(...) }
    window.addEventListener('consent_updated', () => { if (consent.analytics) posthog.init(...) })
    ```
-2. **Third-party scripts**: Change `type="text/javascript"` to `type="text/plain"` and add `data-category="analytics"` — the consent manager activates them after consent
+2. **Third-party scripts**: Change `type="text/javascript"` to `type="text/plain"` and add `data-category="analytics"`: the consent manager activates them after consent
 3. **Server-side tracking**: Check consent header or cookie before processing
 
 
@@ -89,7 +89,7 @@ For California users:
 - [ ] Banner appears on first visit (clear localStorage to test)
 - [ ] Banner does not appear on return visits after consent is given
 - [ ] Accepting all consent initializes analytics scripts
-- [ ] Rejecting non-essential blocks all non-essential scripts (verify in Network tab — no PostHog/GA calls)
+- [ ] Rejecting non-essential blocks all non-essential scripts (verify in Network tab: no PostHog/GA calls)
 - [ ] "Manage Preferences" link in footer opens the modal
 - [ ] Revoking consent stops tracking and clears existing tracking cookies
 - [ ] No console errors on any consent state

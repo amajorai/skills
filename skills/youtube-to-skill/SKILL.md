@@ -27,7 +27,7 @@ Extract `VIDEO_ID` and confirm it looks valid (11 alphanumeric characters).
 
 Fetch the video page to extract metadata and transcript data. Try these sources in order until you have enough content:
 
-**Source A — YouTube page (metadata + title + description):**
+**Source A: YouTube page (metadata + title + description):**
 Fetch `https://www.youtube.com/watch?v=VIDEO_ID`
 
 Extract from the HTML:
@@ -36,12 +36,12 @@ Extract from the HTML:
 - Channel name
 - Duration
 
-**Source B — Transcript (try this first for content):**
+**Source B: Transcript (try this first for content):**
 Fetch `https://youtubetranscript.com/?server_vid2=VIDEO_ID`
 
 If Source B returns a transcript, use it as the primary content source. If it fails or returns no content, rely on Source A's description and title, and note that the transcript was unavailable.
 
-**Source C — Fallback YouTube transcript API:**
+**Source C: Fallback YouTube transcript API:**
 If Source B fails, try fetching:
 `https://www.youtube.com/api/timedtext?v=VIDEO_ID&lang=en&fmt=json3`
 
@@ -86,14 +86,14 @@ name: <kebab-case-name>
 description: <One sentence: what it does and when to use it. Include key tech names so the trigger is precise.>
 argument-hint: <optional: what args the user should pass>
 
-# <name> — <Human-Readable Title>
+# <name>: <Human-Readable Title>
 
 <One paragraph: what this skill does, what it produces, and why it exists. Attribute the source: "Based on [Video Title] by [Channel Name].">
 
 **Source:** [Video Title]({{args}}) by [Channel Name]
 
 
-<Skill body — structured content extracted from the video>
+<Skill body: structured content extracted from the video>
 ```
 
 ### Body content rules:
@@ -102,7 +102,7 @@ argument-hint: <optional: what args the user should pass>
 - **Steps should be executable.** Each step should be something Claude can actually do or instruct the user to do.
 - **Use phases for complex workflows.** `## Phase 1: X`, `## Phase 2: Y`
 - **Use code blocks for every command or code snippet.** Even single-line commands.
-- **Include decision points.** If the video says "if you're using PostgreSQL, do X; if SQLite, do Y" — keep the branch.
+- **Include decision points.** If the video says "if you're using PostgreSQL, do X; if SQLite, do Y": keep the branch.
 - **Strip filler.** Don't include the presenter's personal anecdotes, channel intros/outros, or ad reads.
 - **If transcript was unavailable**, note it at the top: `> Note: Transcript was unavailable. This skill is based on the video title and description only. Verify steps before running.`
 
@@ -114,6 +114,6 @@ After writing the file, report back:
 1. The skill name and file path
 2. A one-line description of what the skill does
 3. How to invoke it (`/<name>` or `/<name> <args>`)
-4. Any caveats — e.g., transcript unavailable, video was too abstract to extract concrete steps, commands couldn't be verified
+4. Any caveats: e.g., transcript unavailable, video was too abstract to extract concrete steps, commands couldn't be verified
 
 If the video content was too abstract, conceptual-only, or completely inaccessible, tell the user and suggest they paste the transcript manually for better results.

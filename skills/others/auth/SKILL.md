@@ -1,6 +1,6 @@
 ---
 name: auth
-description: Add authentication to any web or mobile app using Better Auth. Sets up OAuth (Google/GitHub/Discord), magic links, passkeys, session management, and route protection. Handles the full boilerplate — signup, login, logout, protected routes, and user model. Use when starting a new app or adding auth to an existing one.
+description: Add authentication to any web or mobile app using Better Auth. Sets up OAuth (Google/GitHub/Discord), magic links, passkeys, session management, and route protection. Handles the full boilerplate: signup, login, logout, protected routes, and user model. Use when starting a new app or adding auth to an existing one.
 argument-hint: <auth methods: oauth | magic-link | password | passkeys | all>
 ---
 
@@ -26,7 +26,7 @@ This command auto-configures the remote Better Auth docs MCP server in Claude Co
 
 Ask the user (combine related questions):
 
-- **Methods**: OAuth (which providers — Google, GitHub, Discord?), magic link, username/password, or passkeys?
+- **Methods**: OAuth (which providers: Google, GitHub, Discord?), magic link, username/password, or passkeys?
 - **Stack**: Framework, database, ORM?
 - **User model**: What fields beyond email/name are needed? Roles? Teams/orgs?
 - **Session strategy**: Cookie-based sessions or JWT tokens? Expiry preferences?
@@ -62,7 +62,7 @@ bun add better-auth
 
 Reference the Better Auth MCP and docs at https://better-auth.com/docs throughout.
 
-1. Create `lib/auth.ts` — configure providers, session strategy, database adapter
+1. Create `lib/auth.ts`: configure providers, session strategy, database adapter
 2. Create the catch-all API route: `app/api/auth/[...all]/route.ts`
 3. Run schema generation: `bunx better-auth generate` and apply migration
 4. Create auth client: `lib/auth-client.ts` for frontend
@@ -83,8 +83,8 @@ Reference the Better Auth MCP and docs at https://better-auth.com/docs throughou
 
 ### Auth pages
 
-1. `/login` — provider buttons, magic link input, or password form
-2. `/signup` — same as login if using OAuth/magic link; separate form if password
+1. `/login`: provider buttons, magic link input, or password form
+2. `/signup`: same as login if using OAuth/magic link; separate form if password
 3. Post-auth redirect to the intended destination (save `?next=` param)
 
 
@@ -96,7 +96,7 @@ Reference the Better Auth MCP and docs at https://better-auth.com/docs throughou
 - [ ] OAuth state parameter validated to prevent CSRF
 - [ ] Rate limit: max 10 login attempts per IP per 15 min
 - [ ] Secure + HttpOnly + SameSite=Lax cookies for session tokens
-- [ ] No user enumeration — same error message for "user not found" and "wrong password"
+- [ ] No user enumeration: same error message for "user not found" and "wrong password"
 
 
 ## Phase 6: Verify

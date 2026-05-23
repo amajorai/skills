@@ -6,23 +6,19 @@ Simple, minimal, lean skills that people don't think about when shipping apps. T
 
 ### 📦 [ship.md](https://github.com/amajorai/ship.md)
 
-Full-cycle development workflow. 10 phases from interview to final verify — explore, plan (`/model opusplan`), implement (`/batch`), verify (`/goal`), edge cases, E2E tests, simplify, security review.
+Full-cycle development workflow. 10 phases from interview to final verify: explore, plan (`/model opusplan`), implement (`/batch`), verify (`/goal`), edge cases, E2E tests, simplify, security review.
 
 ```bash
 npx skills add amajorai/ship.md
 ```
 
----
-
 ### 🪅 [vibe.md](https://github.com/amajorai/vibe.md)
 
-Ultimate vibe coding setup. One interview, one clean pass — VPS provisioned, Bun + GitHub CLI installed, Dokploy or Coolify deployed, Better T Stack scaffolded and wired to auto-deploy.
+Ultimate vibe coding setup. One interview, one clean pass: VPS provisioned, Bun + GitHub CLI installed, Dokploy or Coolify deployed, Better T Stack scaffolded and wired to auto-deploy.
 
 ```bash
 npx skills add amajorai/vibe.md
 ```
-
----
 
 ## Skills
 

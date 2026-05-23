@@ -6,7 +6,7 @@ argument-hint: <migration description or migration file>
 
 # DB Migrate
 
-You are running a production database migration. Safety first — data loss is not recoverable. Work through each phase in order.
+You are running a production database migration. Safety first: data loss is not recoverable. Work through each phase in order.
 
 **Migration:** {{args}}
 
@@ -17,8 +17,8 @@ Spawn **2 parallel subagents**:
 
 | Subagent | Focus |
 |----------|-------|
-| 1 | Read the migration file(s) — what exactly does this change? Tables added/dropped? Columns added/altered/dropped? Indexes? Constraints? |
-| 2 | Production data scale — how many rows in affected tables? Any tables > 1M rows? Foreign key relationships? |
+| 1 | Read the migration file(s): what exactly does this change? Tables added/dropped? Columns added/altered/dropped? Indexes? Constraints? |
+| 2 | Production data scale: how many rows in affected tables? Any tables > 1M rows? Foreign key relationships? |
 
 Assess risk level:
 - **Low**: Adding nullable columns, adding indexes (with `CONCURRENTLY`), creating new tables

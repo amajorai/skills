@@ -51,17 +51,17 @@ Trigger trial start at the right moment (signup or first meaningful action):
 
 1. Set `trial_started_at = now()`, `trial_ends_at = now() + N days`
 2. If using Stripe: create a subscription with a trial period (no charge until trial ends)
-3. If no card required: just set the database fields — prompt for card when trial expires
+3. If no card required: just set the database fields: prompt for card when trial expires
 4. Send welcome email with trial end date prominently displayed
 
 
 ## Phase 5: Access Gating
 
 Create a `getAccessLevel(user)` utility that returns one of:
-- `'full'` — active paid subscriber
-- `'trial'` — within trial period
-- `'expired'` — trial ended, no payment
-- `'free'` — on free plan (if applicable)
+- `'full'`: active paid subscriber
+- `'trial'`: within trial period
+- `'expired'`: trial ended, no payment
+- `'free'`: on free plan (if applicable)
 
 The middleware/guard checks this, not raw dates:
 
@@ -92,7 +92,7 @@ Build an upgrade prompt component shown when a trial user hits a paywall:
 
 1. Show days remaining in the trial (or "your trial has ended")
 2. List what they'll lose access to
-3. Clear CTA: "Upgrade to [Plan] — $X/mo"
+3. Clear CTA: "Upgrade to [Plan]: $X/mo"
 4. Secondary: "Remind me later" (snooze for 24h, not available at expiry)
 
 Show a persistent banner in the header for the last 3 days of trial.

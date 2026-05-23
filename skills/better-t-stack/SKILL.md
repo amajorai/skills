@@ -13,18 +13,18 @@ You are scaffolding a Better T Stack project. Run a structured interview to lock
 
 ## Phase 1: Project Basics
 
-Use `AskUserQuestion` with these questions (send as one batch — 4 questions max per call):
+Use `AskUserQuestion` with these questions (send as one batch: 4 questions max per call):
 
-**Question 1 — Project name** (skip if {{args}} is set):
+**Question 1: Project name** (skip if {{args}} is set):
 > What is your project name?
 
-**Question 2 — Where to create it:**
+**Question 2: Where to create it:**
 > Where should the project be created? Provide a full absolute path (e.g. `C:\Code`, `/home/user/projects`, `~/projects`). Leave blank to use the current directory.
 
-**Question 3 — Package manager:**
-Options: `bun` (Recommended — fastest), `npm`, `pnpm`, `yarn`
+**Question 3: Package manager:**
+Options: `bun` (Recommended: fastest), `npm`, `pnpm`, `yarn`
 
-**Question 4 — Git + install:**
+**Question 4: Git + install:**
 - Initialize a git repository? (yes / no)
 - Install dependencies automatically? (yes / no)
 
@@ -33,19 +33,19 @@ Options: `bun` (Recommended — fastest), `npm`, `pnpm`, `yarn`
 
 Send the next batch of questions using `AskUserQuestion`. Use `multiSelect: true` for array options.
 
-### Batch A — Frontend & Backend
+### Batch A: Frontend & Backend
 
 **Question: Frontend framework** (multi-select):
 | Value | Description |
 |---|---|
-| `tanstack-router` | React + TanStack Router — lightweight SPA (Recommended) |
+| `tanstack-router` | React + TanStack Router: lightweight SPA (Recommended) |
 | `react-router` | React + React Router v7 |
-| `tanstack-start` | React + TanStack Start — SSR/SSG |
-| `next` | Next.js — full-stack React |
-| `nuxt` | Nuxt — Vue full-stack |
+| `tanstack-start` | React + TanStack Start: SSR/SSG |
+| `next` | Next.js: full-stack React |
+| `nuxt` | Nuxt: Vue full-stack |
 | `svelte` | SvelteKit |
 | `solid` | SolidStart |
-| `astro` | Astro — content/hybrid |
+| `astro` | Astro: content/hybrid |
 | `native-bare` | React Native (bare) |
 | `native-nativewind` | React Native + NativeWind (Tailwind) |
 | `native-unistyles` | React Native + Unistyles |
@@ -54,41 +54,41 @@ Send the next batch of questions using `AskUserQuestion`. Use `multiSelect: true
 **Question: Backend framework** (single select):
 | Value | Description |
 |---|---|
-| `hono` | Hono — ultra-fast, edge-ready (Recommended) |
-| `express` | Express — classic Node.js |
-| `fastify` | Fastify — fast Node.js |
-| `elysia` | Elysia — Bun-native |
-| `convex` | Convex — reactive backend-as-a-service |
+| `hono` | Hono: ultra-fast, edge-ready (Recommended) |
+| `express` | Express: classic Node.js |
+| `fastify` | Fastify: fast Node.js |
+| `elysia` | Elysia: Bun-native |
+| `convex` | Convex: reactive backend-as-a-service |
 | `self` | Self-hosted / fullstack (no separate backend server) |
 | `none` | No backend |
 
 **Question: Runtime** (single select):
 | Value | Description |
 |---|---|
-| `bun` | Bun — fastest JS runtime (Recommended) |
+| `bun` | Bun: fastest JS runtime (Recommended) |
 | `node` | Node.js |
-| `workers` | Cloudflare Workers — edge runtime |
+| `workers` | Cloudflare Workers: edge runtime |
 
 **Question: API layer** (single select):
 | Value | Description |
 |---|---|
-| `trpc` | tRPC — end-to-end type-safe RPC (Recommended) |
-| `orpc` | oRPC — alternative type-safe RPC |
+| `trpc` | tRPC: end-to-end type-safe RPC (Recommended) |
+| `orpc` | oRPC: alternative type-safe RPC |
 | `none` | No API layer (REST or custom) |
 
 
-### Batch B — Data Layer
+### Batch B: Data Layer
 
 **Question: Database** (single select):
 | Value | Description |
 |---|---|
-| `sqlite` | SQLite / LibSQL — lightweight, zero-config (Recommended) |
+| `sqlite` | SQLite / LibSQL: lightweight, zero-config (Recommended) |
 | `postgres` | PostgreSQL |
 | `mysql` | MySQL |
 | `mongodb` | MongoDB |
 | `none` | No database |
 
-**Question: ORM** (single select — show only compatible options based on DB choice):
+**Question: ORM** (single select: show only compatible options based on DB choice):
 | Value | Compatible with |
 |---|---|
 | `drizzle` | SQLite, PostgreSQL, MySQL (Recommended) |
@@ -96,38 +96,38 @@ Send the next batch of questions using `AskUserQuestion`. Use `multiSelect: true
 | `mongoose` | MongoDB only |
 | `none` | No ORM |
 
-**Question: Database setup / hosting** (single select — skip if database is `none`):
+**Question: Database setup / hosting** (single select: skip if database is `none`):
 | Value | Description |
 |---|---|
-| `turso` | Turso — hosted LibSQL (best for SQLite) |
-| `neon` | Neon — serverless PostgreSQL |
-| `supabase` | Supabase — PostgreSQL + extras |
-| `prisma-postgres` | Prisma Postgres — managed |
-| `mongodb-atlas` | MongoDB Atlas — hosted MongoDB |
-| `cloudflare-d1` | Cloudflare D1 — edge SQLite |
-| `docker` | Local Docker — self-hosted |
+| `turso` | Turso: hosted LibSQL (best for SQLite) |
+| `neon` | Neon: serverless PostgreSQL |
+| `supabase` | Supabase: PostgreSQL + extras |
+| `prisma-postgres` | Prisma Postgres: managed |
+| `mongodb-atlas` | MongoDB Atlas: hosted MongoDB |
+| `cloudflare-d1` | Cloudflare D1: edge SQLite |
+| `docker` | Local Docker: self-hosted |
 | `none` | Manual / skip |
 
 
-### Batch C — Auth, Payments & Extras
+### Batch C: Auth, Payments & Extras
 
 **Question: Authentication** (single select):
 | Value | Description |
 |---|---|
-| `better-auth` | Better Auth — self-hosted, full-featured (Recommended) |
-| `clerk` | Clerk — managed auth with UI components |
+| `better-auth` | Better Auth: self-hosted, full-featured (Recommended) |
+| `clerk` | Clerk: managed auth with UI components |
 | `none` | No auth |
 
 **Question: Payments** (single select):
 | Value | Description |
 |---|---|
-| `polar` | Polar — open-source payments & billing |
+| `polar` | Polar: open-source payments & billing |
 | `none` | No payments |
 
 **Question: Web deployment target** (single select):
 | Value | Description |
 |---|---|
-| `workers` | Cloudflare Workers — edge deployment |
+| `workers` | Cloudflare Workers: edge deployment |
 | `none` | No web deploy config |
 
 **Question: Example template** (single select):
@@ -138,26 +138,26 @@ Send the next batch of questions using `AskUserQuestion`. Use `multiSelect: true
 | `ai` | AI app template |
 
 
-### Batch D — Addons
+### Batch D: Addons
 
-**Question: Addons** (multi-select — pick any):
+**Question: Addons** (multi-select: pick any):
 | Value | Description |
 |---|---|
-| `biome` | Biome — fast linter + formatter (Recommended) |
-| `turborepo` | Turborepo — monorepo build system |
-| `nx` | Nx — monorepo tooling |
-| `pwa` | PWA — Progressive Web App support |
-| `tauri` | Tauri — cross-platform desktop app |
-| `electrobun` | Electrobun — Bun-native desktop app |
-| `lefthook` | Lefthook — git hooks manager |
-| `husky` | Husky — git hooks (alternative to lefthook) |
-| `starlight` | Starlight — Astro-based docs site |
-| `fumadocs` | Fumadocs — Next.js docs framework |
-| `ultracite` | Ultracite — opinionated config preset |
-| `oxlint` | OxLint — Rust-based linter |
-| `mcp` | MCP — Model Context Protocol server |
-| `opentui` | OpenTUI — terminal UI framework |
-| `wxt` | WXT — browser extension framework |
+| `biome` | Biome: fast linter + formatter (Recommended) |
+| `turborepo` | Turborepo: monorepo build system |
+| `nx` | Nx: monorepo tooling |
+| `pwa` | PWA: Progressive Web App support |
+| `tauri` | Tauri: cross-platform desktop app |
+| `electrobun` | Electrobun: Bun-native desktop app |
+| `lefthook` | Lefthook: git hooks manager |
+| `husky` | Husky: git hooks (alternative to lefthook) |
+| `starlight` | Starlight: Astro-based docs site |
+| `fumadocs` | Fumadocs: Next.js docs framework |
+| `ultracite` | Ultracite: opinionated config preset |
+| `oxlint` | OxLint: Rust-based linter |
+| `mcp` | MCP: Model Context Protocol server |
+| `opentui` | OpenTUI: terminal UI framework |
+| `wxt` | WXT: browser extension framework |
 | `none` | No addons |
 
 

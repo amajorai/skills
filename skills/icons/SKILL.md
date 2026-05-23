@@ -46,7 +46,7 @@ ls vite.config.ts next.config.ts next.config.js astro.config.mjs 2>$null
 ls index.html public/index.html 2>$null
 ```
 
-Identify which platforms apply — a project can have **multiple** (e.g. Tauri + PWA, Capacitor + PWA):
+Identify which platforms apply: a project can have **multiple** (e.g. Tauri + PWA, Capacitor + PWA):
 
 | File found | Platform |
 |---|---|
@@ -73,7 +73,7 @@ bun add -D @tauri-apps/cli
 bunx tauri icon "<SOURCE_IMAGE>"
 ```
 
-This generates: `.icns` (macOS), `.ico` (Windows), multiple `.png` sizes (Linux, tray, etc.) all placed in `src-tauri/icons/`. No config changes needed — Tauri reads from that directory automatically.
+This generates: `.icns` (macOS), `.ico` (Windows), multiple `.png` sizes (Linux, tray, etc.) all placed in `src-tauri/icons/`. No config changes needed: Tauri reads from that directory automatically.
 
 Verify output:
 ```bash
@@ -87,7 +87,7 @@ ls src-tauri/icons/
 # Install the assets package
 bun add -D @capacitor/assets
 
-# Place source image — assets tool expects resources/ directory
+# Place source image: assets tool expects resources/ directory
 # Create resources/ with icon and splash source images
 mkdir -p resources
 cp "<SOURCE_IMAGE>" resources/icon.png

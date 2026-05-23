@@ -5,7 +5,7 @@ description: Scans all past conversation transcripts for the current project and
 
 # Mirror
 
-You are scanning the project's conversation history to find recurring patterns across sessions and distill them into durable rules. This is a deeper version of `/reflect` — it looks back at every past conversation, not just the current one.
+You are scanning the project's conversation history to find recurring patterns across sessions and distill them into durable rules. This is a deeper version of `/reflect`: it looks back at every past conversation, not just the current one.
 
 
 ## Step 1: Detect the Current Agent
@@ -64,7 +64,7 @@ Focus on:
 - Assistant messages that preceded those corrections (what triggered them)
 - Turns where the user accepted or confirmed a non-obvious approach
 
-You do not need to read transcripts exhaustively — scan for signal, not every word.
+You do not need to read transcripts exhaustively: scan for signal, not every word.
 
 
 ## Step 4: Read the Current Config File
@@ -76,23 +76,23 @@ Read the existing contents of the target config file so you can see what rules a
 
 Look across all transcripts for signals that appeared in **multiple separate sessions**. A single-session incident is noise; a pattern across sessions is signal.
 
-### 5a — Recurring corrections
+### 5a: Recurring corrections
 The user had to correct the same type of mistake in 2+ sessions:
 - Same wrong tool used
 - Same bad default assumed
 - Same explanation given twice about a constraint
 
-### 5b — Repeated instructions
+### 5b: Repeated instructions
 The user gave the same explicit instruction in 2+ sessions:
 - "Always use X" or "Never do Y" appearing in multiple chats
 - The same environment fact explained more than once
 
-### 5c — Validated non-obvious choices
+### 5c: Validated non-obvious choices
 An unusual approach appeared and was accepted in 2+ sessions without comment:
 - A non-standard pattern the agent kept using and the user kept approving
 - A workflow or tool choice that was questioned once and then settled
 
-### 5d — Blind spots
+### 5d: Blind spots
 Types of problems where the agent consistently needed more turns than expected:
 - Repeatedly misunderstood the same domain concept
 - Consistently needed the user to clarify the same type of ambiguity
@@ -101,9 +101,9 @@ Types of problems where the agent consistently needed more turns than expected:
 ## Step 6: Score and Filter
 
 Rank each finding by:
-- **Frequency** — how many sessions it appeared in (higher = more valuable)
-- **Severity** — how much wasted effort did it cause
-- **Specificity** — is it actionable as a concrete rule
+- **Frequency**: how many sessions it appeared in (higher = more valuable)
+- **Severity**: how much wasted effort did it cause
+- **Specificity**: is it actionable as a concrete rule
 
 Discard anything that:
 - Only happened once
@@ -117,7 +117,7 @@ Discard anything that:
 For each pattern that passes Step 6, write a rule:
 
 ```
-**[Label]:** <imperative rule>. [Why — what incident or pattern drives this.]
+**[Label]:** <imperative rule>. [Why: what incident or pattern drives this.]
 ```
 
 Group related rules under a section header if the config file uses sections.
@@ -129,7 +129,7 @@ Update the target config file:
 1. Add new rules to the appropriate section (or create a new section at the end)
 2. Strengthen any existing rule that the history confirms is important
 3. Remove any rule that the transcript history shows was consistently wrong or ignored
-4. Keep the file readable — no duplicate entries
+4. Keep the file readable: no duplicate entries
 
 
 ## Step 9: Report Back

@@ -18,10 +18,10 @@ Ask the user (combine related questions):
 - **Provider**: Which provider?
   - **Resend** (default, great DX, CLI-driven setup, hosted)
   - **Postmark** (high deliverability focus, hosted)
-  - **useSend** (self-hosted, open-source, SES-backed — https://github.com/usesend/useSend)
-  - **Plunk** (self-hosted, open-source, Docker — https://github.com/useplunk/plunk)
+  - **useSend** (self-hosted, open-source, SES-backed: https://github.com/usesend/useSend)
+  - **Plunk** (self-hosted, open-source, Docker: https://github.com/useplunk/plunk)
 - **From address**: What sending domain? Is it already verified with the provider?
-- **Email types**: Which of these are needed — welcome, email verification, password reset, notification, weekly digest, billing receipt, team invitation?
+- **Email types**: Which of these are needed: welcome, email verification, password reset, notification, weekly digest, billing receipt, team invitation?
 - **Templates**: Plain text only, or styled HTML? React Email or MJML for templating?
 - **Stack**: Framework and language?
 
@@ -75,7 +75,7 @@ Install SDK: `bun add postmark`
 
 ### useSend (self-hosted)
 
-Deploy via Docker or Railway (one-click) — see https://docs.usesend.com
+Deploy via Docker or Railway (one-click): see https://docs.usesend.com
 
 ```bash
 # After deploy, configure AWS SES credentials in the useSend dashboard
@@ -130,7 +130,7 @@ Create a shared `sendEmail(to, template, data)` utility that:
 1. Renders the React Email template to HTML
 2. Calls the provider API with from, to, subject, html, text
 3. Logs the result (success or error) with the user ID
-4. Never throws — catches errors and reports to error tracking
+4. Never throws: catches errors and reports to error tracking
 
 For each email type, create a typed wrapper:
 
@@ -150,7 +150,7 @@ Wire each wrapper to the correct trigger point in the codebase.
 - [ ] From name is recognizable: `"App Name <hello@mail.yourdomain.com>"`
 - [ ] Subject lines are clear and not spammy (no ALL CAPS, no excessive punctuation)
 - [ ] Unsubscribe link in every email (required by CAN-SPAM, GDPR)
-- [ ] Test deliverability at [mail-tester.com](https://www.mail-tester.com) — aim for 9+/10
+- [ ] Test deliverability at [mail-tester.com](https://www.mail-tester.com): aim for 9+/10
 
 
 ## Phase 7: Verify

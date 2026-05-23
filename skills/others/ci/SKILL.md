@@ -27,7 +27,7 @@ Identify: which checks to run, how to run them, what secrets the deploy needs.
 
 Ask the user (combine related questions):
 
-- **Checks**: Which of these exist — lint, typecheck, unit tests, E2E tests, build?
+- **Checks**: Which of these exist: lint, typecheck, unit tests, E2E tests, build?
 - **Preview deploys**: Should PRs get preview deploy URLs?
 - **Deploy on merge**: Auto-deploy to production when PR merges to main?
 - **Secrets needed**: What API keys does the deploy step need?

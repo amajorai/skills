@@ -16,9 +16,9 @@ You are setting up production observability. Work through each phase in order.
 Ask the user (combine related questions):
 
 - **Error tracking**: Sentry (default) or alternative (Highlight, Bugsnag)?
-- **Logging**: Is there an existing logger? Preferred log sink — console (dev), file, or a service like BetterStack Logs / Axiom?
+- **Logging**: Is there an existing logger? Preferred log sink: console (dev), file, or a service like BetterStack Logs / Axiom?
 - **Uptime monitoring**: BetterStack (default) or UptimeRobot? What URLs to monitor?
-- **Alerting**: Where should alerts go — email, Slack, PagerDuty?
+- **Alerting**: Where should alerts go: email, Slack, PagerDuty?
 - **Stack**: Frontend framework, backend runtime, any background jobs?
 
 Confirm tools and alert destinations before proceeding.
@@ -58,7 +58,7 @@ Identify: where to initialize SDKs, what's unhandled, what context (user ID, req
 3. Replace bare `console.log` / `console.error` calls throughout the codebase
 4. Add request context middleware (request ID, user ID, route) for API layers
 5. Log levels: `error` for exceptions, `warn` for degraded state, `info` for key events, `debug` for dev only
-6. Never log sensitive fields — add a redact list to the logger config for passwords, tokens, PII
+6. Never log sensitive fields: add a redact list to the logger config for passwords, tokens, PII
 
 
 ## Phase 5: Uptime Monitoring

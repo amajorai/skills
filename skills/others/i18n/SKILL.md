@@ -47,7 +47,7 @@ bunx paraglide-js init
 
 Creates:
 - `messages/en.json` (and one per locale)
-- `src/lib/i18n.js` — the compiled message functions
+- `src/lib/i18n.js`: the compiled message functions
 
 ### next-intl
 
@@ -57,7 +57,7 @@ bun add next-intl
 
 Creates:
 - `messages/en.json`
-- `i18n.ts` — locale configuration
+- `i18n.ts`: locale configuration
 - Middleware for locale routing
 
 ### Locale routing
@@ -87,7 +87,7 @@ For each hardcoded string found in Phase 2:
    <h1>{t('title')}</h1>
    ```
 
-Work through files systematically. Do not leave hardcoded strings — they will show in English to non-English users.
+Work through files systematically. Do not leave hardcoded strings: they will show in English to non-English users.
 
 
 ## Phase 5: Translate

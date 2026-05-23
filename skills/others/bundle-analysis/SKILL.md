@@ -1,6 +1,6 @@
 ---
 name: bundle-analysis
-description: Analyze JavaScript bundle size, identify bloat, and implement fixes — code splitting, lazy loading, tree shaking, and dependency swaps. Use when page load is slow, Lighthouse performance score is low, or before launching a web app.
+description: Analyze JavaScript bundle size, identify bloat, and implement fixes: code splitting, lazy loading, tree shaking, and dependency swaps. Use when page load is slow, Lighthouse performance score is low, or before launching a web app.
 argument-hint: <framework: next | vite | remix | other>
 ---
 
@@ -46,8 +46,8 @@ Spawn **2 parallel subagents**:
 
 | Subagent | Focus |
 |----------|-------|
-| 1 | Read the bundle analyzer output — which modules are largest? Which appear in multiple chunks when they shouldn't? |
-| 2 | `package.json` dependencies — find packages with cheaper alternatives (e.g., `moment` → `date-fns`, `lodash` → native, `axios` → `fetch`) |
+| 1 | Read the bundle analyzer output: which modules are largest? Which appear in multiple chunks when they shouldn't? |
+| 2 | `package.json` dependencies: find packages with cheaper alternatives (e.g., `moment` → `date-fns`, `lodash` → native, `axios` → `fetch`) |
 
 Produce a ranked list of optimizations by estimated savings.
 
@@ -56,13 +56,13 @@ Produce a ranked list of optimizations by estimated savings.
 
 For routes/pages that are not on the critical path:
 
-1. **Dynamic imports** — lazy-load components loaded below the fold or on interaction:
+1. **Dynamic imports**: lazy-load components loaded below the fold or on interaction:
    ```typescript
    const HeavyChart = lazy(() => import('./HeavyChart'))
    ```
-2. **Route-based splitting** — verify each route is its own chunk (Next.js does this automatically; Vite needs route lazy imports)
-3. **Vendor chunk splitting** — ensure large dependencies (React, charting libs) are split into their own chunks for long-term caching
-4. **Conditional imports** — only import heavy polyfills or libs when the browser actually needs them
+2. **Route-based splitting**: verify each route is its own chunk (Next.js does this automatically; Vite needs route lazy imports)
+3. **Vendor chunk splitting**: ensure large dependencies (React, charting libs) are split into their own chunks for long-term caching
+4. **Conditional imports**: only import heavy polyfills or libs when the browser actually needs them
 
 
 ## Phase 4: Dependency Swaps
@@ -72,7 +72,7 @@ For each identified heavy dependency with a lighter alternative:
 1. Confirm the replacement covers all current usage patterns
 2. Install replacement, remove old package
 3. Update all import sites
-4. Run tests — confirm nothing breaks
+4. Run tests: confirm nothing breaks
 5. Measure the size delta
 
 Common swaps:
@@ -90,7 +90,7 @@ Verify tree shaking is working:
 1. Check that all imports from large packages use named imports: `import { specific } from 'lib'` not `import lib from 'lib'`
 2. Confirm `"sideEffects": false` in the package.json of any internal packages
 3. For barrel files (`index.ts` that re-exports everything), consider direct imports instead
-4. Verify `browserslist` target is set — shipping modern JS to modern browsers saves size
+4. Verify `browserslist` target is set: shipping modern JS to modern browsers saves size
 
 
 ## Phase 6: Image & Font Optimization (bonus)

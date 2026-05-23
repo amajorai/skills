@@ -127,7 +127,7 @@ CREATE TABLE push_subscriptions (
 
 ## Phase 6: Server-Side Sending
 
-Install: `bun add web-push` (for web) — Expo uses their own API directly.
+Install: `bun add web-push` (for web): Expo uses their own API directly.
 
 Create `lib/notifications.ts`:
 
@@ -168,7 +168,7 @@ Store preferences in a `notification_preferences` table linked to the user.
 
 ## Phase 8: Permission UX
 
-Do not ask for push permission on page load — this results in high denial rates.
+Do not ask for push permission on page load: this results in high denial rates.
 
 Instead:
 1. Wait until the user completes a meaningful action (posts content, receives a message)

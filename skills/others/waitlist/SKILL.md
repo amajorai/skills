@@ -26,13 +26,13 @@ Ask the user (combine related questions):
 
 Define the components:
 
-1. **Landing page** — hero, value prop, social proof (if any), email capture form
-2. **Waitlist table** — `email`, `referral_code`, `referred_by`, `position`, `created_at`
-3. **Signup API** — validates email, creates record, sends welcome email, returns position
-4. **Referral system** — unique link per user, position bump when referrals sign up
-5. **Confirmation page** — position, referral link, share buttons
-6. **Welcome email** — confirms signup, shows position, shares referral link
-7. **Admin view** — count of signups, referral leaderboard (optional)
+1. **Landing page**: hero, value prop, social proof (if any), email capture form
+2. **Waitlist table**: `email`, `referral_code`, `referred_by`, `position`, `created_at`
+3. **Signup API**: validates email, creates record, sends welcome email, returns position
+4. **Referral system**: unique link per user, position bump when referrals sign up
+5. **Confirmation page**: position, referral link, share buttons
+6. **Welcome email**: confirms signup, shows position, shares referral link
+7. **Admin view**: count of signups, referral leaderboard (optional)
 
 
 ## Phase 3: Database
@@ -57,7 +57,7 @@ Position is assigned at insert time (use `count(*) + 1` or a sequence). If refer
 
 Create `POST /api/waitlist`:
 1. Validate email format
-2. Check for duplicate — return existing position if already signed up
+2. Check for duplicate: return existing position if already signed up
 3. Resolve referral code if `?ref=<code>` param present
 4. Insert with calculated position
 5. Send welcome email asynchronously (don't block the response)
@@ -85,7 +85,7 @@ After signup, show a confirmation state:
 
 Send immediately after signup:
 
-- Subject: "You're on the list — here's your spot"
+- Subject: "You're on the list: here's your spot"
 - Position in the waitlist
 - Referral link with call to action
 - What to expect (launch timeline, what early access means)
@@ -97,7 +97,7 @@ Send immediately after signup:
 When a referred user signs up:
 1. Look up the referrer by `referral_code`
 2. Decrease the referrer's position by 1 (move up) for each referral
-3. Send the referrer a "you moved up!" email (optional — set a threshold like every 5 referrals)
+3. Send the referrer a "you moved up!" email (optional: set a threshold like every 5 referrals)
 
 Cap position at 1 to prevent going to 0 or negative.
 
@@ -106,7 +106,7 @@ Cap position at 1 to prevent going to 0 or negative.
 
 - [ ] Signup form submits and shows confirmation with position
 - [ ] Duplicate emails return the existing position (no error)
-- [ ] Referral link works — signing up via it bumps the referrer
+- [ ] Referral link works: signing up via it bumps the referrer
 - [ ] Welcome email arrives within 30 seconds
 - [ ] Share buttons pre-populate correct copy
 - [ ] Mobile layout looks correct

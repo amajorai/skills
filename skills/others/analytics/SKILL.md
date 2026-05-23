@@ -31,11 +31,11 @@ Before writing any code, define events to track. Structure:
 ```
 
 Identify:
-1. **Lifecycle events** — signed_up, activated, churned, reactivated
-2. **Core product actions** — the 3–5 actions that define value delivery
-3. **Funnel events** — each step a user takes from landing to activation
-4. **Revenue events** — trial_started, plan_upgraded, plan_cancelled
-5. **Error events** — payment_failed, auth_error, onboarding_abandoned
+1. **Lifecycle events**: signed_up, activated, churned, reactivated
+2. **Core product actions**: the 3–5 actions that define value delivery
+3. **Funnel events**: each step a user takes from landing to activation
+4. **Revenue events**: trial_started, plan_upgraded, plan_cancelled
+5. **Error events**: payment_failed, auth_error, onboarding_abandoned
 
 Confirm the taxonomy with the user before implementing. Over-tracking is as bad as under-tracking.
 
@@ -81,14 +81,14 @@ For each event in the taxonomy:
 3. Use server-side events for revenue and auth events (not spoofable)
 4. Use client-side events only for UI interactions (button clicks, modal opens)
 
-Identify events and add them throughout the codebase — do not leave stubs.
+Identify events and add them throughout the codebase: do not leave stubs.
 
 
 ## Phase 6: Dashboards
 
 Set up a minimum viable dashboard:
 
-1. **Activation funnel** — steps from signup to first core action
+1. **Activation funnel**: steps from signup to first core action
 2. **Daily/weekly active users**
 3. **Revenue events** (if applicable)
 4. **Top drop-off points**

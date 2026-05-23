@@ -1,6 +1,6 @@
 ---
 name: agent-quality
-description: Set up quality tools designed specifically for AI-generated code — react-doctor (health scoring), react-scan (re-render detection), react-grab (element context capture), expect (browser testing from git diffs), and agentation (UI annotation for agents). Interviews the user to install only what's relevant.
+description: Set up quality tools designed specifically for AI-generated code: react-doctor (health scoring), react-scan (re-render detection), react-grab (element context capture), expect (browser testing from git diffs), and agentation (UI annotation for agents). Interviews the user to install only what's relevant.
 argument-hint: <leave blank to start the interview>
 ---
 
@@ -19,9 +19,9 @@ Present the tools and ask the user which to set up. Show this summary first:
 | Tool | What it does | Best for |
 |------|-------------|----------|
 | **react-doctor** | Scans React code and gives a health score (0–100) with diagnostics across performance, architecture, security, and a11y | React / Next.js / React Native projects |
-| **react-scan** | Highlights components causing unnecessary re-renders in real time — no code changes needed | Any React app with performance issues |
+| **react-scan** | Highlights components causing unnecessary re-renders in real time: no code changes needed | Any React app with performance issues |
 | **react-grab** | Press ⌘C / Ctrl+C over any UI element to copy its component name, file path, and HTML to clipboard | Giving an agent precise UI element context |
-| **expect** | Reads your git diff, generates a test plan, and runs it in a real browser with Playwright — no test scripts to maintain | Any web app with a UI |
+| **expect** | Reads your git diff, generates a test plan, and runs it in a real browser with Playwright: no test scripts to maintain | Any web app with a UI |
 | **agentation** | Desktop app that annotates UI elements with CSS selectors, component paths, and file locations for agents | Detailed UI feedback workflows |
 | **dev3000** | AI-powered debugging and dev monitoring from Vercel Labs | Vercel / Next.js projects |
 
@@ -99,7 +99,7 @@ Run `npx react-doctor@latest` and confirm:
 
 ### What it catches
 
-Unnecessary re-renders caused by inline functions, inline objects, and missing memoization. Highlights offending components directly in the browser with a visual overlay — no code changes needed to start seeing problems.
+Unnecessary re-renders caused by inline functions, inline objects, and missing memoization. Highlights offending components directly in the browser with a visual overlay: no code changes needed to start seeing problems.
 
 ### Install & run
 
@@ -122,7 +122,7 @@ if (typeof window !== 'undefined') scan({ enabled: true })
 
 ### Use
 
-Open the app in the browser — a floating toolbar appears in the corner. Components that re-render unnecessarily are highlighted in real time. Click a highlighted component to see why it re-rendered.
+Open the app in the browser: a floating toolbar appears in the corner. Components that re-render unnecessarily are highlighted in real time. Click a highlighted component to see why it re-rendered.
 
 **Common fixes react-scan surfaces:**
 - Inline functions as props: `onClick={() => ...}` → `useCallback`
@@ -156,7 +156,7 @@ Hover over any element in the browser and press **⌘C** (Mac) or **Ctrl+C** (Wi
 - Source file path and line number
 - HTML source
 
-Paste directly into Claude Code instead of describing the element — gives the agent the exact location without guessing.
+Paste directly into Claude Code instead of describing the element: gives the agent the exact location without guessing.
 
 ### Install
 
@@ -179,10 +179,10 @@ Options: activation key, toggle vs. hold mode, context line count.
 2. Open the app in the browser
 3. Hover over any UI element
 4. Press ⌘C / Ctrl+C
-5. Paste into Claude Code — the agent receives component name, file path, and HTML
+5. Paste into Claude Code: the agent receives component name, file path, and HTML
 
 Instead of: *"Fix the button in the sidebar"*
-The agent receives: *"Component: `<SidebarButton>` at `src/components/sidebar/SidebarButton.tsx:42` — `<button class="sidebar-btn primary">Submit</button>`"*
+The agent receives: *"Component: `<SidebarButton>` at `src/components/sidebar/SidebarButton.tsx:42`: `<button class="sidebar-btn primary">Submit</button>`"*
 
 ### Add to CLAUDE.md
 
@@ -206,7 +206,7 @@ Paste the output here when referencing a specific UI element.
 
 ### What it does
 
-Reads your current `git diff`, generates a test plan covering the changes, and executes it in a real Playwright browser. No selectors or assertions to write — the agent figures it out from the diff.
+Reads your current `git diff`, generates a test plan covering the changes, and executes it in a real Playwright browser. No selectors or assertions to write: the agent figures it out from the diff.
 
 Catches: broken hover states, missing links, dead buttons, performance regressions (LCP, animation frames), CSRF issues, missing metadata.
 
@@ -219,7 +219,7 @@ npm install -g expect-cli
 ### Run
 
 ```bash
-# Basic run — reads git diff, asks for confirmation, runs in browser:
+# Basic run: reads git diff, asks for confirmation, runs in browser:
 /expect
 
 # Skip confirmation:
@@ -276,7 +276,7 @@ This replaces vague instructions like "fix the blue button" with precise, action
 
 ### Install
 
-Download from [agentation.com](https://www.agentation.com/) — free for individual and internal team use.
+Download from [agentation.com](https://www.agentation.com/): free for individual and internal team use.
 
 ### Basic workflow
 
@@ -286,7 +286,7 @@ Download from [agentation.com](https://www.agentation.com/) — free for individ
 4. Click to annotate with feedback and priority
 5. Copy the generated markdown and paste into Claude Code
 
-### MCP integration (optional — real-time sync)
+### MCP integration (optional: real-time sync)
 
 If the user wants MCP integration, add to `.claude/settings.json`:
 
@@ -301,14 +301,14 @@ If the user wants MCP integration, add to `.claude/settings.json`:
 }
 ```
 
-With MCP enabled, Claude Code receives annotations in real time and can ask clarifying questions about UI feedback — turning it into a two-way conversation rather than one-directional input.
+With MCP enabled, Claude Code receives annotations in real time and can ask clarifying questions about UI feedback: turning it into a two-way conversation rather than one-directional input.
 
 ### Add to CLAUDE.md
 
 ```markdown
 ## UI Feedback
 Use Agentation to annotate UI issues. Export the markdown and paste it here.
-Annotations include CSS selectors and component paths — use them to find the exact code to change.
+Annotations include CSS selectors and component paths: use them to find the exact code to change.
 ```
 
 ### Verify
@@ -329,7 +329,7 @@ AI-powered debugging and development monitoring from Vercel Labs. Designed for N
 
 ### Install
 
-Visit [dev3000.ai](https://dev3000.ai/) for current installation instructions — the setup flow is project-specific.
+Visit [dev3000.ai](https://dev3000.ai/) for current installation instructions: the setup flow is project-specific.
 
 ### Recommended for
 
@@ -349,12 +349,12 @@ Run `npx react-doctor@latest` after making React changes to check the health sco
 Target: score ≥ 75. Use `--diff origin/main` on PRs to scan only changed files.
 
 ### react-scan (if installed)
-Open the app in the browser — the toolbar shows re-render highlights in real time.
+Open the app in the browser: the toolbar shows re-render highlights in real time.
 Only optimize components that react-scan confirms are actually re-rendering unnecessarily.
 
 ### react-grab (if installed)
 Hover over any UI element and press ⌘C / Ctrl+C to copy its component name, file path, and HTML.
-Paste the output here when referencing a specific UI element — don't describe it vaguely.
+Paste the output here when referencing a specific UI element: don't describe it vaguely.
 
 ### expect (if installed)
 Run `/expect` after any UI change to verify in a real browser.
@@ -362,7 +362,7 @@ Use `/expect -m "<area>"` to focus on a specific flow.
 
 ### agentation (if installed)
 For UI feedback, use Agentation to annotate elements and paste the export here.
-Annotations include CSS selectors and file paths — use them directly.
+Annotations include CSS selectors and file paths: use them directly.
 ```
 
 

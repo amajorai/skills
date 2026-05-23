@@ -139,7 +139,7 @@ Common findings and fixes:
 |---------|-----|
 | P95 spikes at N users | Add database index, optimize query, add caching |
 | Connection pool exhaustion | Increase pool size, add connection pooler (PgBouncer) |
-| Memory grows during soak test | Fix memory leak — check for unbounded caches, event listeners not removed |
+| Memory grows during soak test | Fix memory leak: check for unbounded caches, event listeners not removed |
 | 5xx errors under spike | Add rate limiting, circuit breaker, or queue for expensive operations |
 | Slow 3rd-party calls | Add timeout, cache response, or make async |
 

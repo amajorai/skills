@@ -43,20 +43,20 @@ Each subagent returns: specific violations with file locations and WCAG criteria
 
 Classify all findings:
 
-- **Critical (P0)**: Users with disabilities cannot complete core tasks — fix before launch
+- **Critical (P0)**: Users with disabilities cannot complete core tasks: fix before launch
   - Form fields without labels
   - Images without alt text (if content-bearing)
   - Keyboard traps
   - Missing page `<title>`
-- **Serious (P1)**: Significant barriers — fix in first sprint
+- **Serious (P1)**: Significant barriers: fix in first sprint
   - Contrast failures on body text
   - Missing focus indicators
   - Interactive elements not keyboard accessible
-- **Moderate (P2)**: Inconvenient but workaround exists — fix in first month
+- **Moderate (P2)**: Inconvenient but workaround exists: fix in first month
   - Missing skip navigation link
   - Inconsistent focus order
   - Missing ARIA labels on icon buttons
-- **Minor (P3)**: Best practice improvements — backlog
+- **Minor (P3)**: Best practice improvements: backlog
 
 Fix all P0 and P1 findings. Present P2 and P3 for user decision.
 

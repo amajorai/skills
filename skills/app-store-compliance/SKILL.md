@@ -6,7 +6,7 @@ argument-hint: [app name and brief description, or paste rejection reason]
 
 # App Store & Play Store Compliance Audit
 
-You are auditing an app against Apple App Store and Google Play Store review policies. Work through each phase in order. Fetch current guidelines before auditing — policies change frequently and your training data may be stale.
+You are auditing an app against Apple App Store and Google Play Store review policies. Work through each phase in order. Fetch current guidelines before auditing: policies change frequently and your training data may be stale.
 
 **App:** {{args}}
 
@@ -97,7 +97,7 @@ Ask all questions in a single message. Tell the user: detailed answers prevent f
 - Does the app require an account to access any core functionality?
 - If account required: can users sign in with Apple (iOS) / sign in with Google (Android)?
 - Does the app have a working demo mode or test account you can provide to reviewers?
-- What is the reviewer login / demo account? (do not share real user data — provide a sandboxed test account)
+- What is the reviewer login / demo account? (do not share real user data: provide a sandboxed test account)
 
 Do not proceed to Phase 3 until all Phase 2 questions are answered.
 
@@ -105,10 +105,10 @@ Do not proceed to Phase 3 until all Phase 2 questions are answered.
 ## Phase 3: Apple App Store Audit
 
 Work through each guideline category. For each item, mark as:
-- PASS — compliant based on the information provided
-- FAIL — clear violation that will cause rejection
-- RISK — potential issue that needs attention or clarification
-- N/A — not applicable to this app
+- PASS: compliant based on the information provided
+- FAIL: clear violation that will cause rejection
+- RISK: potential issue that needs attention or clarification
+- N/A: not applicable to this app
 
 ### 3.1 Safety
 
@@ -127,12 +127,12 @@ Work through each guideline category. For each item, mark as:
 
 | Check | Status | Notes |
 |---|---|---|
-| App is complete — no placeholder content, broken links, dummy data in production build | | |
+| App is complete: no placeholder content, broken links, dummy data in production build | | |
 | App performs advertised function on the target device and iOS version | | |
 | App does not use excessive battery, storage, or network bandwidth | | |
 | App does not crash or display obvious technical problems | | |
 | App provides reviewer credentials / demo mode for gated content | | |
-| App has sufficient lasting value — not a single use or trivially simple app | | |
+| App has sufficient lasting value: not a single use or trivially simple app | | |
 | App is not a duplicate of another app from the same developer (spam) | | |
 | App name, keywords, and description accurately reflect the app's content and features | | |
 | Screenshots and preview video accurately reflect the app's actual UI | | |
@@ -153,14 +153,14 @@ Work through each guideline category. For each item, mark as:
 | NFT apps do not enable purchasing NFTs with IAP; may allow viewing/browsing | | |
 | Physical goods and services (e.g., Uber, Amazon) may use their own payment systems | | |
 | Freemium apps make it clear which features are free vs. paid before download | | |
-| "Reader" apps (Netflix, Spotify) may omit IAP if they only access previously purchased content — but cannot link to sign-up | | |
+| "Reader" apps (Netflix, Spotify) may omit IAP if they only access previously purchased content: but cannot link to sign-up | | |
 | Apps using EntitlementLink / Account Deletion compliance: if app allows account creation, it must also allow account deletion | | |
 
 ### 3.4 Design
 
 | Check | Status | Notes |
 |---|---|---|
-| App follows Apple Human Interface Guidelines — does not mimic iOS system UI deceptively | | |
+| App follows Apple Human Interface Guidelines: does not mimic iOS system UI deceptively | | |
 | App does not use custom keyboard extensions to track keystrokes without disclosure | | |
 | Apple Sign In offered if app supports any third-party sign-in (Google, Facebook, etc.) | | |
 | App does not use Push Notifications for advertising or promotions without user opt-in | | |
@@ -184,7 +184,7 @@ Work through each guideline category. For each item, mark as:
 | SDK Privacy Manifests included for all third-party SDKs that require them | | |
 | App does not collect device fingerprinting data to uniquely identify devices | | |
 | App does not enable user profiling without explicit consent | | |
-| App does not violate export compliance laws (encryption export) — declare encryption use in App Store Connect | | |
+| App does not violate export compliance laws (encryption export): declare encryption use in App Store Connect | | |
 | App contains only content the developer has rights to use | | |
 | App does not defame, stalk, bully, or harass real people | | |
 | Apps with mature content use correct age rating in App Store Connect | | |
@@ -234,7 +234,7 @@ Apply only the sections relevant to this app based on Phase 2 answers:
 |---|---|---|
 | No sexual content beyond what policy permits for designated adult apps | | |
 | No content that sexualizes minors in any form | | |
-| No gratuitous violence — violence must have redemptive purpose | | |
+| No gratuitous violence: violence must have redemptive purpose | | |
 | No content that incites hatred based on protected characteristics | | |
 | No content facilitating illegal activities | | |
 | No bullying, harassment, or threatening content | | |
@@ -250,7 +250,7 @@ Apply only the sections relevant to this app based on Phase 2 answers:
 | Data collected is limited to what is necessary for disclosed purposes | | |
 | Personal and sensitive user data handled securely (HTTPS) | | |
 | Permissions requested are necessary for core functionality | | |
-| Permissions not requested in bulk at app launch — requested contextually at time of need | | |
+| Permissions not requested in bulk at app launch: requested contextually at time of need | | |
 | App does not silently transmit user data to third parties | | |
 | If app targets children (Families Policy): no behaviorally targeted ads, no collection beyond what policy permits, SDKs are Families-certified | | |
 
@@ -263,8 +263,8 @@ Apply only the sections relevant to this app based on Phase 2 answers:
 | App does not use misleading app icons, titles, or descriptions | | |
 | App does not artificially inflate installs, ratings, or reviews | | |
 | App does not use unauthorized use of trademarked or copyrighted material | | |
-| App discloses if it contains ads — "Contains ads" label in Play Console if applicable | | |
-| Ads within app comply with Google Play Ads Policy — no deceptive ads, no ads that interfere with navigation | | |
+| App discloses if it contains ads: "Contains ads" label in Play Console if applicable | | |
+| Ads within app comply with Google Play Ads Policy: no deceptive ads, no ads that interfere with navigation | | |
 
 ### 4.4 Monetization & Payments
 
@@ -297,7 +297,7 @@ Apply only the sections relevant to this app based on Phase 2 answers:
 | App does not use non-SDK (private) APIs | | |
 | App does not download executable code after installation | | |
 | App has a functional back button behavior on Android | | |
-| Notification permission requested contextually (not at first launch) — Android 13+ | | |
+| Notification permission requested contextually (not at first launch): Android 13+ | | |
 | If using Android permissions: QUERY_ALL_PACKAGES only if core functionality requires (else use explicit package names) | | |
 | VPN Service apps: must be the VPN's primary app, not bundled with unrelated apps | | |
 | Accessibility Services: declared only if app is genuinely an accessibility tool | | |
@@ -339,13 +339,13 @@ Generate a structured report saved to `/app-store-compliance-report.md`.
 ## Apple App Store: [PASS / CONDITIONAL / FAIL]
 
 ### Critical Issues (will cause rejection)
-[Numbered list — empty if none]
+[Numbered list: empty if none]
 
 ### Risks (may cause rejection or future policy action)
-[Numbered list — empty if none]
+[Numbered list: empty if none]
 
 ### Recommendations (best practice, not blocking)
-[Numbered list — empty if none]
+[Numbered list: empty if none]
 
 ### Checklist Summary
 | Category | Status | Issues |
@@ -360,13 +360,13 @@ Generate a structured report saved to `/app-store-compliance-report.md`.
 ## Google Play Store: [PASS / CONDITIONAL / FAIL]
 
 ### Critical Issues (will cause rejection or removal)
-[Numbered list — empty if none]
+[Numbered list: empty if none]
 
 ### Risks (may trigger policy warning or future removal)
-[Numbered list — empty if none]
+[Numbered list: empty if none]
 
 ### Recommendations
-[Numbered list — empty if none]
+[Numbered list: empty if none]
 
 ### Checklist Summary
 | Category | Status | Issues |
@@ -417,7 +417,7 @@ List every metadata field the user still needs to fill in:
 - [ ] Remove any test/debug code, console logs, and placeholder content
 - [ ] Check app binary does not include unused permission strings (iOS: remove from Info.plist)
 - [ ] Verify Privacy Manifest and SDK manifests are included (iOS 17+)
-- [ ] Run through the app as a first-time user — onboarding must be clear without external context
+- [ ] Run through the app as a first-time user: onboarding must be clear without external context
 
 
 ## Resources
@@ -442,7 +442,7 @@ If the user provided a rejection reason in Phase 2, add a dedicated section to t
 
 **Appeal message template:**
 ```
-Subject: Appeal — [App Name] — [Rejection Reason Code]
+Subject: Appeal: [App Name]: [Rejection Reason Code]
 
 Dear App Review Team,
 
@@ -465,7 +465,7 @@ Thank you for your time and consideration.
 
 ## Ongoing Compliance Note
 
-App store policies update frequently — Apple typically updates guidelines in the fall alongside iOS releases; Google updates Play policies on a rolling basis. Recommended practice:
+App store policies update frequently: Apple typically updates guidelines in the fall alongside iOS releases; Google updates Play policies on a rolling basis. Recommended practice:
 - Subscribe to Apple Developer news and Google Play policy update emails
 - Re-run this audit before every major version submission
 - Watch for policy sunset dates when using deprecated APIs or SDKs
