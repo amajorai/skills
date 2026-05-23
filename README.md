@@ -1,4 +1,4 @@
-# A Major Skills
+# ⚡ A Major Skills
 
 Simple, minimal, lean skills that people don't think about when shipping apps. Things we use at [A Major](https://amajor.ai).
 
