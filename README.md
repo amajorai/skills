@@ -79,6 +79,22 @@ Install a single skill:
 npx skills add amajorai/skills/skills/ship
 ```
 
+### Auto-Update
+
+Every skill runs `npx skills update <name> -y` at the start of each invocation. If a newer version is available it updates itself, then stops and asks you to re-run so the new version takes effect.
+
+To opt out, add `--no-update` to your command:
+
+```
+/lighthouse https://mysite.com --no-update
+```
+
+Or disable it project-wide in your CLAUDE.md:
+
+```
+SKILLS_AUTO_UPDATE: false
+```
+
 ### Claude Code plugin
 
 ```
