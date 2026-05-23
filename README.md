@@ -26,7 +26,6 @@ npx skills add amajorai/vibe.md
 
 | Skill | What it does |
 |-------|-------------|
-| [`ship-fast`](skills/ship-fast/SKILL.md) | Quick implementation for simple features that don't need the full pipeline. No security review, edge cases, or simplify pass |
 | [`edge-cases`](skills/edge-cases/SKILL.md) | Discover and harden edge cases across 8 categories using parallel subagents |
 | [`e2e`](skills/e2e/SKILL.md) | End-to-end test authoring and execution. Discovers flows, writes Playwright (web) or Maestro (iOS/Android/React Native/Flutter) tests, fixes failures |
 | [`icons`](skills/icons/SKILL.md) | Generate app icons, favicons, and splash screens for Tauri, PWA, Capacitor, Expo, and Electron |
