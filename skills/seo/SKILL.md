@@ -90,14 +90,14 @@ Present everything in one message. Tailor the checklist based on what you detect
 > **A. Meta tags & Open Graph**
 > *(Flag if missing or incomplete)*
 > - [ ] Add/fix `<title>` tags: unique, ≤60 chars, keyword-first
-> - [ ] Add/fix `<meta name="description">`: 120–160 chars, CTA-oriented
+> - [ ] Add/fix `<meta name="description">` - 120–160 chars, CTA-oriented
 > - [ ] Add/fix Open Graph (`og:title`, `og:description`, `og:image`, `og:url`)
 > - [ ] Add Twitter Card tags (`twitter:card`, `twitter:title`, `twitter:image`)
 > → If yes: **What is the default OG image URL?** (e.g. `/og-image.png`)
 >
 > **B. Sitemap**
 > *(Flag if not found)*
-> - [ ] Generate `sitemap.xml`: lists all indexable URLs
+> - [ ] Generate `sitemap.xml` - lists all indexable URLs
 > → For dynamic sites: generate programmatically from routes/pages
 > → For static sites: use a build-time plugin or script
 > - [ ] Submit sitemap URL to Google Search Console (provide instructions)
@@ -112,13 +112,13 @@ Present everything in one message. Tailor the checklist based on what you detect
 >
 > **E. Structured Data (JSON-LD)**
 > Select schema types relevant to your site:
-> - [ ] `WebSite`: site name, search action
-> - [ ] `Organization` / `Person`: brand identity, social profiles
-> - [ ] `Article` / `BlogPosting`: for blog posts
-> - [ ] `Product`: for e-commerce (name, price, availability, reviews)
-> - [ ] `BreadcrumbList`: breadcrumb navigation
-> - [ ] `FAQPage`: FAQ sections
-> - [ ] `LocalBusiness`: address, hours, phone (local SEO)
+> - [ ] `WebSite` - site name, search action
+> - [ ] `Organization` / `Person` - brand identity, social profiles
+> - [ ] `Article` / `BlogPosting` - for blog posts
+> - [ ] `Product` - for e-commerce (name, price, availability, reviews)
+> - [ ] `BreadcrumbList` - breadcrumb navigation
+> - [ ] `FAQPage` - FAQ sections
+> - [ ] `LocalBusiness` - address, hours, phone (local SEO)
 >
 > **F. Image Optimization**
 > - [ ] Add missing `alt` attributes (descriptive, keyword-relevant)
@@ -582,8 +582,8 @@ Fix: ensure each page has exactly one `<h1>` that contains the primary keyword. 
 ```
 
 Common candidates:
-- `/thank-you`, `/order-confirmation`: no search value, creates duplicate intent
-- `/login`, `/signup`, `/dashboard`: gated content
+- `/thank-you`, `/order-confirmation` - no search value, creates duplicate intent
+- `/login`, `/signup`, `/dashboard` - gated content
 - Paginated pages beyond page 2 (`?page=3`, etc.): thin content
 - Tag/category archive pages with little unique content
 

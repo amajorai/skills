@@ -111,7 +111,7 @@ Present the plan and confirm before implementing.
 1. Install: `bun add react-native-purchases` (or native pod/gradle)
 2. Configure with `Purchases.configure({ apiKey })` on app launch
 3. Identify user: `Purchases.logIn(userId)` after auth
-4. Fetch offerings: `Purchases.getOfferings()`: display in paywall UI
+4. Fetch offerings with `Purchases.getOfferings()` and display in paywall UI
 5. Purchase: `Purchases.purchasePackage(package)`
 6. Check entitlements: `customerInfo.entitlements.active['pro']` to gate features
 7. Set up RevenueCat webhooks to mirror subscription state to your backend (optional but recommended)

@@ -122,7 +122,7 @@ Present the scenario list to the user and confirm scope before writing any tests
    - assertVisible: "Welcome back"
    ```
 4. Key commands: `tapOn`, `inputText`, `scrollUntilVisible`, `assertVisible`, `assertNotVisible`, `back`, `takeScreenshot`, `swipe`
-5. For environment-specific values use `--env`: `${APP_URL}`, `${TEST_USER}`
+5. For environment-specific values, pass them with `--env`: `${APP_URL}`, `${TEST_USER}`
 6. Assert **visible text or element presence**: never internal state
 
 **Rules:**

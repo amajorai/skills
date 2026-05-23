@@ -58,10 +58,10 @@ Trigger trial start at the right moment (signup or first meaningful action):
 ## Phase 5: Access Gating
 
 Create a `getAccessLevel(user)` utility that returns one of:
-- `'full'`: active paid subscriber
-- `'trial'`: within trial period
-- `'expired'`: trial ended, no payment
-- `'free'`: on free plan (if applicable)
+- `'full'` - active paid subscriber
+- `'trial'` - within trial period
+- `'expired'` - trial ended, no payment
+- `'free'` - on free plan (if applicable)
 
 The middleware/guard checks this, not raw dates:
 

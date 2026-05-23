@@ -255,4 +255,4 @@ Report back:
 | Image not square | Crop to square before running (ask user to provide a square image) |
 | SVG source with `pwa-asset-generator` | Add `--type png` flag |
 | Expo: icons look blurry | Source image must be at least 1024×1024px |
-| `@capacitor/assets`: "resources/icon.png not found" | Ensure you copied the source image to `resources/icon.png` |
+| `@capacitor/assets` - "resources/icon.png not found" | Ensure you copied the source image to `resources/icon.png` |

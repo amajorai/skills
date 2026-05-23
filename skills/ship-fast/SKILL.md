@@ -1,6 +1,6 @@
 ---
 name: ship-fast
-description: Quick implementation workflow for simple features and fixes that don't need the full pipeline. Skips security review, edge case hardening, and simplification: explore, plan, implement, verify and done.
+description: Quick implementation workflow for simple features and fixes that don't need the full pipeline. Skips security review, edge case hardening, and simplification. Four phases only: explore, plan, implement, verify.
 argument-hint: <task description>
 ---
 

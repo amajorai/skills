@@ -62,7 +62,7 @@ bun add better-auth
 
 Reference the Better Auth MCP and docs at https://better-auth.com/docs throughout.
 
-1. Create `lib/auth.ts`: configure providers, session strategy, database adapter
+1. Create `lib/auth.ts` - configure providers, session strategy, database adapter
 2. Create the catch-all API route: `app/api/auth/[...all]/route.ts`
 3. Run schema generation: `bunx better-auth generate` and apply migration
 4. Create auth client: `lib/auth-client.ts` for frontend
@@ -83,8 +83,8 @@ Reference the Better Auth MCP and docs at https://better-auth.com/docs throughou
 
 ### Auth pages
 
-1. `/login`: provider buttons, magic link input, or password form
-2. `/signup`: same as login if using OAuth/magic link; separate form if password
+1. `/login` - provider buttons, magic link input, or password form
+2. `/signup` - same as login if using OAuth/magic link; separate form if password
 3. Post-auth redirect to the intended destination (save `?next=` param)
 
 

@@ -131,9 +131,9 @@ A `CLAUDE.md` at the project root is loaded into Claude Code's context on every 
   - Example: `cat $(opensrc path hono)/src/router/trie-router/router.ts`
 
 ## Commands
-- `bun dev`: start dev server
-- `bun test`: run tests
-- `bun run db:migrate`: run migrations
+- `bun dev` - start dev server
+- `bun test` - run tests
+- `bun run db:migrate` - run migrations
 [Add the actual commands for this project]
 ```
 

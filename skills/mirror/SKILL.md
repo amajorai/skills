@@ -5,7 +5,7 @@ description: Scans all past conversation transcripts for the current project and
 
 # Mirror
 
-You are scanning the project's conversation history to find recurring patterns across sessions and distill them into durable rules. This is a deeper version of `/reflect`: it looks back at every past conversation, not just the current one.
+You are scanning the project's conversation history to find recurring patterns across sessions and distill them into durable rules. This is a deeper version of `/reflect` - it looks back at every past conversation, not just the current one.
 
 
 ## Step 1: Detect the Current Agent

@@ -184,12 +184,12 @@ await env.SEARCH_NS.create({
 ```
 
 **Tokenizer guide:**
-- `porter`: natural language prose (stems words: "running" → "run")
-- `trigram`: code search (character-level substring matching)
+- `porter` - natural language prose (stems words like "running" → "run")
+- `trigram` - code search (character-level substring matching)
 
 **Fusion methods:**
-- `rrf` (reciprocal rank fusion): balanced hybrid, best default
-- `max`: prefer whichever signal scores higher
+- `rrf` (reciprocal rank fusion) - balanced hybrid, best default
+- `max` - prefer whichever signal scores higher
 
 
 ## Phase 3: Markdown Content Negotiation

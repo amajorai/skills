@@ -57,7 +57,7 @@ For each non-essential script:
    if (consent.analytics) { posthog.init(...) }
    window.addEventListener('consent_updated', () => { if (consent.analytics) posthog.init(...) })
    ```
-2. **Third-party scripts**: Change `type="text/javascript"` to `type="text/plain"` and add `data-category="analytics"`: the consent manager activates them after consent
+2. **Third-party scripts**: Change `type="text/javascript"` to `type="text/plain"` and add `data-category="analytics"` so the consent manager can activate them after consent
 3. **Server-side tracking**: Check consent header or cookie before processing
 
 

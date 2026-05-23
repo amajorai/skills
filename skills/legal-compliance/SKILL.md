@@ -208,7 +208,7 @@ Present to the user:
 
 ## Phase 4: Document Generation
 
-Generate each selected document as a separate markdown file. Save them to a `/legal` directory in the project root. Use the exact company name, app name, contact email, and dates from the interview. Do not use placeholder text like `[INSERT NAME HERE]`: only use actual values from the interview. If a value was not provided, note it clearly with `⚠️ REQUIRED: [description of what's needed]` so the user knows what to fill in.
+Generate each selected document as a separate markdown file. Save them to a `/legal` directory in the project root. Use the exact company name, app name, contact email, and dates from the interview. Do not use placeholder text like `[INSERT NAME HERE]`. Use only actual values from the interview. If a value was not provided, note it clearly with `⚠️ REQUIRED: [description of what's needed]` so the user knows what to fill in.
 
 Set the "Last Updated" date to today's date. Generate a "Effective Date" one week from today (to give time for review).
 

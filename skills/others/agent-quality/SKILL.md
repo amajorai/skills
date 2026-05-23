@@ -182,7 +182,7 @@ Options: activation key, toggle vs. hold mode, context line count.
 5. Paste into Claude Code: the agent receives component name, file path, and HTML
 
 Instead of: *"Fix the button in the sidebar"*
-The agent receives: *"Component: `<SidebarButton>` at `src/components/sidebar/SidebarButton.tsx:42`: `<button class="sidebar-btn primary">Submit</button>`"*
+The agent receives: *"Component: `<SidebarButton>` at `src/components/sidebar/SidebarButton.tsx:42` - `<button class="sidebar-btn primary">Submit</button>`"*
 
 ### Add to CLAUDE.md
 
