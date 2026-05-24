@@ -1,12 +1,11 @@
 # ⚡ A Major Skills
 
+Simple, minimal, lean skills that people don't think about when shipping apps. Things we use at [A Major](https://amajor.ai).
+
 [![Stars](https://shieldcn.dev/github/stars/amajorai/skills.svg)](https://github.com/amajorai/skills)
 [![Forks](https://shieldcn.dev/github/forks/amajorai/skills.svg)](https://github.com/amajorai/skills)
 [![License](https://shieldcn.dev/github/license/amajorai/skills.svg)](https://github.com/amajorai/skills)
 [![Issues](https://shieldcn.dev/github/issues/amajorai/skills.svg)](https://github.com/amajorai/skills/issues)
-[![Release](https://shieldcn.dev/github/release/amajorai/skills.svg)](https://github.com/amajorai/skills/releases)
-
-Simple, minimal, lean skills that people don't think about when shipping apps. Things we use at [A Major](https://amajor.ai).
 
 ## Flagship
 
