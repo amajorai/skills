@@ -76,7 +76,7 @@ Installs all skills and automatically configures them for whichever coding agent
 Install a single skill:
 
 ```bash
-npx skills add amajorai/skills/skills/ship
+npx skills add amajorai/skills/skills/hardening
 ```
 
 ### Auto-Update
