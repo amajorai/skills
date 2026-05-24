@@ -16,7 +16,7 @@ You are writing end-to-end tests that simulate real user behavior. Work through 
 *Skip unless `{{args}}` contains `--update`, or `SKILLS_AUTO_UPDATE: true` is set in your project CLAUDE.md.*
 
 ```bash
-npx skills update e2e -y
+npx --yes skills update e2e -y 2>/dev/null || true
 ```
 
 If the skill was updated, stop here and tell the user: **"This skill was just updated. Re-run your command to use the new version."** Otherwise continue silently.
@@ -60,19 +60,19 @@ If a framework already exists, use it. If not, choose based on platform:
 1. Install: `bun add -d @playwright/test`
 2. Install browser: `bunx playwright install --with-deps chromium`
 3. Create a minimal `playwright.config.ts` following project conventions
-4. Add to `package.json`: `"test:e2e": "playwright test"`
-5. Verify: empty test suite passes
+4. Add to `package.json` scripts: `"test:e2e": "playwright test"`
+5. Verify the setup by writing one trivial passing test and running `bun run test:e2e` (running with no test files reports "No tests found" rather than success)
 
 ### Maestro (mobile / React Native / Flutter)
 
 1. Install the Maestro CLI (requires Java 17+):
    ```bash
-   curl -Ls "https://get.maestro.mobile.dev" | bash
+   curl -fsSL "https://get.maestro.mobile.dev" | bash
    ```
 2. Verify: `maestro --version`
 3. Confirm a device or emulator is available: `maestro devices`
 4. Create a `maestro/` folder at the project root for flow files
-5. Verify: `maestro test maestro/smoke.yaml` with a trivial flow passes
+5. Write a trivial smoke flow to `maestro/smoke.yaml` (launch the app and assert it opens), then verify it passes: `maestro test maestro/smoke.yaml`
 
 If a framework already exists, read its config and confirm the test directory and launch settings before proceeding.
 
@@ -161,12 +161,12 @@ Fix → run → fix → run. One failure at a time.
 ## Phase 6: Run Full Suite & Confirm
 
 **Playwright:**
-```
-bun test:e2e
+```bash
+bun run test:e2e
 ```
 
 **Maestro:**
-```
+```bash
 maestro test maestro/
 ```
 

@@ -16,7 +16,7 @@ You are running a production database migration. Safety first: data loss is not 
 *Skip unless `{{args}}` contains `--update`, or `SKILLS_AUTO_UPDATE: true` is set in your project CLAUDE.md.*
 
 ```bash
-npx skills update db-migrate -y
+npx --yes skills update db-migrate -y 2>/dev/null || true
 ```
 
 If the skill was updated, stop here and tell the user: **"This skill was just updated. Re-run your command to use the new version."** Otherwise continue silently.
@@ -50,17 +50,20 @@ Do not proceed to Phase 3 without confirming a backup exists.
 
 ## Phase 3: Dry Run
 
-Run the migration against a staging or development database that mirrors production:
+Run the migration against a staging or development database that mirrors production.
+
+Drizzle Kit has no `--dry-run` flag. To preview, generate the SQL with `bun drizzle-kit generate` and read the generated file in `drizzle/` before applying. Then apply against staging by pointing your config at the staging database:
 
 ```bash
-# Example with Drizzle
-bun drizzle-kit migrate --dry-run
+# Drizzle: generate SQL to inspect, then apply to staging
+bun drizzle-kit generate
+DATABASE_URL="$STAGING_DATABASE_URL" bun drizzle-kit migrate
 
-# Example with Prisma
-bunx prisma migrate deploy --preview-feature
+# Prisma: apply pending migrations to staging
+DATABASE_URL="$STAGING_DATABASE_URL" bunx prisma migrate deploy
 
-# Raw SQL
-psql $STAGING_DATABASE_URL < migration.sql
+# Raw SQL: review the file first, then apply
+psql "$STAGING_DATABASE_URL" < migration.sql
 ```
 
 Verify:
@@ -106,12 +109,15 @@ Before running in production:
 
 ```bash
 # Verify backup exists and is recent
-# For PostgreSQL:
-pg_dump $PRODUCTION_DATABASE_URL > backup_pre_migration_$(date +%Y%m%d_%H%M%S).sql
+# For PostgreSQL, use the custom format (-Fc) so pg_restore can read it:
+BACKUP_FILE="backup_pre_migration_$(date +%Y%m%d_%H%M%S).dump"
+pg_dump -Fc "$PRODUCTION_DATABASE_URL" -f "$BACKUP_FILE"
 
-# Verify the backup is readable
-pg_restore --list backup_pre_migration_*.sql | head -20
+# Verify the backup is readable and non-empty
+pg_restore --list "$BACKUP_FILE" | head -20
 ```
+
+(If you prefer a plain `.sql` dump, omit `-Fc`/`-f` and redirect to a `.sql` file, but then verify with `head` instead of `pg_restore`, which only reads custom/directory/tar archives.)
 
 Do not proceed without a fresh backup taken within the last hour.
 
@@ -136,10 +142,7 @@ Run the migration with monitoring:
 
 If the migration causes problems:
 
-**Rollback the schema** (if ORM supports it):
-```bash
-bun drizzle-kit migrate --rollback
-```
+**Note:** Drizzle Kit has no built-in rollback command, and `prisma migrate deploy` only rolls forward. Neither ORM auto-reverts an applied migration. You must roll back manually with the inverse SQL or by restoring from backup.
 
 **Manual rollback** (prepare this BEFORE running):
 - Write the inverse SQL before starting

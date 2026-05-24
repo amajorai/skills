@@ -16,7 +16,7 @@ You are wiring up analytics so the team can understand user behavior. Work throu
 *Skip unless `{{args}}` contains `--update`, or `SKILLS_AUTO_UPDATE: true` is set in your project CLAUDE.md.*
 
 ```bash
-npx skills update analytics -y
+npx --yes skills update analytics -y 2>/dev/null || true
 ```
 
 If the skill was updated, stop here and tell the user: **"This skill was just updated. Re-run your command to use the new version."** Otherwise continue silently.
@@ -69,7 +69,7 @@ bun add posthog-js  # frontend
 bun add posthog-node  # backend (server-side events)
 ```
 
-- Initialize with `POSTHOG_API_KEY` from env var
+- Initialize the browser SDK with the project API key and host from env vars (e.g. `POSTHOG_KEY` and `POSTHOG_HOST`; in Next.js these must be `NEXT_PUBLIC_`-prefixed to reach the client). Omitting the host is a common cause of events silently never arriving — PostHog Cloud uses `https://us.i.posthog.com` or `https://eu.i.posthog.com`.
 - Set `person_profiles: 'identified_only'` to avoid anonymous profile bloat
 - Enable session recording only if the user confirmed no PII in UI
 
@@ -77,6 +77,18 @@ bun add posthog-node  # backend (server-side events)
 
 - Add the script tag to the HTML head (no npm package needed)
 - Enable custom events via `plausible('event_name', { props: {...} })`
+
+### Mixpanel
+
+```bash
+bun add mixpanel-browser  # frontend
+bun add mixpanel          # backend (server-side events)
+```
+
+- Initialize the browser SDK with your project token from env (e.g. `MIXPANEL_TOKEN`)
+- Track events via `mixpanel.track('event_name', { ...props })`
+- Use `mixpanel.identify(userId)` to tie events to a user
+- Send revenue and auth events server-side with the `mixpanel` Node SDK (not spoofable)
 
 
 ## Phase 5: Instrument

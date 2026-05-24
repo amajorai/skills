@@ -16,7 +16,7 @@ You are optimizing a web project for search engine visibility and ranking. **Do 
 *Skip unless `{{args}}` contains `--update`, or `SKILLS_AUTO_UPDATE: true` is set in your project CLAUDE.md.*
 
 ```bash
-npx skills update seo -y
+npx --yes skills update seo -y 2>/dev/null || true
 ```
 
 If the skill was updated, stop here and tell the user: **"This skill was just updated. Re-run your command to use the new version."** Otherwise continue silently.
@@ -606,6 +606,8 @@ export const metadata: Metadata = {
 
 
 ## Phase 13: Final Verification
+
+Replace `https://example.com` below with the site's real deployed domain. The `curl` checks only work against a live/deployed URL: if the site is not deployed yet, skip them and rely on the local `grep` checks instead.
 
 ```bash
 # Sitemap accessible

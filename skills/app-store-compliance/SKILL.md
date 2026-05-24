@@ -16,7 +16,7 @@ You are auditing an app against Apple App Store and Google Play Store review pol
 *Skip unless `{{args}}` contains `--update`, or `SKILLS_AUTO_UPDATE: true` is set in your project CLAUDE.md.*
 
 ```bash
-npx skills update app-store-compliance -y
+npx --yes skills update app-store-compliance -y 2>/dev/null || true
 ```
 
 If the skill was updated, stop here and tell the user: **"This skill was just updated. Re-run your command to use the new version."** Otherwise continue silently.
@@ -331,7 +331,7 @@ Apply only the sections relevant to this app based on Phase 2 answers:
 
 ## Phase 5: Compliance Report
 
-Generate a structured report saved to `/app-store-compliance-report.md`.
+Generate a structured report saved to `app-store-compliance-report.md` in the current working directory.
 
 ### Report Structure
 

@@ -16,7 +16,7 @@ You are converting a YouTube video into a reusable Claude Code skill file. Work 
 *Skip unless `{{args}}` contains `--update`, or `SKILLS_AUTO_UPDATE: true` is set in your project CLAUDE.md.*
 
 ```bash
-npx skills update youtube-to-skill -y
+npx --yes skills update youtube-to-skill -y 2>/dev/null || true
 ```
 
 If the skill was updated, stop here and tell the user: **"This skill was just updated. Re-run your command to use the new version."** Otherwise continue silently.
@@ -35,9 +35,9 @@ Extract `VIDEO_ID` and confirm it looks valid (11 alphanumeric characters).
 
 ## Step 2: Fetch Video Metadata and Transcript
 
-Fetch the video page to extract metadata and transcript data. Try these sources in order until you have enough content:
+Use your web fetch tool to retrieve the pages below (replace `VIDEO_ID` with the ID from Step 1). Gather both metadata and transcript content:
 
-**Source A: YouTube page (metadata + title + description):**
+**Source A: YouTube page (metadata: title + description + channel):**
 Fetch `https://www.youtube.com/watch?v=VIDEO_ID`
 
 Extract from the HTML:
@@ -46,16 +46,18 @@ Extract from the HTML:
 - Channel name
 - Duration
 
-**Source B: Transcript (try this first for content):**
+**Source B: Transcript (primary content source):**
 Fetch `https://youtubetranscript.com/?server_vid2=VIDEO_ID`
 
-If Source B returns a transcript, use it as the primary content source. If it fails or returns no content, rely on Source A's description and title, and note that the transcript was unavailable.
+If Source B returns a transcript, use it as the primary content source. If it fails or returns no content, try Source C.
 
 **Source C: Fallback YouTube transcript API:**
 If Source B fails, try fetching:
 `https://www.youtube.com/api/timedtext?v=VIDEO_ID&lang=en&fmt=json3`
 
 Parse the `events[].segs[].utf8` fields to reconstruct the full transcript text.
+
+If both Source B and Source C fail, rely on Source A's title and description only, and note that the transcript was unavailable.
 
 
 ## Step 3: Understand the Content
@@ -89,12 +91,14 @@ Before writing, decide:
 
 ## Step 5: Write the Skill File
 
-Write the skill to `.claude/skills/<name>.md` using this structure:
+Write the skill to `.claude/skills/<name>.md` using this structure. The frontmatter at the top must be enclosed in `---` delimiters (omit the `argument-hint` line entirely if the skill takes no arguments):
 
 ```markdown
+---
 name: <kebab-case-name>
 description: <One sentence: what it does and when to use it. Include key tech names so the trigger is precise.>
 argument-hint: <optional: what args the user should pass>
+---
 
 # <name>: <Human-Readable Title>
 

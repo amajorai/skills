@@ -16,7 +16,7 @@ You are implementing dynamic OG image generation via an edge function. No extern
 *Skip unless `{{args}}` contains `--update`, or `SKILLS_AUTO_UPDATE: true` is set in your project CLAUDE.md.*
 
 ```bash
-npx skills update og-images -y
+npx --yes skills update og-images -y 2>/dev/null || true
 ```
 
 If the skill was updated, stop here and tell the user: **"This skill was just updated. Re-run your command to use the new version."** Otherwise continue silently.
@@ -72,9 +72,9 @@ app/og/route.tsx  (or pages/api/og.tsx for Pages Router)
 bun add satori @resvg/resvg-js
 ```
 
-**Cloudflare Workers**: use `@cloudflare/workers-og` (built on Satori):
+**Cloudflare Workers**: use `workers-og` (built on Satori, designed for the Workers edge runtime):
 ```bash
-bun add @cloudflare/workers-og
+bun add workers-og
 ```
 
 ### Implementation steps
@@ -100,7 +100,7 @@ For dynamic routes (blog posts, user profiles), populate params from the page's 
 
 ## Phase 5: Verify
 
-Test with real tools: not just looking at the HTML source:
+Test with real tools, not just by looking at the HTML source:
 
 - [ ] Open [opengraph.xyz](https://www.opengraph.xyz) and enter the URL: confirm image renders
 - [ ] Twitter card validator: paste URL, confirm large image appears

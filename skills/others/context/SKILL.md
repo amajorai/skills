@@ -16,7 +16,7 @@ You are setting up the context infrastructure that makes an AI coding agent accu
 *Skip unless `{{args}}` contains `--update`, or `SKILLS_AUTO_UPDATE: true` is set in your project CLAUDE.md.*
 
 ```bash
-npx skills update context -y
+npx --yes skills update context -y 2>/dev/null || true
 ```
 
 If the skill was updated, stop here and tell the user: **"This skill was just updated. Re-run your command to use the new version."** Otherwise continue silently.
@@ -39,9 +39,11 @@ Context7 is an MCP server that pulls up-to-date, version-specific library docume
 
 **Option A: Automatic (recommended):**
 ```bash
-npx ctx7 setup
-# or explicitly for Claude Code:
-npx ctx7 setup --claude
+# Run the Context7 installer and select Claude Code:
+npx @upstash/context7-mcp@latest init --claude
+
+# Or register it directly with the Claude Code CLI (user-level):
+claude mcp add --scope user context7 -- npx -y @upstash/context7-mcp
 ```
 
 **Option B: Manual config:**

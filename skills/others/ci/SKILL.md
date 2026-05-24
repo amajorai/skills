@@ -16,7 +16,7 @@ You are setting up a complete CI/CD pipeline with GitHub Actions. Work through e
 *Skip unless `{{args}}` contains `--update`, or `SKILLS_AUTO_UPDATE: true` is set in your project CLAUDE.md.*
 
 ```bash
-npx skills update ci -y
+npx --yes skills update ci -y 2>/dev/null || true
 ```
 
 If the skill was updated, stop here and tell the user: **"This skill was just updated. Re-run your command to use the new version."** Otherwise continue silently.
@@ -71,9 +71,11 @@ jobs:
       - run: bun run build       # always
 ```
 
+**Important:** Only include the steps whose scripts actually exist in `package.json`. `bun run <script>` exits non-zero ("Script not found") if the script is missing, which would fail CI. From the Phase 1 exploration, delete the steps for any script the project does not define (do not rely on the `# if exists` comments to skip them).
+
 Rules:
 - Use `--frozen-lockfile` so lockfile drift fails CI
-- Cache `~/.bun/install/cache` with a cache key on `bun.lockb`
+- Cache `~/.bun/install/cache` keyed on the lockfile, e.g. `hashFiles('**/bun.lock', '**/bun.lockb')` (Bun 1.2+ uses the text lockfile `bun.lock`; older projects use the binary `bun.lockb`)
 - Fail fast: if build fails, no point running deploy
 
 
@@ -103,27 +105,32 @@ Post the preview URL as a PR comment using `peter-evans/create-or-update-comment
 
 ## Phase 5: Production Deploy (on merge to main)
 
-Create `.github/workflows/deploy.yml`:
+Create `.github/workflows/deploy.yml`. To guarantee the deploy only runs after CI passes, gate it on the CI workflow completing successfully via `workflow_run` (note: `needs:` only chains jobs within the *same* file, so it cannot reference the `check` job in `ci.yml`):
 
 ```yaml
 name: Deploy
 on:
-  push:
+  workflow_run:
+    workflows: ["CI"]        # must match the `name:` in ci.yml
+    types: [completed]
     branches: [main]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    needs: []   # reference the check job if in same file
+    # Only deploy if the CI run succeeded
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
       - run: bun install --frozen-lockfile
       - run: bun run build
       # Platform-specific deploy step here
 ```
 
-Deploy only runs when checks pass. Never deploy a broken build.
+Alternatively, keep the deploy job in the same `ci.yml` file and use `needs: check` so it runs only after the `check` job succeeds. Either way: never deploy a broken build.
 
 
 ## Phase 6: Secrets Setup

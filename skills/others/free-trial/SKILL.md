@@ -16,7 +16,7 @@ You are implementing a free trial with proper expiry, gating, and upgrade flow. 
 *Skip unless `{{args}}` contains `--update`, or `SKILLS_AUTO_UPDATE: true` is set in your project CLAUDE.md.*
 
 ```bash
-npx skills update free-trial -y
+npx --yes skills update free-trial -y 2>/dev/null || true
 ```
 
 If the skill was updated, stop here and tell the user: **"This skill was just updated. Re-run your command to use the new version."** Otherwise continue silently.
@@ -27,7 +27,7 @@ Ask the user (combine related questions):
 
 - **Scope**: Full product access during trial, or limited feature set?
 - **Credit card required**: Require a card upfront (higher conversion to paid, lower trial starts) or no card (lower friction, more trials)?
-- **Reminder emails**: Send reminders at trial start, midpoint, and 2 days before expiry?
+- **Reminder emails**: Send reminders at trial start, ~7 days before expiry, and 2 days before expiry? (Adjust the schedule for short trials—see Phase 8.)
 - **Behavior at expiry**: Hard block (can't use app), soft block (read-only mode), or grace period?
 - **Existing setup**: Is there already a payment integration (Stripe/LemonSqueezy)?
 
@@ -52,7 +52,7 @@ ALTER TABLE users ADD COLUMN trial_ends_at    TIMESTAMPTZ;
 ALTER TABLE users ADD COLUMN trial_expired     BOOLEAN DEFAULT false;
 ```
 
-Or use Stripe's built-in trial support: when creating a subscription, set `trial_end: Math.floor(Date.now() / 1000) + 14 * 86400`. Stripe will handle the trial period and send a `customer.subscription.trial_will_end` webhook 3 days before expiry.
+Or use Stripe's built-in trial support: when creating a subscription, set the trial length to the configured number of days, e.g. `trial_period_days: N` (where `N` is the trial length from `{{args}}`), or `trial_end: Math.floor(Date.now() / 1000) + N * 86400`. Stripe will handle the trial period and send a `customer.subscription.trial_will_end` webhook 3 days before expiry.
 
 
 ## Phase 4: Trial Start
@@ -112,10 +112,12 @@ Show a persistent banner in the header for the last 3 days of trial.
 
 Send these emails automatically:
 
+Use the configured trial length (`{{args}}` days) in copy, and skip any reminder whose timing falls before the trial starts (e.g., for a 7-day or shorter trial, drop the "7 days before expiry" email):
+
 | Trigger | Subject | Content |
 |---------|---------|---------|
-| Trial starts | "Your 14-day trial has started" | Features, trial end date, support link |
-| 7 days before expiry | "Your trial ends in 7 days" | What you've built, upgrade CTA |
+| Trial starts | "Your {{args}}-day trial has started" | Features, trial end date, support link |
+| ~7 days before expiry (if trial is long enough) | "Your trial ends in 7 days" | What you've built, upgrade CTA |
 | 2 days before expiry | "2 days left in your trial" | Urgency, upgrade CTA |
 | Trial expired | "Your trial has ended" | What you lose, upgrade CTA, FAQ |
 

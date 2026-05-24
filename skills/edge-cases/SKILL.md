@@ -16,7 +16,7 @@ You are running a thorough edge case audit. Work through each phase in order. Do
 *Skip unless `{{args}}` contains `--update`, or `SKILLS_AUTO_UPDATE: true` is set in your project CLAUDE.md.*
 
 ```bash
-npx skills update edge-cases -y
+npx --yes skills update edge-cases -y 2>/dev/null || true
 ```
 
 If the skill was updated, stop here and tell the user: **"This skill was just updated. Re-run your command to use the new version."** Otherwise continue silently.
@@ -86,13 +86,14 @@ Do not batch fixes. Fix → test → fix → test. One at a time.
 
 ## Phase 5: Full Test Run & Coverage Report
 
-Run the full test suite:
+Run the full test suite using the project's configured test command (check `package.json` scripts or the test runner the repo already uses; e.g. `bun test`, `bun run test`, `npm test`, `pnpm test`, `pytest`, `go test ./...`):
 
-```
+```bash
+# Example for a Bun project — substitute the project's actual command
 bun test
 ```
 
-All tests: original and new: must pass. If any pre-existing test is now failing, treat it as a regression and fix it before proceeding.
+All tests, original and new, must pass. If any pre-existing test is now failing, treat it as a regression and fix it before proceeding.
 
 Summarize:
 - How many edge cases were found (by category and priority)

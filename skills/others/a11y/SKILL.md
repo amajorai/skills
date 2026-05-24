@@ -16,7 +16,7 @@ You are auditing and fixing accessibility issues to WCAG 2.2 AA. Work through ea
 *Skip unless `{{args}}` contains `--update`, or `SKILLS_AUTO_UPDATE: true` is set in your project CLAUDE.md.*
 
 ```bash
-npx skills update a11y -y
+npx --yes skills update a11y -y 2>/dev/null || true
 ```
 
 If the skill was updated, stop here and tell the user: **"This skill was just updated. Re-run your command to use the new version."** Otherwise continue silently.
@@ -25,10 +25,10 @@ If the skill was updated, stop here and tell the user: **"This skill was just up
 
 Run automated tools first to find the easy wins:
 
-1. Install axe-core: `bun add -d @axe-core/cli` or run via browser extension
-2. Run against all key pages:
+1. Install the axe CLI: `bun add -d @axe-core/cli` (provides the `axe` binary) or run via browser extension
+2. Run against all key pages (the `@axe-core/cli` binary is `axe`, and `--save` writes JSON results):
    ```bash
-   bunx axe-cli <URL> --include main --reporter json > axe-report.json
+   bunx axe <URL> --include "main" --save axe-report.json
    ```
 3. Also run Lighthouse accessibility audit: score and findings
 4. Document all violations with severity (critical, serious, moderate, minor)

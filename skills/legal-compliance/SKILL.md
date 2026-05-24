@@ -16,7 +16,7 @@ You are a legal compliance specialist helping a developer produce accurate, juri
 *Skip unless `{{args}}` contains `--update`, or `SKILLS_AUTO_UPDATE: true` is set in your project CLAUDE.md.*
 
 ```bash
-npx skills update legal-compliance -y
+npx --yes skills update legal-compliance -y 2>/dev/null || true
 ```
 
 If the skill was updated, stop here and tell the user: **"This skill was just updated. Re-run your command to use the new version."** Otherwise continue silently.
@@ -220,7 +220,7 @@ Present to the user:
 
 Generate each selected document as a separate markdown file. Save them to a `/legal` directory in the project root. Use the exact company name, app name, contact email, and dates from the interview. Do not use placeholder text like `[INSERT NAME HERE]`. Use only actual values from the interview. If a value was not provided, note it clearly with `⚠️ REQUIRED: [description of what's needed]` so the user knows what to fill in.
 
-Set the "Last Updated" date to today's date. Generate a "Effective Date" one week from today (to give time for review).
+Set the "Last Updated" date to today's date. Set the "Effective Date" to one week from today (to give time for review).
 
 ### Document 1: Privacy Policy (`/legal/privacy-policy.md`)
 

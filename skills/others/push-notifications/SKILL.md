@@ -16,7 +16,7 @@ You are implementing push notifications end-to-end. Work through each phase in o
 *Skip unless `{{args}}` contains `--update`, or `SKILLS_AUTO_UPDATE: true` is set in your project CLAUDE.md.*
 
 ```bash
-npx skills update push-notifications -y
+npx --yes skills update push-notifications -y 2>/dev/null || true
 ```
 
 If the skill was updated, stop here and tell the user: **"This skill was just updated. Re-run your command to use the new version."** Otherwise continue silently.
@@ -64,10 +64,11 @@ self.addEventListener('notificationclick', (event) => {
 })
 ```
 
-Register the service worker on app start:
+Register the service worker on app start and keep the registration reference (you need it to subscribe later):
 ```typescript
+let swRegistration: ServiceWorkerRegistration | undefined
 if ('serviceWorker' in navigator) {
-  await navigator.serviceWorker.register('/sw.js')
+  swRegistration = await navigator.serviceWorker.register('/sw.js')
 }
 ```
 
@@ -82,14 +83,27 @@ Store as env vars: `VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY`, `VAPID_SUBJECT` (mai
 
 #### Permission & Subscription
 
+`applicationServerKey` must be a `Uint8Array`, not the raw base64 string. Convert the VAPID public key first:
+
 ```typescript
+function urlBase64ToUint8Array(base64: string): Uint8Array {
+  const padding = '='.repeat((4 - (base64.length % 4)) % 4)
+  const normalized = (base64 + padding).replace(/-/g, '+').replace(/_/g, '/')
+  const raw = atob(normalized)
+  return Uint8Array.from([...raw].map((c) => c.charCodeAt(0)))
+}
+
 const permission = await Notification.requestPermission()
-if (permission === 'granted') {
+if (permission === 'granted' && swRegistration) {
   const sub = await swRegistration.pushManager.subscribe({
     userVisibleOnly: true,
-    applicationServerKey: VAPID_PUBLIC_KEY,
+    applicationServerKey: urlBase64ToUint8Array(VAPID_PUBLIC_KEY),
   })
-  await fetch('/api/push/subscribe', { method: 'POST', body: JSON.stringify(sub) })
+  await fetch('/api/push/subscribe', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(sub),
+  })
 }
 ```
 
@@ -110,7 +124,11 @@ In `app.json`:
 Get and store the push token:
 ```typescript
 const token = (await Notifications.getExpoPushTokenAsync()).data
-await fetch('/api/push/subscribe', { method: 'POST', body: JSON.stringify({ token }) })
+await fetch('/api/push/subscribe', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ token }),
+})
 ```
 
 Request permission on iOS (Android grants automatically):
@@ -137,7 +155,7 @@ CREATE TABLE push_subscriptions (
 
 ## Phase 6: Server-Side Sending
 
-Install: `bun add web-push` (for web): Expo uses their own API directly.
+Install: `bun add web-push` (for web). Expo uses their own HTTP API directly, so no extra package is required.
 
 Create `lib/notifications.ts`:
 
@@ -155,6 +173,10 @@ async function sendPushNotification(userId: string, notification: {
       // Expo send API
       await fetch('https://exp.host/--/api/v2/push/send', {
         method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
         body: JSON.stringify({ to: sub.token, ...notification }),
       })
     }

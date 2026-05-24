@@ -16,7 +16,7 @@ You are running load tests to find where the system breaks before users do. Work
 *Skip unless `{{args}}` contains `--update`, or `SKILLS_AUTO_UPDATE: true` is set in your project CLAUDE.md.*
 
 ```bash
-npx skills update load-test -y
+npx --yes skills update load-test -y 2>/dev/null || true
 ```
 
 If the skill was updated, stop here and tell the user: **"This skill was just updated. Re-run your command to use the new version."** Otherwise continue silently.
@@ -51,10 +51,10 @@ Spawn **1 subagent** to:
 brew install k6
 
 # Windows
-winget install k6
+winget install -e --id k6.k6
 
-# Docker (no install needed)
-docker run --rm -i grafana/k6 run - <script.js
+# Docker (no install needed) — pipe the script in via stdin
+docker run --rm -i grafana/k6 run - < script.js
 ```
 
 k6 is a JavaScript-based load testing tool. Tests are JS files that describe virtual user behavior.
@@ -110,11 +110,11 @@ Write one script per endpoint or user flow to test.
 Against staging (never production without approval):
 
 ```bash
-k6 run load-tests/baseline.js
-k6 run load-tests/spike.js --env TEST_TOKEN=<token>
+k6 run --env TEST_TOKEN=<token> load-tests/baseline.js
+k6 run --env TEST_TOKEN=<token> load-tests/spike.js
 
-# With HTML report
-k6 run --out json=results.json load-tests/baseline.js
+# Save raw results to a JSON file for later analysis
+k6 run --env TEST_TOKEN=<token> --out json=results.json load-tests/baseline.js
 ```
 
 Monitor during the run:

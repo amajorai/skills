@@ -16,7 +16,7 @@ You are making a site fully agent-ready using Cloudflare AI Search and the stand
 *Skip unless `{{args}}` contains `--update`, or `SKILLS_AUTO_UPDATE: true` is set in your project CLAUDE.md.*
 
 ```bash
-npx skills update aso -y
+npx --yes skills update aso -y 2>/dev/null || true
 ```
 
 If the skill was updated, stop here and tell the user: **"This skill was just updated. Re-run your command to use the new version."** Otherwise continue silently.
@@ -92,19 +92,19 @@ Ask: "Which of these do you want me to implement? I can do all of them, or we ca
 
 ## Phase 3: Cloudflare AI Search Setup
 
-### 2a. Install Wrangler (if not already installed)
+### 3a. Install Wrangler (if not already installed)
 
 ```bash
 bun add -D wrangler
 ```
 
-### 2b. Create a search instance
+### 3b. Create a search instance
 
 ```bash
-npx wrangler ai-search create <project-name>-search
+bunx wrangler ai-search create <project-name>-search
 ```
 
-### 2c. Add the binding to `wrangler.jsonc`
+### 3c. Add the binding to `wrangler.jsonc`
 
 ```jsonc
 {
@@ -130,7 +130,7 @@ For multi-tenant or per-agent use, also add a namespace binding for dynamic crea
 }
 ```
 
-### 2d. Create the search Worker (`src/search.ts`)
+### 3d. Create the search Worker (`src/search.ts`)
 
 ```typescript
 export interface Env {
@@ -160,7 +160,7 @@ export default {
 };
 ```
 
-### 2e. Index content
+### 3e. Index content
 
 Upload documents with metadata for filtering and boosting:
 
@@ -177,7 +177,7 @@ await instance.items.uploadAndPoll("doc-id", markdownContent, {
 });
 ```
 
-### 2f. Enable hybrid search (recommended for best results)
+### 3f. Enable hybrid search (recommended for best results)
 
 Create the instance with both keyword and vector search:
 

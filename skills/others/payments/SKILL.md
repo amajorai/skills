@@ -16,7 +16,7 @@ You are wiring up a complete payment integration. Work through each phase in ord
 *Skip unless `{{args}}` contains `--update`, or `SKILLS_AUTO_UPDATE: true` is set in your project CLAUDE.md.*
 
 ```bash
-npx skills update payments -y
+npx --yes skills update payments -y 2>/dev/null || true
 ```
 
 If the skill was updated, stop here and tell the user: **"This skill was just updated. Re-run your command to use the new version."** Otherwise continue silently.
@@ -69,7 +69,7 @@ Define the full implementation surface based on provider:
 3. **Webhook events**:
    - Stripe: `checkout.session.completed`, `customer.subscription.updated`, `customer.subscription.deleted`, `invoice.payment_failed`
    - LemonSqueezy: `subscription_created`, `subscription_updated`, `subscription_cancelled`, `subscription_payment_failed`
-   - Polar.sh: `subscription.created`, `subscription.updated`, `subscription.cancelled`, `order.created`
+   - Polar.sh: `subscription.created`, `subscription.updated`, `subscription.canceled`, `order.created`
 4. **Frontend**: pricing page, upgrade prompt, billing management page, plan-gated components
 5. **Env vars**: keys needed in dev and prod
 
@@ -109,9 +109,9 @@ Present the plan and confirm before implementing.
 ### Polar.sh (Web)
 
 1. Install: `bun add @polar-sh/sdk`
-2. Create checkout session via `polar.checkouts.custom.create()`
-3. Webhook handler: verify with `validateEvent()` from the SDK
-4. Handle `subscription.created`, `subscription.updated`, `subscription.cancelled`, `order.created`
+2. Create checkout session via `polar.checkouts.create({ products: ['<productId>'] })`
+3. Webhook handler: verify with `validateEvent()` imported from `@polar-sh/sdk/webhooks` (throws `WebhookVerificationError` on a bad signature)
+4. Handle `subscription.created`, `subscription.updated`, `subscription.canceled`, `order.created`
 5. Store `polar_customer_id` and subscription state on user
 6. Use Polar's customer portal URL for billing management
 7. Optionally configure **Benefits** (e.g. license keys, Discord roles, downloads) in Polar dashboard: no extra code needed
@@ -128,7 +128,7 @@ Present the plan and confirm before implementing.
 
 ### Superwall (Mobile)
 
-1. Install: `bun add react-native-superwall` (or native SDK)
+1. Install: for Expo (SDK 53+) use `bunx expo install expo-superwall` (the current recommended SDK); for bare React Native use the legacy `@superwall/react-native-superwall`
 2. Configure: `Superwall.configure({ apiKey })` on app launch
 3. Identify user: `Superwall.shared.identify(userId)` after auth
 4. Register trigger: `Superwall.shared.register('campaign_trigger')` at paywall entry points

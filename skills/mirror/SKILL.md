@@ -13,7 +13,7 @@ You are scanning the project's conversation history to find recurring patterns a
 *Skip unless `{{args}}` contains `--update`, or `SKILLS_AUTO_UPDATE: true` is set in your project CLAUDE.md.*
 
 ```bash
-npx skills update mirror -y
+npx --yes skills update mirror -y 2>/dev/null || true
 ```
 
 If the skill was updated, stop here and tell the user: **"This skill was just updated. Re-run your command to use the new version."** Otherwise continue silently.
@@ -37,24 +37,27 @@ Record: **Agent type**, **Target config file**, **Transcript directory**.
 
 ## Step 2: Locate Transcript Files
 
-Find where past conversation transcripts are stored for this project.
+Find where past conversation transcripts are stored for this project. Claude Code keeps each project's transcripts in a subdirectory of `~/.claude/projects/` whose name is the project's absolute path with path separators replaced by dashes (e.g. `D:\Code\md\vibemd` → `D--Code-md-vibemd`). Prefer that project-specific subdirectory; only fall back to scanning all of `~/.claude/projects/` if you cannot identify it.
 
 **Claude Code (Windows):**
 ```powershell
-# Transcripts live in the project's hashed directory under ~/.claude/projects/
+# Transcripts live in the project's path-derived directory under ~/.claude/projects/
 $transcriptDir = "$env:USERPROFILE\.claude\projects"
 Get-ChildItem $transcriptDir -Recurse -Filter "*.jsonl" | Sort-Object LastWriteTime -Descending
 ```
 
 **Claude Code (macOS/Linux):**
 ```bash
-find ~/.claude/projects -name "*.jsonl" | sort -t/ -k1 | head -50
+# List newest transcripts first (most recently modified at the top)
+find ~/.claude/projects -name "*.jsonl" -print0 2>/dev/null \
+  | xargs -0 ls -t 2>/dev/null | head -50
 ```
 
 **Codex:**
 ```bash
 # Codex stores sessions in ~/.codex/sessions/ or similar
-find ~/.codex -name "*.json" -o -name "*.jsonl" 2>/dev/null | head -50
+find ~/.codex \( -name "*.json" -o -name "*.jsonl" \) -print0 2>/dev/null \
+  | xargs -0 ls -t 2>/dev/null | head -50
 ```
 
 Read the most recent 10–20 transcript files (or all of them if fewer than 10 exist). Skip files that are empty or under 1KB.

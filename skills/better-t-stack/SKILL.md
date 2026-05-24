@@ -16,7 +16,7 @@ You are scaffolding a Better T Stack project. Run a structured interview to lock
 *Skip unless `{{args}}` contains `--update`, or `SKILLS_AUTO_UPDATE: true` is set in your project CLAUDE.md.*
 
 ```bash
-npx skills update better-t-stack -y
+npx --yes skills update better-t-stack -y 2>/dev/null || true
 ```
 
 If the skill was updated, stop here and tell the user: **"This skill was just updated. Re-run your command to use the new version."** Otherwise continue silently.
@@ -32,7 +32,7 @@ Use `AskUserQuestion` with these questions (send as one batch: 4 questions max p
 > Where should the project be created? Provide a full absolute path (e.g. `C:\Code`, `/home/user/projects`, `~/projects`). Leave blank to use the current directory.
 
 **Question 3: Package manager:**
-Options: `bun` (Recommended: fastest), `npm`, `pnpm`, `yarn`
+Options: `bun` (Recommended: fastest), `npm`, `pnpm`
 
 **Question 4: Git + install:**
 - Initialize a git repository? (yes / no)
@@ -57,7 +57,7 @@ Send the next batch of questions using `AskUserQuestion`. Use `multiSelect: true
 | `solid` | SolidStart |
 | `astro` | Astro: content/hybrid |
 | `native-bare` | React Native (bare) |
-| `native-nativewind` | React Native + NativeWind (Tailwind) |
+| `native-uniwind` | React Native + NativeWind (Tailwind) |
 | `native-unistyles` | React Native + Unistyles |
 | `none` | No frontend |
 
@@ -114,7 +114,7 @@ Send the next batch of questions using `AskUserQuestion`. Use `multiSelect: true
 | `supabase` | Supabase: PostgreSQL + extras |
 | `prisma-postgres` | Prisma Postgres: managed |
 | `mongodb-atlas` | MongoDB Atlas: hosted MongoDB |
-| `cloudflare-d1` | Cloudflare D1: edge SQLite |
+| `d1` | Cloudflare D1: edge SQLite |
 | `docker` | Local Docker: self-hosted |
 | `none` | Manual / skip |
 
@@ -137,7 +137,7 @@ Send the next batch of questions using `AskUserQuestion`. Use `multiSelect: true
 **Question: Web deployment target** (single select):
 | Value | Description |
 |---|---|
-| `workers` | Cloudflare Workers: edge deployment |
+| `cloudflare` | Cloudflare Workers: edge deployment |
 | `none` | No web deploy config |
 
 **Question: Example template** (single select):
@@ -189,18 +189,18 @@ bun create better-t-stack@latest <project-name> \
   [--payments <val>] \
   [--addons <val> <val>...] \
   [--examples <val>] \
-  [--packageManager <val>] \
-  [--dbSetup <val>] \
-  [--webDeploy <val>] \
-  [--git] \
-  [--install]
+  [--package-manager <val>] \
+  [--db-setup <val>] \
+  [--web-deploy <val>] \
+  (--git | --no-git) \
+  (--install | --no-install)
 ```
 
 ### Assembly rules
 
-- **Omit** any flag where the user chose `none` or skipped
+- **Omit** any flag where the user chose `none` or skipped (except boolean flags below — pass those explicitly to avoid interactive prompts)
 - **Array flags** (`--frontend`, `--addons`): list each value as a separate space-separated argument after the flag
-- **Boolean flags**: include `--git` only if git init is yes; include `--install` only if auto-install is yes
+- **Boolean flags**: always pass explicitly so the CLI never prompts. Use `--git` if git init is yes, `--no-git` if no. Use `--install` if auto-install is yes, `--no-install` if no.
 - **Directory**: if a custom path was given, `cd` there before running the command
 
 ### Example assembled command
@@ -216,8 +216,8 @@ bun create better-t-stack@latest my-app \
   --api trpc \
   --auth better-auth \
   --addons biome turborepo \
-  --packageManager bun \
-  --dbSetup turso \
+  --package-manager bun \
+  --db-setup turso \
   --git \
   --install
 ```
@@ -230,7 +230,7 @@ Display the exact command you're about to run. Ask: "Run this command?"
 1. `cd` to the specified directory (if provided and not CWD)
 2. Run the assembled `bun create better-t-stack@latest` command
 3. After scaffolding completes, `cd` into the new project directory
-4. If `--install` was **not** passed, run `bun install`
+4. Respect the install choice: if the user chose to auto-install (`--install`), dependencies are already installed; if they chose not to (`--no-install`), leave them uninstalled and remind the user to run `bun install` before starting
 5. Print the dev start command:
 
 ```
@@ -246,5 +246,5 @@ bun dev
 - [ ] All stack choices captured via interview
 - [ ] Assembled command shown and confirmed
 - [ ] Project scaffolded successfully
-- [ ] Dependencies installed
+- [ ] Dependencies installed (or user reminded to run `bun install` if they declined auto-install)
 - [ ] Dev start command shown to user

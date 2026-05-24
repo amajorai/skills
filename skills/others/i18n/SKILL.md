@@ -16,7 +16,7 @@ You are adding internationalization support. Work through each phase in order.
 *Skip unless `{{args}}` contains `--update`, or `SKILLS_AUTO_UPDATE: true` is set in your project CLAUDE.md.*
 
 ```bash
-npx skills update i18n -y
+npx --yes skills update i18n -y 2>/dev/null || true
 ```
 
 If the skill was updated, stop here and tell the user: **"This skill was just updated. Re-run your command to use the new version."** Otherwise continue silently.
@@ -51,13 +51,15 @@ Produce a string inventory: estimated count of strings, location of most-used on
 ### Paraglide (recommended)
 
 ```bash
-bun add @inlang/paraglide-js
-bunx paraglide-js init
+bunx @inlang/paraglide-js@latest init
 ```
 
+`init` adds `@inlang/paraglide-js` to `package.json`, so a separate `bun add` is not needed.
+
 Creates:
+- `project.inlang/settings.json` - locale and project configuration
 - `messages/en.json` (and one per locale)
-- `src/lib/i18n.js` - the compiled message functions
+- A generated output directory (default `src/paraglide/`) containing the compiled message functions in `messages.js` and locale helpers in `runtime.js`. Run `bunx paraglide-js compile` to (re)generate these after editing message files.
 
 ### next-intl
 
@@ -88,8 +90,8 @@ For each hardcoded string found in Phase 2:
    ```
 2. Replace the hardcoded string with the translation function:
    ```typescript
-   // Paraglide
-   import * as m from '$lib/paraglide/messages'
+   // Paraglide (import from the generated output dir; adjust path to your config)
+   import * as m from '@/paraglide/messages'   // or a relative path like '../paraglide/messages'
    <h1>{m.auth_login_title()}</h1>
    
    // next-intl

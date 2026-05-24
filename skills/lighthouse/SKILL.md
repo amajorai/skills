@@ -16,12 +16,14 @@ You are auditing and optimizing a website for Lighthouse scores. Work through ea
 *Skip unless `{{args}}` contains `--update`, or `SKILLS_AUTO_UPDATE: true` is set in your project CLAUDE.md.*
 
 ```bash
-npx skills update lighthouse -y
+npx --yes skills update lighthouse -y 2>/dev/null || true
 ```
 
 If the skill was updated, stop here and tell the user: **"This skill was just updated. Re-run your command to use the new version."** Otherwise continue silently.
 
 ## Phase 1: Setup & Baseline
+
+If `{{args}}` is empty, ask the user for the target URL (or local dev server address) and do not run any audit until you have it.
 
 First, ensure Lighthouse is available:
 
@@ -35,7 +37,7 @@ npx lighthouse --version 2>/dev/null || bunx lighthouse --version 2>/dev/null
 
 If the target is a local dev server, start it first and confirm it's running before proceeding.
 
-Run the baseline audit across all four categories:
+Run the baseline audit across all four categories (replace `{{args}}` with the confirmed target URL):
 
 ```bash
 npx lighthouse {{args}} \
@@ -45,8 +47,6 @@ npx lighthouse {{args}} \
   --only-categories=performance,accessibility,best-practices,seo \
   --quiet
 ```
-
-If `{{args}}` is empty, ask the user for the URL before proceeding.
 
 Parse and display the baseline scores in a table:
 

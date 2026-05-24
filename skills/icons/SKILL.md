@@ -16,7 +16,7 @@ You are generating all platform icons from a single source image. Work through e
 *Skip unless `{{args}}` contains `--update`, or `SKILLS_AUTO_UPDATE: true` is set in your project CLAUDE.md.*
 
 ```bash
-npx skills update icons -y
+npx --yes skills update icons -y 2>/dev/null || true
 ```
 
 If the skill was updated, stop here and tell the user: **"This skill was just updated. Re-run your command to use the new version."** Otherwise continue silently.
@@ -44,16 +44,16 @@ If the image is too small or non-square, warn the user and ask if they want to c
 
 ## Step 2: Detect Project Type
 
-Spawn parallel subagents to check for platform config files:
+Check for platform config files (run all checks; missing files are expected and harmless):
 
 ```bash
 # Check all at once
-ls tauri.conf.json src-tauri/tauri.conf.json 2>$null
-ls capacitor.config.ts capacitor.config.js capacitor.config.json 2>$null
-ls app.json app.config.ts app.config.js 2>$null
-ls electron-builder.yml electron-builder.json package.json 2>$null
-ls vite.config.ts next.config.ts next.config.js astro.config.mjs 2>$null
-ls index.html public/index.html 2>$null
+ls tauri.conf.json src-tauri/tauri.conf.json 2>/dev/null
+ls capacitor.config.ts capacitor.config.js capacitor.config.json 2>/dev/null
+ls app.json app.config.ts app.config.js 2>/dev/null
+ls electron-builder.yml electron-builder.json package.json 2>/dev/null
+ls vite.config.ts next.config.ts next.config.js astro.config.mjs 2>/dev/null
+ls index.html public/index.html 2>/dev/null
 ```
 
 Identify which platforms apply: a project can have **multiple** (e.g. Tauri + PWA, Capacitor + PWA):
@@ -71,6 +71,8 @@ Identify which platforms apply: a project can have **multiple** (e.g. Tauri + PW
 ## Step 3: Generate Icons Per Platform
 
 Run the relevant sections below. If multiple platforms apply, do them in parallel.
+
+In every command below, replace `<SOURCE_IMAGE>` with the validated source image path from Step 1 (the value of `{{args}}`). Quote it if it contains spaces.
 
 
 ### Tauri
@@ -240,13 +242,13 @@ After generation, list what was created:
 
 ```bash
 # Show generated files per platform
-ls src-tauri/icons/ 2>$null       # Tauri
-ls resources/ 2>$null              # Capacitor source
-ls ios/App/App/Assets.xcassets/ 2>$null  # Capacitor iOS
-ls android/app/src/main/res/ 2>$null     # Capacitor Android
-ls assets/ 2>$null                 # Expo
-ls build/ icons/ 2>$null           # Electron
-ls public/icons/ 2>$null           # PWA/Web
+ls src-tauri/icons/ 2>/dev/null       # Tauri
+ls resources/ 2>/dev/null              # Capacitor source
+ls ios/App/App/Assets.xcassets/ 2>/dev/null  # Capacitor iOS
+ls android/app/src/main/res/ 2>/dev/null     # Capacitor Android
+ls assets/ 2>/dev/null                 # Expo
+ls build/ icons/ 2>/dev/null           # Electron
+ls public/icons/ 2>/dev/null           # PWA/Web
 ```
 
 Report back:

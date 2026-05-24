@@ -16,7 +16,7 @@ You are implementing a complete auth system using [Better Auth](https://better-a
 *Skip unless `{{args}}` contains `--update`, or `SKILLS_AUTO_UPDATE: true` is set in your project CLAUDE.md.*
 
 ```bash
-npx skills update auth -y
+npx --yes skills update auth -y 2>/dev/null || true
 ```
 
 If the skill was updated, stop here and tell the user: **"This skill was just updated. Re-run your command to use the new version."** Otherwise continue silently.
@@ -26,7 +26,7 @@ If the skill was updated, stop here and tell the user: **"This skill was just up
 Before starting, add the Better Auth MCP so you have live, accurate docs throughout:
 
 ```bash
-npx auth@latest mcp --claude-code
+npx @better-auth/cli@latest mcp --claude-code
 ```
 
 This command auto-configures the remote Better Auth docs MCP server in Claude Code. Restart Claude Code after running it.
@@ -74,7 +74,7 @@ Reference the Better Auth MCP and docs at https://better-auth.com/docs throughou
 
 1. Create `lib/auth.ts` - configure providers, session strategy, database adapter
 2. Create the catch-all API route: `app/api/auth/[...all]/route.ts`
-3. Run schema generation: `bunx better-auth generate` and apply migration
+3. Run schema generation: `bunx @better-auth/cli generate` and apply migration
 4. Create auth client: `lib/auth-client.ts` for frontend
 5. Add session middleware that attaches `ctx.user` to every request
 

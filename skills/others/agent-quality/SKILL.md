@@ -14,7 +14,7 @@ You are setting up quality tools that catch the specific problems AI coding agen
 *Skip unless `{{args}}` contains `--update`, or `SKILLS_AUTO_UPDATE: true` is set in your project CLAUDE.md.*
 
 ```bash
-npx skills update agent-quality -y
+npx --yes skills update agent-quality -y 2>/dev/null || true
 ```
 
 If the skill was updated, stop here and tell the user: **"This skill was just updated. Re-run your command to use the new version."** Otherwise continue silently.
@@ -171,17 +171,15 @@ Paste directly into Claude Code instead of describing the element: gives the age
 ### Install
 
 ```bash
-npx grab@latest init -y
+npx -y grab@latest init
 ```
 
 The CLI detects your framework and configures the initialization automatically. Supported: Next.js (app and pages router), Vite, Webpack.
 
-**Customize (optional):**
+**Optional MCP integration** (lets the agent respond to grabbed elements):
 ```bash
-npx grab@latest config
+npx -y grab@latest add mcp
 ```
-
-Options: activation key, toggle vs. hold mode, context line count.
 
 ### Use
 

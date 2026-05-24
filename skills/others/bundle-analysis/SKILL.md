@@ -16,7 +16,7 @@ You are analyzing and optimizing the JavaScript bundle. Work through each phase 
 *Skip unless `{{args}}` contains `--update`, or `SKILLS_AUTO_UPDATE: true` is set in your project CLAUDE.md.*
 
 ```bash
-npx skills update bundle-analysis -y
+npx --yes skills update bundle-analysis -y 2>/dev/null || true
 ```
 
 If the skill was updated, stop here and tell the user: **"This skill was just updated. Re-run your command to use the new version."** Otherwise continue silently.
@@ -27,8 +27,13 @@ Generate a bundle analysis report:
 
 **Next.js**:
 ```bash
+# First install and wire up the analyzer (prerequisite — ANALYZE=true is a no-op without it):
+bun add -d @next/bundle-analyzer
+# Wrap the config in next.config.(js|mjs|ts):
+#   const withBundleAnalyzer = require('@next/bundle-analyzer')({ enabled: process.env.ANALYZE === 'true' })
+#   module.exports = withBundleAnalyzer(nextConfig)
+# Then build with the env var set:
 ANALYZE=true bun run build
-# or: bun add -d @next/bundle-analyzer and configure next.config
 ```
 
 **Vite**:
@@ -86,7 +91,7 @@ For each identified heavy dependency with a lighter alternative:
 5. Measure the size delta
 
 Common swaps:
-- `moment` / `dayjs` → `date-fns` (tree-shakeable) or `Temporal` (native, no package)
+- `moment` / `dayjs` → `date-fns` (tree-shakeable) or `Temporal` (native in Node 26+ and most modern browsers as of 2026, but Safari still lacks support — needs the `@js-temporal/polyfill` for full browser coverage)
 - `lodash` → native array/object methods or `lodash-es` with tree shaking
 - `axios` → native `fetch`
 - `uuid` → `crypto.randomUUID()` (native)

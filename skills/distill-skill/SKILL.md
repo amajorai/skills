@@ -13,7 +13,7 @@ You are mining conversation history to find workflows that were done more than o
 *Skip unless `{{args}}` contains `--update`, or `SKILLS_AUTO_UPDATE: true` is set in your project CLAUDE.md.*
 
 ```bash
-npx skills update distill-skill -y
+npx --yes skills update distill-skill -y 2>/dev/null || true
 ```
 
 If the skill was updated, stop here and tell the user: **"This skill was just updated. Re-run your command to use the new version."** Otherwise continue silently.
@@ -52,8 +52,8 @@ Read the most recent 10–20 files. Skip files under 1KB.
 List all skills already defined so you don't create duplicates:
 
 ```bash
-# List existing skill files
-ls .claude/skills/
+# List existing skill files (no error if the directory doesn't exist yet)
+ls .claude/skills/ 2>/dev/null || echo "No .claude/skills/ directory yet"
 ```
 
 Note what each existing skill covers (from its `description:` frontmatter field).
@@ -125,9 +125,11 @@ For each candidate that passes Step 5:
 For each skill, write `.claude/skills/<name>.md`:
 
 ```markdown
+---
 name: <kebab-case-name>
 description: <One sentence: what it does, when to use it, key tech names for precise triggering.>
 argument-hint: <optional: what the user should pass>
+---
 
 # <name>: <Human-Readable Title>
 
