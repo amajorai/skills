@@ -1,5 +1,11 @@
 # ⚡ A Major Skills
 
+[![Stars](https://shieldcn.dev/github/stars/amajorai/skills.svg)](https://github.com/amajorai/skills)
+[![Forks](https://shieldcn.dev/github/forks/amajorai/skills.svg)](https://github.com/amajorai/skills)
+[![License](https://shieldcn.dev/github/license/amajorai/skills.svg)](https://github.com/amajorai/skills)
+[![Issues](https://shieldcn.dev/github/issues/amajorai/skills.svg)](https://github.com/amajorai/skills/issues)
+[![Release](https://shieldcn.dev/github/release/amajorai/skills.svg)](https://github.com/amajorai/skills/releases)
+
 Simple, minimal, lean skills that people don't think about when shipping apps. Things we use at [A Major](https://amajor.ai).
 
 ## Flagship
@@ -103,3 +109,13 @@ SKILLS_AUTO_UPDATE: true
 ```
 
 Invoked as `/amajor-skills:ship <task>`.
+
+## Star History
+
+<a href="https://www.star-history.com/#amajorai/skills&Date">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=amajorai/skills&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=amajorai/skills&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=amajorai/skills&type=Date" />
+ </picture>
+</a>
