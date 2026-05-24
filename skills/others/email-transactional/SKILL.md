@@ -71,8 +71,6 @@ Install SDK: `bun add resend`
 
 Set `RESEND_API_KEY` in env vars.
 
----
-
 ### Postmark
 
 Install SDK: `bun add postmark`
@@ -80,8 +78,6 @@ Install SDK: `bun add postmark`
 1. Create a Postmark account and a Server
 2. Add and verify your sending domain in the Postmark dashboard (SPF, DKIM records)
 3. Set `POSTMARK_API_KEY` (Server API token) in env vars
-
----
 
 ### useSend (self-hosted)
 
@@ -95,8 +91,6 @@ Deploy via Docker or Railway (one-click): see https://docs.usesend.com
 Install SDK: `bun add usesend-js`  
 Set `USESEND_API_KEY` and `USESEND_BASE_URL` in env vars.
 
----
-
 ### Plunk (self-hosted)
 
 ```bash
@@ -107,8 +101,6 @@ docker pull useplunk/plunk
 
 Install SDK: `bun add @plunk/node`  
 Set `PLUNK_SECRET_KEY` and `PLUNK_BASE_URL` in env vars.
-
----
 
 ### DNS Records (all providers)
 
