@@ -10,7 +10,7 @@ You are scanning the project's conversation history to find recurring patterns a
 
 ## Phase 0: Auto-Update
 
-*Skip if `{{args}}` contains `--no-update`, or if `SKILLS_AUTO_UPDATE: false` is set in your project CLAUDE.md.*
+*Skip unless `{{args}}` contains `--update`, or `SKILLS_AUTO_UPDATE: true` is set in your project CLAUDE.md.*
 
 ```bash
 npx skills update mirror -y

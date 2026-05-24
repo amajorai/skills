@@ -81,18 +81,18 @@ npx skills add amajorai/skills/skills/hardening
 
 ### Auto-Update
 
-Every skill runs `npx skills update <name> -y` at the start of each invocation. If a newer version is available it updates itself, then stops and asks you to re-run so the new version takes effect.
+Auto-update is **disabled by default**. Skills do not self-update unless you explicitly opt in — this prevents untrusted code from running automatically during a session (supply chain hygiene).
 
-To opt out, add `--no-update` to your command:
-
-```
-/lighthouse https://mysite.com --no-update
-```
-
-Or disable it project-wide in your CLAUDE.md:
+To update a skill on a single invocation, pass `--update`:
 
 ```
-SKILLS_AUTO_UPDATE: false
+/lighthouse https://mysite.com --update
+```
+
+Or enable it project-wide in your CLAUDE.md:
+
+```
+SKILLS_AUTO_UPDATE: true
 ```
 
 ### Claude Code plugin
