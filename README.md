@@ -2,6 +2,7 @@
 
 Simple, minimal, lean skills that people don't think about when shipping apps. Things we use at [A Major](https://amajor.ai).
 
+[![Status](https://shieldcn.dev/badge/status-experimental-orange.svg)](https://github.com/amajorai/skills)
 [![Stars](https://shieldcn.dev/github/stars/amajorai/skills.svg)](https://github.com/amajorai/skills)
 [![Forks](https://shieldcn.dev/github/forks/amajorai/skills.svg)](https://github.com/amajorai/skills)
 [![License](https://shieldcn.dev/github/license/amajorai/skills.svg)](https://github.com/amajorai/skills)
