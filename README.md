@@ -37,7 +37,7 @@ npx skills add amajorai/vibe.md
 | [`icons`](skills/icons/SKILL.md) | Generate app icons, favicons, and splash screens for Tauri, PWA, Capacitor, Expo, and Electron |
 | [`legal-compliance`](skills/legal-compliance/SKILL.md) | Generate production-ready Privacy Policy, Terms, and DPA covering 20+ regulations |
 | [`app-store-compliance`](skills/app-store-compliance/SKILL.md) | Audit against Apple App Store and Google Play Store review guidelines with a prioritized fix list |
-| [`hardening`](skills/hardening/SKILL.md) | Harden a self-hosted Linux server. SSH, firewall, fail2ban, and optional 2FA |
+| [`hardening`](skills/hardening/SKILL.md) | Harden a self-hosted Linux server. Detects state, runs a structured 5-question interview, then implements in one pass: SSH hardening (auto-randomized port), UFW + provider firewall (AWS Lightsail, EC2, Hetzner, DigitalOcean, OVH, or any other), fail2ban, kernel hardening, ClamAV, 2FA, and more. Uses subagent SSH verification instead of "open a new terminal" prompts. Includes rescue-mode docs for all providers. |
 | [`youtube-to-skill`](skills/youtube-to-skill/SKILL.md) | Convert a YouTube video into a reusable Claude Code / Codex skill file |
 | [`lighthouse`](skills/lighthouse/SKILL.md) | Audit with Lighthouse across performance, accessibility, best practices, and SEO. Fix and re-verify |
 | [`seo`](skills/seo/SKILL.md) | Optimize for search. Meta tags, structured data, sitemap, robots.txt, Core Web Vitals, hreflang |
