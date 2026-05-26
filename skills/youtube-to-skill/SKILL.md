@@ -16,7 +16,7 @@ You are converting a YouTube video into a reusable Claude Code skill file. Work 
 *Skip unless `{{args}}` contains `--update`, or `SKILLS_AUTO_UPDATE: true` is set in your project CLAUDE.md.*
 
 ```bash
-npx --yes skills update amajorai/skills -y 2>/dev/null || true
+npx --yes skills update youtube-to-skill -y 2>/dev/null || true
 ```
 
 If the skill was updated, stop here and tell the user: **"This skill was just updated. Re-run your command to use the new version."** Otherwise continue silently.
