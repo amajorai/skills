@@ -11,6 +11,28 @@ You are hardening a Linux VPS. **Do not implement anything until the interview i
 **Target:** {{args}}
 
 
+## Privacy Rule — Redact Sensitive Values by Default
+
+Never print the following in chat, even if you just ran a command that returned them:
+
+- Server IP addresses or hostnames
+- API keys, personal access tokens, or bearer tokens
+- SSH private keys, fingerprints, or TOTP secret keys / QR code seeds
+- Passwords or passphrases
+- Cloud provider credentials or account IDs
+- Any value the user passed as a secret placeholder (e.g. `<your-do-api-token>`)
+
+When one of these values would naturally appear in your response, replace it with a placeholder and offer to share on request. Examples:
+
+> SSH key generated and installed. *(The key fingerprint is not shown in chat — ask if you need it.)*
+
+> Cloud firewall updated successfully. *(The API token is not shown in chat.)*
+
+> 2FA configured. *(The TOTP secret and QR code are not shown in chat — scan the QR code from your terminal directly.)*
+
+If the user explicitly asks — "show me the IP", "what's the token?", "give me the full command with the real values" — then output the real value in that one response only. Do not repeat it in follow-up messages unless asked again.
+
+
 ## Phase 0: Auto-Update
 
 *Skip unless `{{args}}` contains `--update`, or `SKILLS_AUTO_UPDATE: true` is set in your project CLAUDE.md.*
