@@ -2,16 +2,21 @@
 
 In every command below, replace `<SOURCE_IMAGE>` with the validated source image path from Step 1. Quote it if it contains spaces.
 
+Detect package manager once before running any install commands:
+```bash
+command -v bun >/dev/null 2>&1 && PM=bun || (command -v pnpm >/dev/null 2>&1 && PM=pnpm || PM=npm)
+```
+
 ---
 
 ### Tauri
 
 ```bash
 # Install Tauri CLI if not present
-bun add -D @tauri-apps/cli
+$PM add -D @tauri-apps/cli
 
 # Generate all icon sizes (outputs to src-tauri/icons/)
-bunx tauri icon "<SOURCE_IMAGE>"
+npx tauri icon "<SOURCE_IMAGE>"
 ```
 
 This generates: `.icns` (macOS), `.ico` (Windows), multiple `.png` sizes (Linux, tray, etc.) all placed in `src-tauri/icons/`. No config changes needed: Tauri reads from that directory automatically.
@@ -26,7 +31,7 @@ ls src-tauri/icons/
 
 ```bash
 # Install the assets package
-bun add -D @capacitor/assets
+$PM add -D @capacitor/assets
 
 # Place source image: assets tool expects resources/ directory
 mkdir -p resources
@@ -39,7 +44,7 @@ Ask the user for background colors (used for adaptive icons and splash screens):
 
 Then run:
 ```bash
-bunx @capacitor/assets generate \
+npx @capacitor/assets generate \
   --iconBackgroundColor '#FFFFFF' \
   --iconBackgroundColorDark '#111111' \
   --splashBackgroundColor '#FFFFFF' \
@@ -48,14 +53,14 @@ bunx @capacitor/assets generate \
 
 This generates icons for both iOS (`ios/App/App/Assets.xcassets/`) and Android (`android/app/src/main/res/`).
 
-If `ios/` or `android/` folders don't exist yet, tell the user to run `bunx cap add ios` / `bunx cap add android` first.
+If `ios/` or `android/` folders don't exist yet, tell the user to run `npx cap add ios` / `npx cap add android` first.
 
 
 ### Expo
 
 ```bash
 # Ensure expo-splash-screen is installed
-bunx expo install expo-splash-screen
+npx expo install expo-splash-screen
 
 # Create assets directory
 mkdir -p assets
@@ -91,7 +96,7 @@ Then update `app.json` / `app.config.ts` to reference these:
 
 For actual icon resizing across all required sizes, run:
 ```bash
-bunx expo prebuild --clean
+npx expo prebuild --clean
 ```
 (This regenerates native folders with correct icon sizes.)
 
@@ -100,10 +105,10 @@ bunx expo prebuild --clean
 
 ```bash
 # Install electron-icon-maker
-bun add -D electron-icon-maker
+$PM add -D electron-icon-maker
 
 # Generate all sizes (outputs to ./icons/)
-bunx electron-icon-maker --input="<SOURCE_IMAGE>" --output=./
+npx electron-icon-maker --input="<SOURCE_IMAGE>" --output=./
 
 # Or if using electron-builder, place icon at:
 cp "<SOURCE_IMAGE>" build/icon.png   # Linux
@@ -124,10 +129,10 @@ If using `electron-builder`, verify `package.json` has:
 
 ```bash
 # Install pwa-asset-generator
-bun add -D pwa-asset-generator
+$PM add -D pwa-asset-generator
 
 # Generate all PWA icons + favicons (outputs to public/icons/)
-bunx pwa-asset-generator "<SOURCE_IMAGE>" public/icons \
+npx pwa-asset-generator "<SOURCE_IMAGE>" public/icons \
   --favicon \
   --manifest public/manifest.json \
   --index public/index.html \

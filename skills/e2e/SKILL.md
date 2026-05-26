@@ -233,7 +233,7 @@ bash e2e/run-all.sh        # if the project has a runner script
 
 **Playwright:**
 ```bash
-bun run test:e2e
+$PM run test:e2e
 ```
 
 **Maestro:**

@@ -15,10 +15,14 @@ You are auditing and fixing accessibility issues to WCAG 2.2 AA. Work through ea
 
 Run automated tools first to find the easy wins:
 
-1. Install the axe CLI: `bun add -d @axe-core/cli` (provides the `axe` binary) or run via browser extension
+```bash
+command -v bun >/dev/null 2>&1 && PM=bun || (command -v pnpm >/dev/null 2>&1 && PM=pnpm || PM=npm)
+```
+
+1. Install the axe CLI: `$PM add -d @axe-core/cli` (provides the `axe` binary) or run via browser extension
 2. Run against all key pages (the `@axe-core/cli` binary is `axe`, and `--save` writes JSON results):
    ```bash
-   bunx axe <URL> --include "main" --save axe-report.json
+   npx axe <URL> --include "main" --save axe-report.json
    ```
 3. Also run Lighthouse accessibility audit: score and findings
 4. Document all violations with severity (critical, serious, moderate, minor)

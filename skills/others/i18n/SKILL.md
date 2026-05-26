@@ -63,20 +63,21 @@ Produce a string inventory: estimated count of strings, location of most-used on
 ### Paraglide (recommended)
 
 ```bash
-bunx @inlang/paraglide-js@latest init
+command -v bun >/dev/null 2>&1 && PM=bun || (command -v pnpm >/dev/null 2>&1 && PM=pnpm || PM=npm)
+npx @inlang/paraglide-js@latest init
 ```
 
-`init` adds `@inlang/paraglide-js` to `package.json`, so a separate `bun add` is not needed.
+`init` adds `@inlang/paraglide-js` to `package.json`, so a separate `$PM add` is not needed.
 
 Creates:
 - `project.inlang/settings.json` - locale and project configuration
 - `messages/en.json` (and one per locale)
-- A generated output directory (default `src/paraglide/`) containing the compiled message functions in `messages.js` and locale helpers in `runtime.js`. Run `bunx paraglide-js compile` to (re)generate these after editing message files.
+- A generated output directory (default `src/paraglide/`) containing the compiled message functions in `messages.js` and locale helpers in `runtime.js`. Run `npx paraglide-js compile` to (re)generate these after editing message files.
 
 ### next-intl
 
 ```bash
-bun add next-intl
+$PM add next-intl
 ```
 
 Creates:

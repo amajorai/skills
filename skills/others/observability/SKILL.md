@@ -63,7 +63,12 @@ Identify: where to initialize SDKs, what's unhandled, what context (user ID, req
 
 ## Phase 3: Error Tracking (Sentry)
 
-1. Install: `bun add @sentry/node @sentry/browser` (or framework-specific: `@sentry/nextjs`, `@sentry/react`)
+Detect the package manager:
+```bash
+command -v bun >/dev/null 2>&1 && PM=bun || (command -v pnpm >/dev/null 2>&1 && PM=pnpm || PM=npm)
+```
+
+1. Install: `$PM add @sentry/node @sentry/browser` (or framework-specific: `@sentry/nextjs`, `@sentry/react`)
 2. Initialize at the earliest possible entry point with:
    - DSN from env var (`SENTRY_DSN`)
    - Environment tag (`production` / `staging`)
@@ -76,7 +81,7 @@ Identify: where to initialize SDKs, what's unhandled, what context (user ID, req
 
 ## Phase 4: Structured Logging
 
-1. Install: `bun add pino` (default) or use existing logger if present
+1. Install: `$PM add pino` (default) or use existing logger if present
 2. Create a shared logger instance with:
    - JSON output in production, pretty-print in development
    - Default fields: `service`, `env`, `version`

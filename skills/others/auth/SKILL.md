@@ -78,14 +78,15 @@ Confirm before implementing.
 ## Phase 4: Implement
 
 ```bash
-bun add better-auth
+command -v bun >/dev/null 2>&1 && PM=bun || (command -v pnpm >/dev/null 2>&1 && PM=pnpm || PM=npm)
+$PM add better-auth
 ```
 
 Reference the Better Auth MCP and docs at https://better-auth.com/docs throughout.
 
 1. Create `lib/auth.ts` - configure providers, session strategy, database adapter
 2. Create the catch-all API route: `app/api/auth/[...all]/route.ts`
-3. Run schema generation: `bunx @better-auth/cli generate` and apply migration
+3. Run schema generation: `npx @better-auth/cli generate` and apply migration
 4. Create auth client: `lib/auth-client.ts` for frontend
 5. Add session middleware that attaches `ctx.user` to every request
 

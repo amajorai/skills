@@ -42,15 +42,17 @@ Do not proceed to Phase 3 without confirming a backup exists.
 
 Run the migration against a staging or development database that mirrors production.
 
-Drizzle Kit has no `--dry-run` flag. To preview, generate the SQL with `bun drizzle-kit generate` and read the generated file in `drizzle/` before applying. Then apply against staging by pointing your config at the staging database:
+Drizzle Kit has no `--dry-run` flag. To preview, generate the SQL with `npx drizzle-kit generate` and read the generated file in `drizzle/` before applying. Then apply against staging by pointing your config at the staging database:
 
 ```bash
+command -v bun >/dev/null 2>&1 && PM=bun || (command -v pnpm >/dev/null 2>&1 && PM=pnpm || PM=npm)
+
 # Drizzle: generate SQL to inspect, then apply to staging
-bun drizzle-kit generate
-DATABASE_URL="$STAGING_DATABASE_URL" bun drizzle-kit migrate
+npx drizzle-kit generate
+DATABASE_URL="$STAGING_DATABASE_URL" npx drizzle-kit migrate
 
 # Prisma: apply pending migrations to staging
-DATABASE_URL="$STAGING_DATABASE_URL" bunx prisma migrate deploy
+DATABASE_URL="$STAGING_DATABASE_URL" npx prisma migrate deploy
 
 # Raw SQL: review the file first, then apply
 psql "$STAGING_DATABASE_URL" < migration.sql
@@ -119,7 +121,7 @@ Run the migration with monitoring:
 1. Open the database monitoring dashboard
 2. Run the migration:
    ```bash
-   bun drizzle-kit migrate   # or your ORM's migrate command
+   npx drizzle-kit migrate   # or your ORM's migrate command
    ```
 3. Watch for: lock waits, connection spikes, query time increases
 4. Verify immediately after:

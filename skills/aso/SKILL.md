@@ -82,13 +82,14 @@ Ask: "Which of these do you want me to implement? I can do all of them, or we ca
 ### 3a. Install Wrangler (if not already installed)
 
 ```bash
-bun add -D wrangler
+command -v bun >/dev/null 2>&1 && PM=bun || (command -v pnpm >/dev/null 2>&1 && PM=pnpm || PM=npm)
+$PM add -D wrangler
 ```
 
 ### 3b. Create a search instance
 
 ```bash
-bunx wrangler ai-search create <project-name>-search
+npx wrangler ai-search create <project-name>-search
 ```
 
 For binding config, Worker code, indexing, and hybrid search setup, see [references/search-setup.md](references/search-setup.md)

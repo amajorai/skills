@@ -57,13 +57,17 @@ resend domains verify <id>
 resend api-keys create --name "Production" --permission full_access
 ```
 
-Install SDK: `bun add resend`
+```bash
+command -v bun >/dev/null 2>&1 && PM=bun || (command -v pnpm >/dev/null 2>&1 && PM=pnpm || PM=npm)
+```
+
+Install SDK: `$PM add resend`
 
 Set `RESEND_API_KEY` in env vars.
 
 ### Postmark
 
-Install SDK: `bun add postmark`
+Install SDK: `$PM add postmark`
 
 1. Create a Postmark account and a Server
 2. Add and verify your sending domain in the Postmark dashboard (SPF, DKIM records)
@@ -78,7 +82,7 @@ Deploy via Docker or Railway (one-click): see https://docs.usesend.com
 # Domain setup and DKIM/SPF are managed through the dashboard
 ```
 
-Install SDK: `bun add usesend-js`  
+Install SDK: `$PM add usesend-js`  
 Set `USESEND_API_KEY` and `USESEND_BASE_URL` in env vars.
 
 ### Plunk (self-hosted)
@@ -89,7 +93,7 @@ docker pull useplunk/plunk
 # Follow https://docs.useplunk.com for full self-hosting setup
 ```
 
-Install SDK: `bun add @plunk/node`  
+Install SDK: `$PM add @plunk/node`  
 Set `PLUNK_SECRET_KEY` and `PLUNK_BASE_URL` in env vars.
 
 ### DNS Records (all providers)
@@ -105,7 +109,7 @@ Guide the user to add these DNS records for the sending domain:
 Use React Email (default) for HTML templates:
 
 ```bash
-bun add @react-email/components react-email
+$PM add @react-email/components react-email
 ```
 
 Create `emails/` directory with one file per template. Each template:

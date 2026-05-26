@@ -31,6 +31,10 @@ Spawn **1 subagent** to:
 
 ## Phase 3: Web Push Setup
 
+```bash
+command -v bun >/dev/null 2>&1 && PM=bun || (command -v pnpm >/dev/null 2>&1 && PM=pnpm || PM=npm)
+```
+
 #### Service Worker
 
 Create `public/sw.js`:
@@ -66,7 +70,7 @@ if ('serviceWorker' in navigator) {
 
 Generate VAPID keys (one-time setup):
 ```bash
-bunx web-push generate-vapid-keys
+npx web-push generate-vapid-keys
 ```
 
 Store as env vars: `VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY`, `VAPID_SUBJECT` (mailto:you@domain.com)
@@ -103,7 +107,8 @@ Save subscription to DB linked to the user.
 ## Phase 4: Expo Push Setup
 
 ```bash
-bun add expo-notifications
+command -v bun >/dev/null 2>&1 && PM=bun || (command -v pnpm >/dev/null 2>&1 && PM=pnpm || PM=npm)
+$PM add expo-notifications
 ```
 
 In `app.json`:
@@ -145,7 +150,7 @@ CREATE TABLE push_subscriptions (
 
 ## Phase 6: Server-Side Sending
 
-Install: `bun add web-push` (for web). Expo uses their own HTTP API directly, so no extra package is required.
+Install: `$PM add web-push` (for web). Expo uses their own HTTP API directly, so no extra package is required.
 
 Create `lib/notifications.ts`:
 

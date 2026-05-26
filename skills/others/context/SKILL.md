@@ -133,10 +133,10 @@ A `CLAUDE.md` at the project root is loaded into Claude Code's context on every 
   - Example: `cat $(opensrc path hono)/src/router/trie-router/router.ts`
 
 ## Commands
-- `bun dev` - start dev server
-- `bun test` - run tests
-- `bun run db:migrate` - run migrations
-[Add the actual commands for this project]
+- `bun dev` / `npm run dev` / `pnpm dev` - start dev server
+- `bun test` / `npm test` / `pnpm test` - run tests
+- `bun run db:migrate` / `npm run db:migrate` - run migrations
+[Add the actual commands for this project, using the project's package manager]
 ```
 
 If a `CLAUDE.md` already exists, add the Context Tools section to it rather than overwriting.

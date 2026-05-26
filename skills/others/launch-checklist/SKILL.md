@@ -38,7 +38,7 @@ Spawn **2 parallel subagents** to explore:
 - [ ] **Rate limiting**: auth endpoints (login, signup, password reset) are rate-limited
 - [ ] **CORS**: production origin whitelist is set, not `*`
 - [ ] **CSP headers**: Content-Security-Policy set, at minimum `default-src 'self'`
-- [ ] **Dependencies**: run `bun audit` or equivalent; no critical CVEs
+- [ ] **Dependencies**: run `bun audit` / `npm audit` / `pnpm audit`; no critical CVEs
 
 
 ## Phase 3: Infrastructure

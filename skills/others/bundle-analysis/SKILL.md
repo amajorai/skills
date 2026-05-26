@@ -15,27 +15,31 @@ You are analyzing and optimizing the JavaScript bundle. Work through each phase 
 
 Generate a bundle analysis report:
 
+```bash
+command -v bun >/dev/null 2>&1 && PM=bun || (command -v pnpm >/dev/null 2>&1 && PM=pnpm || PM=npm)
+```
+
 **Next.js**:
 ```bash
 # First install and wire up the analyzer (prerequisite — ANALYZE=true is a no-op without it):
-bun add -d @next/bundle-analyzer
+$PM add -d @next/bundle-analyzer
 # Wrap the config in next.config.(js|mjs|ts):
 #   const withBundleAnalyzer = require('@next/bundle-analyzer')({ enabled: process.env.ANALYZE === 'true' })
 #   module.exports = withBundleAnalyzer(nextConfig)
 # Then build with the env var set:
-ANALYZE=true bun run build
+ANALYZE=true $PM run build
 ```
 
 **Vite**:
 ```bash
-bun add -d rollup-plugin-visualizer
+$PM add -d rollup-plugin-visualizer
 # Add to vite.config: visualizer({ open: true, gzipSize: true })
-bun run build
+$PM run build
 ```
 
 **Other**:
 ```bash
-bun add -d webpack-bundle-analyzer  # or source-map-explorer
+$PM add -d webpack-bundle-analyzer  # or source-map-explorer
 ```
 
 Record baseline metrics:

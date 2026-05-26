@@ -86,15 +86,15 @@ Report back:
 - Which platforms were processed
 - How many icon files were generated per platform
 - Any warnings (image too small, missing native folders, etc.)
-- What the user should do next (e.g. rebuild the app, run `bunx cap sync`)
+- What the user should do next (e.g. rebuild the app, run `npx cap sync`)
 
 
 ## Common Issues
 
 | Problem | Fix |
 |---|---|
-| `tauri icon` not found | Run `bun add -D @tauri-apps/cli` first |
-| Capacitor: no iOS/Android folder | Run `bunx cap add ios` / `bunx cap add android` |
+| `tauri icon` not found | Run `$PM add -D @tauri-apps/cli` first (detect: `command -v bun >/dev/null 2>&1 && PM=bun \|\| (command -v pnpm >/dev/null 2>&1 && PM=pnpm \|\| PM=npm)`) |
+| Capacitor: no iOS/Android folder | Run `npx cap add ios` / `npx cap add android` |
 | Image not square | Crop to square before running (ask user to provide a square image) |
 | SVG source with `pwa-asset-generator` | Add `--type png` flag |
 | Expo: icons look blurry | Source image must be at least 1024×1024px |

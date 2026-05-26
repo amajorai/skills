@@ -14,7 +14,7 @@ You are auditing and optimizing a website for Lighthouse scores. Work through ea
 
 If `{{args}}` is empty, ask for the target URL before running anything. If it's a local dev server, start it first.
 
-Ensure Lighthouse is available: `npx lighthouse --version 2>/dev/null || bunx lighthouse --version 2>/dev/null`
+Ensure Lighthouse is available: `npx lighthouse --version 2>/dev/null`
 
 Run the baseline audit:
 

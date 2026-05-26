@@ -14,7 +14,8 @@ The init command auto-detects your framework (Next.js, Vite, Remix, etc.) and ad
 
 **Manual install:**
 ```bash
-bun add -d react-scan
+command -v bun >/dev/null 2>&1 && PM=bun || (command -v pnpm >/dev/null 2>&1 && PM=pnpm || PM=npm)
+$PM add -d react-scan
 ```
 
 Then add to your root layout (Next.js example):

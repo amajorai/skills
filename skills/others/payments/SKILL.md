@@ -90,7 +90,11 @@ Present the plan and confirm before implementing.
 
 ### Stripe (Web)
 
-1. Install: `bun add stripe`
+```bash
+command -v bun >/dev/null 2>&1 && PM=bun || (command -v pnpm >/dev/null 2>&1 && PM=pnpm || PM=npm)
+```
+
+1. Install: `$PM add stripe`
 2. Create customer on signup (or lazily on first checkout)
 3. Checkout session endpoint: returns hosted checkout URL
 4. Billing portal endpoint: returns portal URL for plan changes/cancellation
@@ -102,7 +106,7 @@ Present the plan and confirm before implementing.
 
 ### LemonSqueezy (Web)
 
-1. Install: `bun add @lemonsqueezy/lemonsqueezy.js`
+1. Install: `$PM add @lemonsqueezy/lemonsqueezy.js`
 2. Create checkout via `createCheckout()` with variant ID
 3. Webhook handler: verify with `X-Signature` header using HMAC-SHA256
 4. Handle `subscription_created` / `subscription_updated` / `subscription_cancelled`
@@ -110,7 +114,7 @@ Present the plan and confirm before implementing.
 
 ### Polar.sh (Web)
 
-1. Install: `bun add @polar-sh/sdk`
+1. Install: `$PM add @polar-sh/sdk`
 2. Create checkout session via `polar.checkouts.create({ products: ['<productId>'] })`
 3. Webhook handler: verify with `validateEvent()` imported from `@polar-sh/sdk/webhooks` (throws `WebhookVerificationError` on a bad signature)
 4. Handle `subscription.created`, `subscription.updated`, `subscription.canceled`, `order.created`
@@ -120,7 +124,7 @@ Present the plan and confirm before implementing.
 
 ### RevenueCat (Mobile)
 
-1. Install: `bun add react-native-purchases` (or native pod/gradle)
+1. Install: `$PM add react-native-purchases` (or native pod/gradle)
 2. Configure with `Purchases.configure({ apiKey })` on app launch
 3. Identify user: `Purchases.logIn(userId)` after auth
 4. Fetch offerings with `Purchases.getOfferings()` and display in paywall UI
@@ -130,7 +134,7 @@ Present the plan and confirm before implementing.
 
 ### Superwall (Mobile)
 
-1. Install: for Expo (SDK 53+) use `bunx expo install expo-superwall` (the current recommended SDK); for bare React Native use the legacy `@superwall/react-native-superwall`
+1. Install: for Expo (SDK 53+) use `npx expo install expo-superwall` (the current recommended SDK); for bare React Native use the legacy `@superwall/react-native-superwall`
 2. Configure: `Superwall.configure({ apiKey })` on app launch
 3. Identify user: `Superwall.shared.identify(userId)` after auth
 4. Register trigger: `Superwall.shared.register('campaign_trigger')` at paywall entry points

@@ -59,12 +59,13 @@ app/og/route.tsx  (or pages/api/og.tsx for Pages Router)
 
 **Hono / Bun server**: use `@vercel/og` or `satori` + `sharp`:
 ```bash
-bun add satori @resvg/resvg-js
+command -v bun >/dev/null 2>&1 && PM=bun || (command -v pnpm >/dev/null 2>&1 && PM=pnpm || PM=npm)
+$PM add satori @resvg/resvg-js
 ```
 
 **Cloudflare Workers**: use `workers-og` (built on Satori, designed for the Workers edge runtime):
 ```bash
-bun add workers-og
+$PM add workers-og
 ```
 
 ### Implementation steps

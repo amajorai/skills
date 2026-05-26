@@ -55,8 +55,9 @@ Spawn **2 parallel subagents**:
 ### PostHog
 
 ```bash
-bun add posthog-js  # frontend
-bun add posthog-node  # backend (server-side events)
+command -v bun >/dev/null 2>&1 && PM=bun || (command -v pnpm >/dev/null 2>&1 && PM=pnpm || PM=npm)
+$PM add posthog-js  # frontend
+$PM add posthog-node  # backend (server-side events)
 ```
 
 - Initialize the browser SDK with the project API key and host from env vars (e.g. `POSTHOG_KEY` and `POSTHOG_HOST`; in Next.js these must be `NEXT_PUBLIC_`-prefixed to reach the client). Omitting the host is a common cause of events silently never arriving — PostHog Cloud uses `https://us.i.posthog.com` or `https://eu.i.posthog.com`.
@@ -71,8 +72,9 @@ bun add posthog-node  # backend (server-side events)
 ### Mixpanel
 
 ```bash
-bun add mixpanel-browser  # frontend
-bun add mixpanel          # backend (server-side events)
+command -v bun >/dev/null 2>&1 && PM=bun || (command -v pnpm >/dev/null 2>&1 && PM=pnpm || PM=npm)
+$PM add mixpanel-browser  # frontend
+$PM add mixpanel          # backend (server-side events)
 ```
 
 - Initialize the browser SDK with your project token from env (e.g. `MIXPANEL_TOKEN`)
