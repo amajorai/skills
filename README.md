@@ -52,7 +52,7 @@ npx skills add amajorai/replay.md
 | Skill | What it does |
 |-------|-------------|
 | [`edge-cases`](skills/edge-cases/SKILL.md) | Discover and harden edge cases across 8 categories using parallel subagents |
-| [`e2e`](skills/e2e/SKILL.md) | End-to-end test authoring and execution. Discovers flows, writes Playwright (web) or Maestro (iOS/Android/React Native/Flutter) tests, fixes failures |
+| [`e2e`](skills/e2e/SKILL.md) | End-to-end test authoring and execution. Discovers flows, uses agent-browser (web), Playwright (desktop/complex web), or Maestro (iOS/Android/React Native/Flutter), writes tests, fixes failures |
 | [`icons`](skills/icons/SKILL.md) | Generate app icons, favicons, and splash screens for Tauri, PWA, Capacitor, Expo, and Electron |
 | [`legal-compliance`](skills/legal-compliance/SKILL.md) | Generate production-ready Privacy Policy, Terms, and DPA covering 20+ regulations |
 | [`app-store-compliance`](skills/app-store-compliance/SKILL.md) | Audit against Apple App Store and Google Play Store review guidelines with a prioritized fix list |
