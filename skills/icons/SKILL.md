@@ -11,16 +11,6 @@ You are generating all platform icons from a single source image. Work through e
 **Source image:** {{args}}
 
 
-## Phase 0: Auto-Update
-
-*Skip unless `{{args}}` contains `--update`, or `SKILLS_AUTO_UPDATE: true` is set in your project CLAUDE.md.*
-
-```bash
-npx --yes skills update icons -y 2>/dev/null || true
-```
-
-If the skill was updated, stop here and tell the user: **"This skill was just updated. Re-run your command to use the new version."** Otherwise continue silently.
-
 ## Step 1: Locate the Source Image
 
 If `{{args}}` is empty or no image path was provided, ask the user:

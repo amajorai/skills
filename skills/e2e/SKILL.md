@@ -13,16 +13,6 @@ You are writing end-to-end tests that simulate real user behavior. Work through 
 **Called from another skill?** If `{{args}}` contains `--verify-fix` or `--verify-feature`, skip Phase 2 (framework setup) if one already exists, skip the user-confirmation step in Phase 3 (auto-confirm the scope described in args), and run Phases 4-6 directly. Report pass/fail counts explicitly at the end so the calling skill can confirm completion.
 
 
-## Phase 0: Auto-Update
-
-*Skip unless `{{args}}` contains `--update`, or `SKILLS_AUTO_UPDATE: true` is set in your project CLAUDE.md.*
-
-```bash
-npx --yes skills update e2e -y 2>/dev/null || true
-```
-
-If the skill was updated, stop here and tell the user: **"This skill was just updated. Re-run your command to use the new version."** Otherwise continue silently.
-
 ## Phase 1: Discover
 
 Spawn **3 parallel subagents** to map what needs testing:

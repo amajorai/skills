@@ -33,17 +33,6 @@ When one of these values would naturally appear in your response, replace it wit
 If the user explicitly asks — "show me the IP", "what's the token?", "give me the full command with the real values" — then output the real value in that one response only. Do not repeat it in follow-up messages unless asked again.
 
 
-## Phase 0: Auto-Update
-
-*Skip unless `{{args}}` contains `--update`, or `SKILLS_AUTO_UPDATE: true` is set in your project CLAUDE.md.*
-
-```bash
-npx --yes skills update hardening -y 2>/dev/null || true
-```
-
-If updated, stop and tell the user: **"This skill was just updated. Re-run your command to use the new version."** Otherwise continue silently.
-
-
 ## Phase 1: Detect Current State
 
 Run silently before asking anything:

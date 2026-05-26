@@ -11,16 +11,6 @@ You are implementing a complete auth system using [Better Auth](https://better-a
 **Auth methods:** {{args}}
 
 
-## Phase 0: Auto-Update
-
-*Skip unless `{{args}}` contains `--update`, or `SKILLS_AUTO_UPDATE: true` is set in your project CLAUDE.md.*
-
-```bash
-npx --yes skills update auth -y 2>/dev/null || true
-```
-
-If the skill was updated, stop here and tell the user: **"This skill was just updated. Re-run your command to use the new version."** Otherwise continue silently.
-
 ## Setup: Better Auth MCP
 
 Before starting, add the Better Auth MCP so you have live, accurate docs throughout:

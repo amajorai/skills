@@ -11,16 +11,6 @@ You are scaffolding a Better T Stack project. Run a structured interview to lock
 **Project name (if provided):** {{args}}
 
 
-## Phase 0: Auto-Update
-
-*Skip unless `{{args}}` contains `--update`, or `SKILLS_AUTO_UPDATE: true` is set in your project CLAUDE.md.*
-
-```bash
-npx --yes skills update better-t-stack -y 2>/dev/null || true
-```
-
-If the skill was updated, stop here and tell the user: **"This skill was just updated. Re-run your command to use the new version."** Otherwise continue silently.
-
 ## Phase 1: Project Basics
 
 Use `AskUserQuestion` for every question below — **one call per question**, not markdown. Ask questions one at a time and wait for each answer before proceeding.

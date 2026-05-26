@@ -11,16 +11,6 @@ You are running load tests to find where the system breaks before users do. Work
 **Target:** {{args}}
 
 
-## Phase 0: Auto-Update
-
-*Skip unless `{{args}}` contains `--update`, or `SKILLS_AUTO_UPDATE: true` is set in your project CLAUDE.md.*
-
-```bash
-npx --yes skills update load-test -y 2>/dev/null || true
-```
-
-If the skill was updated, stop here and tell the user: **"This skill was just updated. Re-run your command to use the new version."** Otherwise continue silently.
-
 ## Phase 1: Define Test Scenarios
 
 Ask the user (combine related questions):
