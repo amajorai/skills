@@ -26,6 +26,22 @@ The end-to-end skill for spinning up a 24/7 production-ready full-stack dev and 
 npx skills add amajorai/vibe.md
 ```
 
+### 🎉 [party.md](https://github.com/amajorai/party.md)
+
+The 24/7 autonomous build agent. Use GitHub issues and a Projects kanban board as your interface — drop in issues, party.md picks them up, delegates to `/ship`, opens PRs, and moves cards automatically. Works on a server, a Pi, or GitHub Actions while you sleep.
+
+```bash
+npx skills add amajorai/party.md
+```
+
+### 🎬 [replay.md](https://github.com/amajorai/replay.md)
+
+Record a live video of your running app and share the link — straight from chat. Detects your environment, lets you choose a recording approach (Playwright, VNC + ffmpeg, or Computer Use API) and a storage provider (Cloudflare R2, Hetzner, YouTube, or local). Auto-detects a vibe.md server for zero-setup cloud recording.
+
+```bash
+npx skills add amajorai/replay.md
+```
+
 ## Skills
 
 ### Core
