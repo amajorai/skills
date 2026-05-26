@@ -10,6 +10,8 @@ You are writing end-to-end tests that simulate real user behavior. Work through 
 
 **Target:** {{args}}
 
+**Called from another skill?** If `{{args}}` contains `--verify-fix` or `--verify-feature`, skip Phase 2 (framework setup) if one already exists, skip the user-confirmation step in Phase 3 (auto-confirm the scope described in args), and run Phases 4-6 directly. Report pass/fail counts explicitly at the end so the calling skill can confirm completion.
+
 
 ## Phase 0: Auto-Update
 
