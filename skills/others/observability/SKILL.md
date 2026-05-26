@@ -23,13 +23,38 @@ If the skill was updated, stop here and tell the user: **"This skill was just up
 
 ## Phase 1: Interview
 
-Ask the user (combine related questions):
+Use `AskUserQuestion` for every question below — **one call per question**, not markdown. Ask questions one at a time and wait for each answer before proceeding.
 
-- **Error tracking**: Sentry (default) or alternative (Highlight, Bugsnag)?
-- **Logging**: Is there an existing logger? Preferred log sink: console (dev), file, or a service like BetterStack Logs / Axiom?
-- **Uptime monitoring**: BetterStack (default) or UptimeRobot? What URLs to monitor?
-- **Alerting**: Where should alerts go: email, Slack, PagerDuty?
-- **Stack**: Frontend framework, backend runtime, any background jobs?
+**Question 1: Error tracking** (single select):
+| Value | Description |
+|---|---|
+| `sentry` | Sentry (default) |
+| `highlight` | Highlight.io |
+| `bugsnag` | Bugsnag |
+
+**Question 2: Log sink** (single select):
+| Value | Description |
+|---|---|
+| `console` | Console only (dev / simple setups) |
+| `betterstack-logs` | BetterStack Logs |
+| `axiom` | Axiom |
+| `file` | File-based logging |
+
+**Question 3: Uptime monitoring** (single select):
+| Value | Description |
+|---|---|
+| `betterstack` | BetterStack (default) |
+| `uptimerobot` | UptimeRobot |
+
+**Question 4: Alerting destination** (multi-select):
+| Value | Description |
+|---|---|
+| `email` | Email |
+| `slack` | Slack |
+| `pagerduty` | PagerDuty |
+
+After alerting, ask as free text:
+> What is your frontend framework, backend runtime, and do you have any background jobs?
 
 Confirm tools and alert destinations before proceeding.
 

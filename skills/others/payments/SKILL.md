@@ -23,21 +23,33 @@ If the skill was updated, stop here and tell the user: **"This skill was just up
 
 ## Phase 1: Interview
 
-Ask the user (combine related questions):
+Use `AskUserQuestion` for every question below — **one call per question**, not markdown. Ask questions one at a time and wait for each answer before proceeding.
 
-- **Platform**: Web or mobile (iOS/Android)?
-- **Provider**:
-  - Web: Stripe, LemonSqueezy, or Polar.sh?
-    - Stripe: direct card processing, full control, best ecosystem
-    - LemonSqueezy: built-in VAT/tax handling, good for solo/EU projects
-    - Polar.sh: open-source/developer-first, built-in sponsorships, benefits, and issue funding; great for OSS or dev tools
-  - Mobile: Superwall or RevenueCat?
-    - Superwall: dynamic paywalls configurable without deploys; iOS-first, Android in beta
-    - RevenueCat: abstracts App Store + Google Play billing; best for cross-platform subscriptions and analytics
-- **Products**: What plans/products exist? Prices, billing intervals, trial periods?
-- **Gates**: Which features are paywalled? What happens when a user exceeds their plan?
-- **Existing auth**: How are users identified? What is the user model (table/schema)?
-- **Stack**: Framework, language, existing API layer?
+**Question 1: Platform** (single select):
+| Value | Description |
+|---|---|
+| `web` | Web app |
+| `mobile` | Mobile app (iOS / Android) |
+| `both` | Both web and mobile |
+
+**Question 2a: Web payment provider** (single select; skip if platform is mobile-only):
+| Value | Description |
+|---|---|
+| `stripe` | Stripe — direct card processing, full control, best ecosystem |
+| `lemonsqueezy` | LemonSqueezy — built-in VAT/tax handling, great for solo/EU |
+| `polar` | Polar.sh — open-source, OSS-friendly, built-in sponsorships & benefits |
+
+**Question 2b: Mobile payment provider** (single select; skip if platform is web-only):
+| Value | Description |
+|---|---|
+| `revenuecat` | RevenueCat — abstracts App Store + Google Play; best cross-platform |
+| `superwall` | Superwall — dynamic paywalls without deploys; iOS-first |
+
+**Question 3: Products & billing** — ask as free text:
+> Describe your plans/products (names, prices, billing intervals, trial periods, e.g. "Pro $9/mo with 7-day trial, Enterprise $49/mo").
+
+**Question 4: Gating & stack** — ask as free text:
+> Which features are paywalled, and what is your framework / API layer / user model?
 
 Confirm the product catalog and gating rules before proceeding.
 

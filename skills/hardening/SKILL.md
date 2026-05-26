@@ -37,6 +37,7 @@ ss -tlnp
 curl -s --max-time 2 http://169.254.169.254/latest/meta-data/instance-id 2>/dev/null && echo "IS_AWS" || true
 curl -s --max-time 2 http://169.254.169.254/latest/meta-data/services/domain 2>/dev/null | grep -qi lightsail && echo "IS_LIGHTSAIL" || true
 curl -s --max-time 2 http://169.254.0.1/metadata 2>/dev/null | grep -qi hetzner && echo "IS_HETZNER" || true
+curl -s --max-time 2 http://169.254.169.254/metadata/v1/id 2>/dev/null && echo "IS_DIGITALOCEAN" || true
 which fail2ban-client ufw clamav lynis auditd 2>/dev/null
 aa-status 2>/dev/null | head -3 || echo "AppArmor not active"
 systemctl is-active auditd 2>/dev/null && (auditctl -l 2>/dev/null | grep -q . && echo "AUDIT_RULES_PRESENT" || echo "AUDIT_NO_CUSTOM_RULES") || echo "AUDITD_NOT_RUNNING"
@@ -50,74 +51,87 @@ Note: SSH port, password auth state, SSH key presence, cloud provider, open port
 
 ## Phase 2: Full Interview
 
-Present everything in one message. Tailor warnings based on Phase 1 findings.
+First, show the server summary as a single text message (do not use AskUserQuestion for this):
 
-> **Server hardening setup: tell me what you want and I'll implement it all in one pass.**
->
-> I've scanned your server. Here's what I found:
-> - **Current SSH port:** [detected port]
-> - **Password auth:** [on/off]
+> **Server hardening setup — I've scanned your server. Here's what I found:**
+> - **SSH port:** [detected port]
+> - **Password auth:** [on / off]
 > - **SSH keys:** [present / not found]
 > - **Running as:** [root / user]
-> - **Provider detected:** [AWS / Hetzner / OVH / unknown]
+> - **Provider:** [AWS Lightsail / EC2 / Hetzner / DigitalOcean / OVH / unknown]
 > - **Open ports:** [list]
+> - **Docker:** [present with ports: X,Y / not installed]
+> - **NOPASSWD sudo:** [found / none]
 >
-> ---
->
-> **A. SSH Key Setup** *(only shown if no keys detected)*
-> ⚠️ No SSH keys configured. Disabling password auth without keys = **permanent lockout**.
-> - [ ] Yes: generate a key pair and add it first (required to safely disable password auth)
-> - [ ] Skip: I'll add my key manually before we proceed
->
-> **B. Non-root sudo user** *(only shown if running as root)*
-> - [ ] Yes: create a non-root sudo user → **Username?**
-> - [ ] Skip
->
-> **C. Harden SSH**
-> - [ ] Change SSH port away from 22 → **What port?** (default: 2222)
-> - [ ] Disable password auth ⚠️ Only safe if keys confirmed working
-> - [ ] Disable root login via SSH
-> - [ ] Restrict SSH to specific users (`AllowUsers`) → **Which usernames?**
-> - [ ] Disable TCP/agent forwarding
-> - [ ] Drop idle sessions (~10 min idle)
-> - [ ] Restrict to modern crypto only (aes256-gcm + chacha20-poly1305, ETM MACs, curve25519)
->
-> **D. UFW Firewall**
-> - [ ] Enable UFW with rate-limited SSH + deny everything else
-> *(If Docker detected)* ⚠️ Docker publishes ports via its own iptables rules that bypass UFW — I'll audit every Docker-published port.
->
-> **E. Provider-level Firewall** *(only shown for AWS/Hetzner/OVH)*
-> [For AWS Lightsail]: ⚠️ Lightsail has its **own** firewall separate from UFW. SSH port change MUST be added there too or you're locked out. Same for 80/443.
-> [For EC2]: Security Groups need updating too.
-> - [ ] Yes: configure via CLI
-> - [ ] No: I'll update the provider firewall manually
->
-> **F. fail2ban** — bans IPs that fail SSH login too many times
-> - [ ] Install and configure
->
-> **G. Unattended security updates** — auto-applies patches, no reboot
-> - [ ] Enable
->
-> **H. System hardening**
-> - [ ] Kernel sysctl (network: redirects, SYN-flood, anti-spoof, ICMP; kernel: ASLR, ptrace, kptr/dmesg restrict)
-> - [ ] Disable core dumps
-> - [ ] Filesystem protections (protected_hardlinks/symlinks/fifos/regular)
-> - [ ] Verify AppArmor enforcing
-> - [ ] Disable unused services (avahi, cups, bluetooth)
-> - [ ] Lock root password
-> - [ ] Password policy in `/etc/login.defs` (SHA512, UMASK 022, HOME_MODE 0750)
-> - [ ] auditd — install + meaningful custom ruleset (default install records nothing useful)
-> - [ ] Review sudo NOPASSWD policy *(only shown if NOPASSWD detected)*
->
-> **I. Login banner**
-> - [ ] Set up login banner → **Text?** (blank = standard legal warning)
->
-> **J. Optional extras**
-> - [ ] Lynis: full security audit after hardening
-> - [ ] ClamAV: antivirus with daily scans
-> - [ ] SSH 2FA: TOTP on top of SSH key
+> I'll ask 5 quick questions, then plan and implement everything in one pass.
 
-Wait for answers. Summarize the plan, then ask: **"Ready to proceed?"**
+Then use **AskUserQuestion** for each of the 5 groups below. Each question uses `multiSelect: true`. Present them one at a time, in order — do not combine them into one call. Show or hide individual options based on the Phase 1 findings as noted.
+
+---
+
+**Question 1 — Account & Access**
+
+Options (include only those that apply based on Phase 1):
+- "Set up SSH keys (generate + install)" — *only if NO_KEYS detected*
+- "Create non-root sudo user" — *only if running as root; follow up for username if selected*
+- "Disable password authentication" — *only if KEYS_PRESENT; omit if no keys (would cause lockout)*
+- "Disable root login via SSH"
+
+---
+
+**Question 2 — SSH Hardening**
+
+Options (always show all 4):
+- "Randomize SSH port (I'll auto-generate a secure random port)"
+- "Restrict SSH to specific users (AllowUsers)" — *follow up for usernames if selected*
+- "Disable TCP/agent forwarding + drop idle sessions (~10 min)"
+- "Modern ciphers only (curve25519, aes256-gcm + chacha20-poly1305, ETM MACs)"
+
+---
+
+**Question 3 — Firewall & Intrusion Prevention**
+
+Options (always show all 4):
+- "Enable UFW (deny all inbound, rate-limit SSH)"
+- "Configure [PROVIDER] firewall via CLI" — *replace [PROVIDER] with detected name; if unknown show "Configure provider firewall (tell me which one)"*
+- "fail2ban (auto-ban brute-force SSH IPs)"
+- "Unattended security updates (auto-patch, no reboot)"
+
+---
+
+**Question 4 — System Hardening**
+
+Options (always show all 4; if NOPASSWD_PRESENT was detected, replace the 4th with "Review/tighten sudo NOPASSWD policy"):
+- "Kernel hardening (sysctl: SYN-flood, anti-spoof, ASLR, ptrace/kptr restrict)"
+- "Core dumps disabled + filesystem protections (hardlinks, symlinks, fifos)"
+- "AppArmor enforcing + disable unused services (avahi, cups, bluetooth)"
+- "auditd custom ruleset + lock root password + password policy (SHA512, UMASK 022)"
+
+---
+
+**Question 5 — Extras & Monitoring**
+
+Options (always show all 4):
+- "Login banner (standard legal warning — or provide custom text)"
+- "Lynis security audit (runs after hardening, targets score ≥70)"
+- "ClamAV antivirus daemon (daily scans at 3am, ~50 MB RAM overhead)"
+- "SSH 2FA with TOTP ⚠️ must verify in a fresh session before closing this one"
+
+---
+
+After collecting answers, summarize the full plan in plain text and ask: **"Ready to proceed?"** Do not begin any implementation until the user confirms.
+
+
+## Phase 2.5: Plan
+
+Call `EnterPlanMode` (or switch to the strongest available model with `/model opus` if unavailable).
+
+Draft the implementation plan:
+1. List every selected step in safe execution order, respecting all dependencies (provider FW before UFW enable, UFW before sshd restart, etc.)
+2. Note every safety gate (subagent SSH verification checkpoints, backup steps, port 22 transition windows)
+3. Record the randomly generated SSH port that will be used (generate it now: `shuf -i 49152-65535 -n 1` — store it as `NEW_PORT` for the rest of the run)
+
+Present the plan. Do not proceed until the user approves. Call `ExitPlanMode` after approval.
 
 
 ## Phase 3: Pre-flight Safety Checks
@@ -125,12 +139,36 @@ Wait for answers. Summarize the plan, then ask: **"Ready to proceed?"**
 Before writing any config file, run these checks based on selections:
 
 **If "disable password auth" selected:**
-> ⚠️ Ask user to open a NEW terminal and confirm key login works: `ssh -i <key> USER@{{args}} echo "key works"`. Do not disable password auth until they confirm.
+Spawn a subagent to verify key auth works before proceeding (this is a separate shell — the truth source):
+
+```
+Agent({
+  description: "Verify SSH key auth before disabling password auth",
+  prompt: "Run: ssh -o StrictHostKeyChecking=no -o PasswordAuthentication=no -o ConnectTimeout=15 USER@HOST echo 'KEY_AUTH_OK'. Report SUCCESS if output contains KEY_AUTH_OK, otherwise FAILURE with the exact error."
+})
+```
+
+Do not disable password auth until the subagent reports SUCCESS.
 
 **If "change SSH port" selected:**
-- Remind: new port must be opened in UFW AND provider firewall BEFORE sshd restarts.
-- Lightsail: must update Lightsail firewall or access is lost when sshd moves.
-- EC2: must update the Security Group.
+
+> ❌ **LOCKOUT RULE — read this before touching anything.**
+>
+> The only safe sequence when changing the SSH port is:
+> 1. Open NEW_PORT in UFW — **while keeping port 22 open in UFW too**
+> 2. Open NEW_PORT in the provider firewall — **while keeping port 22 open there too**
+> 3. Restart sshd
+> 4. Ask the user to verify in a **NEW terminal**: `ssh -p NEW_PORT USER@HOST echo "ok"`
+> 5. Only after step 4 succeeds: remove port 22 from UFW
+> 6. Only after step 5: remove port 22 from the provider firewall
+>
+> **Never enable UFW or restart sshd without port 22 still open at both layers.** Closing port 22 before the new port is confirmed in a live terminal = lockout. If this happens, rescue mode is required — see [references/rescue-mode.md](references/rescue-mode.md).
+>
+> This sequence is enforced in Phases 7 and 8. Do not deviate from it.
+
+- Lightsail: port 22 must stay open in the Lightsail firewall until new port is confirmed.
+- EC2: port 22 must stay open in the Security Group until new port is confirmed.
+- DigitalOcean: port 22 must stay open in the Cloud Firewall until new port is confirmed.
 
 **If no keys and user skipped key setup:**
 > ❌ Cannot safely disable password auth. Either help them set up keys first or skip that step.
@@ -143,10 +181,18 @@ Run on the **local machine**:
 ```bash
 ssh-keygen -t ed25519 -C "vps-hardening" -f ~/.ssh/id_ed25519_vps
 ssh-copy-id -i ~/.ssh/id_ed25519_vps.pub USER@{{args}}
-ssh -i ~/.ssh/id_ed25519_vps USER@{{args}} echo "Key auth confirmed"
 ```
 
-**Do not continue until the user confirms key login works.**
+Then spawn a subagent to verify key auth from a clean shell:
+
+```
+Agent({
+  description: "Verify new SSH key works",
+  prompt: "Run: ssh -o StrictHostKeyChecking=no -o PasswordAuthentication=no -o ConnectTimeout=15 -i ~/.ssh/id_ed25519_vps USER@HOST echo 'KEY_OK'. Report SUCCESS if output contains KEY_OK, otherwise FAILURE with the exact error."
+})
+```
+
+Do not continue until the subagent reports SUCCESS.
 
 
 ## Phase 5: Create Non-Root Sudo User (if selected: B)
@@ -160,7 +206,16 @@ chown -R USERNAME:USERNAME /home/USERNAME/.ssh
 chmod 700 /home/USERNAME/.ssh && chmod 600 /home/USERNAME/.ssh/authorized_keys
 ```
 
-Instruct user: **Open a new terminal and confirm SSH works as USERNAME before continuing.**
+Spawn a subagent to verify the new user can SSH in (separate shell, clean state):
+
+```
+Agent({
+  description: "Verify SSH as new non-root user",
+  prompt: "Run: ssh -o StrictHostKeyChecking=no -o ConnectTimeout=15 USERNAME@HOST echo 'USER_OK'. Report SUCCESS if output contains USER_OK, otherwise FAILURE with the exact error."
+})
+```
+
+Do not continue until the subagent reports SUCCESS.
 
 
 ## Phase 6: Harden SSH (if selected: C)
@@ -190,39 +245,75 @@ apt-get install -y ufw
 ufw --force reset
 ufw default deny incoming
 ufw default allow outgoing
-ufw limit NEW_PORT/tcp comment "SSH"
-ss -tlnp
 ```
 
-⚠️ If Docker is installed: Docker writes its own iptables rules into the `DOCKER` / `DOCKER-USER` chains, which are evaluated **before** UFW's FORWARD rules. Containers with `-p PORT:PORT` are reachable from the internet even when UFW says DENY.
+⚠️ If Docker is installed: Docker writes its own iptables rules into the `DOCKER` / `DOCKER-USER` chains, evaluated **before** UFW's FORWARD rules. Containers with `-p PORT:PORT` are exposed even when UFW says DENY. **Do not edit `/etc/ufw/before.rules` for Docker — use `DOCKER-USER` chain rules or rebind containers to `127.0.0.1`.**
+
+Auto-detect Docker-published ports and decide automatically which ones to keep open based on what the containers are (web servers → allow 80/443, databases bound to 127.0.0.1 → no rule needed, management UIs → allow with restriction):
 
 ```bash
 docker ps --format 'table {{.Names}}\t{{.Ports}}' 2>/dev/null
 ```
 
-Audit every Docker-published port the same way you audit a UFW `allow`. To protect sensitive ports: bind containers to `127.0.0.1:PORT:PORT` and use a reverse proxy, or add rules to the `DOCKER-USER` chain (UFW cannot manage this chain).
+Only ask the user if a port's purpose is ambiguous. For clearly internal ports (5432, 3306, 6379, 27017, etc.), skip the UFW allow — do not open them.
 
-Ask: "Which of these ports need to stay open?" Then apply their answers and enable UFW:
+Add all rules — **always keeping both port 22 and NEW_PORT open if a port change was selected:**
 
 ```bash
+# If changing SSH port: keep BOTH open until new port is confirmed
+ufw limit NEW_PORT/tcp comment "SSH (new)"
+ufw allow 22/tcp    comment "SSH (old — remove ONLY after new port confirmed)"
+
+# Web/app ports identified above:
 # ufw allow <PORT>/tcp comment "<label>"
+
 ufw --force enable
 ufw status verbose
 ```
 
-Restart sshd. Instruct user: **Open a new terminal and SSH on the new port before closing this session.**
+**⛔ STOP HERE if provider firewall selected.** Run Phase 8 Part 1 (open NEW_PORT there, keep port 22 open) before restarting sshd. Return here after Phase 8 Part 1 is done.
+
+Now restart sshd:
 
 ```bash
 systemctl restart sshd
 ss -tlnp | grep ssh
 ```
 
+Spawn a subagent to verify the new SSH port from a completely separate shell (this is the source of truth — not just checking if sshd is listening, but actually connecting through all firewall layers):
+
+```
+Agent({
+  description: "Verify SSH on new port through all firewall layers",
+  prompt: "Run: ssh -o StrictHostKeyChecking=no -o ConnectTimeout=15 -p NEW_PORT USER@HOST echo 'NEW_PORT_OK'. Report SUCCESS if output contains NEW_PORT_OK, otherwise FAILURE with the exact error. This test goes through UFW and the provider firewall — a failure means one of those layers is still blocking the port."
+})
+```
+
+If the subagent reports FAILURE: **do NOT remove port 22**. Diagnose — check `systemctl status sshd`, `ss -tlnp | grep ssh`, `ufw status verbose`, and whether the provider firewall has the new port open.
+
+**Only after the subagent reports SUCCESS**, remove port 22 from UFW:
+
+```bash
+ufw delete allow 22/tcp
+ufw status verbose
+```
+
+Then return to Phase 8 Part 2 to remove port 22 from the provider firewall.
+
 
 ## Phase 8: Provider Firewall (if selected: E)
 
-For CLI commands to configure AWS Lightsail, EC2 Security Groups, Hetzner, and OVH firewalls, see [references/provider-firewall.md](references/provider-firewall.md).
+> ⚠️ **If changing SSH port:** this phase runs in **two parts** — one before sshd restarts and one after the new port is confirmed. If you were sent here from the Phase 7 STOP gate, you are in Part 1.
 
-⚠️ Always add the new SSH port to the provider firewall **before** restarting sshd. Keep the old port open until the new one is confirmed working.
+**Part 1 — before sshd restart:** Open NEW_PORT at the provider level. Keep port 22 open. Then return to Phase 7 to restart sshd and verify.
+
+**Part 2 — after new port confirmed in a fresh terminal:** Remove port 22 from the provider firewall.
+
+For CLI commands to configure AWS Lightsail, EC2 Security Groups, Hetzner, DigitalOcean, and OVH firewalls (both the open and the revoke commands), see [references/provider-firewall.md](references/provider-firewall.md).
+
+If the user chose **"Other provider"**: ask which provider/control panel they use, then research the correct CLI or API commands on the spot and walk them through it. Do not skip this step — every provider with an edge-level firewall must be updated.
+
+If the worst happens and you get locked out despite these precautions, see [references/rescue-mode.md](references/rescue-mode.md) for provider-by-provider recovery steps.
 
 
 ## Phase 9: fail2ban (if selected: F)
@@ -335,3 +426,9 @@ For full installation commands for Lynis, ClamAV, and SSH 2FA (TOTP), see [refer
 ## Phase 14: Final Verification & Completion
 
 For the full verification command block and the per-selection completion checklist, see [references/completion-checklist.md](references/completion-checklist.md).
+
+---
+
+## Recovery: If You Get Locked Out
+
+If SSH access is lost despite these precautions, do not attempt further SSH changes — use rescue mode to access the server out-of-band and fix the config. See [references/rescue-mode.md](references/rescue-mode.md) for step-by-step instructions for Hetzner, DigitalOcean, AWS, OVH, and other providers.

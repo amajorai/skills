@@ -35,13 +35,36 @@ Identify: which checks to run, how to run them, what secrets the deploy needs.
 
 ## Phase 2: Interview
 
-Ask the user (combine related questions):
+Use `AskUserQuestion` for every question below — **one call per question**, not markdown. Ask questions one at a time and wait for each answer before proceeding.
 
-- **Checks**: Which of these exist: lint, typecheck, unit tests, E2E tests, build?
-- **Preview deploys**: Should PRs get preview deploy URLs?
-- **Deploy on merge**: Auto-deploy to production when PR merges to main?
-- **Secrets needed**: What API keys does the deploy step need?
-- **Monorepo**: Is this a monorepo? Which packages need CI?
+**Question 1: CI checks** (multi-select; pre-select based on Phase 1 exploration):
+| Value | Description |
+|---|---|
+| `lint` | Lint (e.g. ESLint, Biome) |
+| `typecheck` | Type-check (tsc) |
+| `test` | Unit tests |
+| `e2e` | E2E tests (Playwright, Cypress) |
+
+**Question 2: Preview deploys** (single select):
+| Value | Description |
+|---|---|
+| `yes` | Yes — post a preview URL on every PR |
+| `no` | No |
+
+**Question 3: Production deploy** (single select):
+| Value | Description |
+|---|---|
+| `yes` | Yes — auto-deploy to production on merge to main |
+| `no` | No |
+
+**Question 4: Monorepo** (single select):
+| Value | Description |
+|---|---|
+| `no` | Single package |
+| `yes` | Monorepo — specify which packages need CI |
+
+After the monorepo question, ask as free text:
+> What API keys or secrets does the deploy step need? (names only, e.g. "VERCEL_TOKEN, DATABASE_URL")
 
 
 ## Phase 3: CI Workflow (checks on every PR)

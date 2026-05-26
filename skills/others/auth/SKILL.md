@@ -34,12 +34,33 @@ This command auto-configures the remote Better Auth docs MCP server in Claude Co
 
 ## Phase 1: Interview
 
-Ask the user (combine related questions):
+Use `AskUserQuestion` for every question below — **one call per question**, not markdown. Ask questions one at a time and wait for each answer before proceeding.
 
-- **Methods**: OAuth (which providers: Google, GitHub, Discord?), magic link, username/password, or passkeys?
-- **Stack**: Framework, database, ORM?
-- **User model**: What fields beyond email/name are needed? Roles? Teams/orgs?
-- **Session strategy**: Cookie-based sessions or JWT tokens? Expiry preferences?
+**Question 1: Auth methods** (multi-select):
+| Value | Description |
+|---|---|
+| `oauth` | OAuth via social providers (Google, GitHub, Discord) |
+| `magic-link` | Magic link (passwordless email) |
+| `password` | Username / password |
+| `passkeys` | Passkeys (WebAuthn) |
+
+**Question 2: OAuth providers** (multi-select; skip if OAuth not selected):
+| Value | Description |
+|---|---|
+| `google` | Google |
+| `github` | GitHub |
+| `discord` | Discord |
+
+**Question 3: Stack** — ask as free text:
+> What is your framework, database, and ORM? (e.g. "Next.js, PostgreSQL, Drizzle")
+
+**Question 4: User model & session** (multi-select):
+| Value | Description |
+|---|---|
+| `roles` | Role-based access control (admin / user / etc.) |
+| `teams-orgs` | Teams or organizations per user |
+| `jwt` | JWT tokens instead of cookie-based sessions |
+| `custom-expiry` | Custom session expiry (shorter than default 30 days) |
 
 
 ## Phase 2: Explore

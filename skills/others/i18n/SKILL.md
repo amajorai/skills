@@ -23,13 +23,35 @@ If the skill was updated, stop here and tell the user: **"This skill was just up
 
 ## Phase 1: Interview
 
-Ask the user (combine related questions):
+Use `AskUserQuestion` for every question below — **one call per question**, not markdown. Ask questions one at a time and wait for each answer before proceeding.
 
-- **Locales**: Which languages? Is one the default/fallback?
-- **Library**: `next-intl` (Next.js), `react-i18next`, `i18next`, `paraglide` (Inlang, recommended for type-safety)?
-- **Routing**: Locale in URL (`/en/about`, `/fr/about`) or subdomain (`fr.yourdomain.com`)?
-- **Translation workflow**: Self-translated, Google Translate as a starting point, or connecting to Crowdin/Lokalise?
-- **RTL**: Any right-to-left locales (Arabic, Hebrew)?
+**Question 1: Target locales** (skip if {{args}} is set) — ask as free text:
+> Which languages do you want to support, and which is the default/fallback? (e.g. "en (default), es, fr, de")
+
+**Question 2: i18n library** (single select):
+| Value | Description |
+|---|---|
+| `paraglide` | Paraglide (Inlang) — compile-time, zero overhead, fully type-safe (Recommended) |
+| `next-intl` | next-intl — Next.js ecosystem familiarity |
+| `react-i18next` | react-i18next / i18next — widest ecosystem, runtime |
+
+**Question 3: Locale routing** (single select):
+| Value | Description |
+|---|---|
+| `url-prefix` | URL prefix — `/en/about`, `/fr/about` |
+| `subdomain` | Subdomain — `fr.yourdomain.com` |
+| `none` | No locale routing (single domain, no URL change) |
+
+**Question 4: Translation workflow** (single select):
+| Value | Description |
+|---|---|
+| `self` | Self-translated manually |
+| `machine` | Machine translation (Google Translate / DeepL) as starting point |
+| `crowdin` | Crowdin |
+| `lokalise` | Lokalise |
+
+After translation workflow, ask as a yes/no single select:
+> Do any of your target locales require right-to-left (RTL) layout? (e.g. Arabic, Hebrew)
 
 Recommend: **Paraglide** for new projects (compile-time, zero runtime overhead, fully type-safe). **next-intl** for Next.js projects that want ecosystem familiarity.
 

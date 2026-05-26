@@ -23,7 +23,7 @@ If the skill was updated, stop here and tell the user: **"This skill was just up
 
 ## Phase 1: Project Basics
 
-Use `AskUserQuestion` with these questions (send as one batch: 4 questions max per call):
+Use `AskUserQuestion` for every question below — **one call per question**, not markdown. Ask questions one at a time and wait for each answer before proceeding.
 
 **Question 1: Project name** (skip if {{args}} is set):
 > What is your project name?
@@ -31,17 +31,19 @@ Use `AskUserQuestion` with these questions (send as one batch: 4 questions max p
 **Question 2: Where to create it:**
 > Where should the project be created? Provide a full absolute path (e.g. `C:\Code`, `/home/user/projects`, `~/projects`). Leave blank to use the current directory.
 
-**Question 3: Package manager:**
+**Question 3: Package manager** (single select):
 Options: `bun` (Recommended: fastest), `npm`, `pnpm`
 
-**Question 4: Git + install:**
-- Initialize a git repository? (yes / no)
-- Install dependencies automatically? (yes / no)
+**Question 4a: Git init** (single select):
+- Initialize a git repository? Yes / No
+
+**Question 4b: Auto-install** (single select):
+- Install dependencies automatically? Yes / No
 
 
 ## Phase 2: Stack Interview
 
-Send the next batch of questions using `AskUserQuestion`. Use `multiSelect: true` for array options.
+Use `AskUserQuestion` for every question below — **one call per question**. Use `multiSelect: true` for array options.
 
 ### Batch A: Frontend & Backend
 
