@@ -8,6 +8,9 @@ Simple, minimal, lean skills that people don't think about when shipping apps. T
 [![License](https://shieldcn.dev/github/license/amajorai/skills.svg)](https://github.com/amajorai/skills)
 [![Issues](https://shieldcn.dev/github/issues/amajorai/skills.svg)](https://github.com/amajorai/skills/issues)
 
+> [!NOTE]
+> These skills have been built and tested with **Claude Code**. Codex support is untested. If you try them on Codex, we'd love your help. [Open an issue](https://github.com/amajorai/skills/issues) to share what works and what doesn't.
+
 ## Flagship
 
 ### 📦 [ship.md](https://github.com/amajorai/ship.md)
