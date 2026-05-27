@@ -17,7 +17,7 @@ Simple, minimal, lean skills that people don't think about when shipping apps. T
 The end-to-end skill for shipping features without gaps. Up to 10 phases from interview to final verify. Wraps Claude Code's built-in `/batch`, `/goal`, and `/model` commands into a single quality-gated pipeline.
 
 ```bash
-npx skills add amajorai/ship.md
+npx skills add -g amajorai/ship.md
 ```
 
 ### 🪅 [vibe.md](https://github.com/amajorai/vibe.md)
@@ -25,7 +25,7 @@ npx skills add amajorai/ship.md
 The end-to-end skill for spinning up a 24/7 production-ready full-stack dev and deploy environment. One interview, one clean pass: VPS provisioned, Bun installed, GitHub CLI wired, deployment platform running, and your project scaffolded and shipping.
 
 ```bash
-npx skills add amajorai/vibe.md
+npx skills add -g amajorai/vibe.md
 ```
 
 ### 🎉 [party.md](https://github.com/amajorai/party.md)
@@ -33,7 +33,7 @@ npx skills add amajorai/vibe.md
 The 24/7 autonomous build agent. Use GitHub issues and a Projects kanban board as your interface — drop in issues, party.md picks them up, delegates to `/ship`, opens PRs, and moves cards automatically. Works on a server, a Pi, or GitHub Actions while you sleep.
 
 ```bash
-npx skills add amajorai/party.md
+npx skills add -g amajorai/party.md
 ```
 
 ### 🎬 [replay.md](https://github.com/amajorai/replay.md)
@@ -41,7 +41,7 @@ npx skills add amajorai/party.md
 Record a live video of your running app and share the link — straight from chat. Detects your environment, lets you choose a recording approach (Playwright, VNC + ffmpeg, or Computer Use API) and a storage provider (Cloudflare R2, Hetzner, YouTube, or local). Auto-detects a vibe.md server for zero-setup cloud recording.
 
 ```bash
-npx skills add amajorai/replay.md
+npx skills add -g amajorai/replay.md
 ```
 
 ## Skills
@@ -103,7 +103,7 @@ npx skills add amajorai/replay.md
 ## Quickstart
 
 ```bash
-npx skills add amajorai/skills
+npx skills add -g amajorai/skills
 ```
 
 Installs all skills and automatically configures them for whichever coding agents you have installed (Claude Code, Codex, Cursor, and 50+ others).
@@ -111,23 +111,7 @@ Installs all skills and automatically configures them for whichever coding agent
 Install a single skill:
 
 ```bash
-npx skills add amajorai/skills/skills/hardening
-```
-
-### Auto-Update
-
-Auto-update is **disabled by default**. Skills do not self-update unless you explicitly opt in — this prevents untrusted code from running automatically during a session (supply chain hygiene).
-
-To update a skill on a single invocation, pass `--update`:
-
-```
-/lighthouse https://mysite.com --update
-```
-
-Or enable it project-wide in your CLAUDE.md:
-
-```
-SKILLS_AUTO_UPDATE: true
+npx skills add -g amajorai/skills/skills/hardening
 ```
 
 ### Claude Code plugin
