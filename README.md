@@ -114,6 +114,26 @@ Install a single skill:
 npx skills add -g amajorai/skills/skills/hardening
 ```
 
+### Update
+
+```bash
+# Update a single skill by name
+npx skills update hardening
+
+# Update multiple specific skills
+npx skills update hardening lighthouse seo
+
+# Update all installed skills (interactive scope prompt)
+npx skills update
+
+# Update only global or project skills
+npx skills update -g
+npx skills update -p
+
+# Non-interactive (auto-detects scope)
+npx skills update -y
+```
+
 ### Claude Code plugin
 
 ```
