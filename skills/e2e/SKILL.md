@@ -1,6 +1,6 @@
 ---
 name: e2e
-description: End-to-end test authoring and execution for web, mobile, React Native, or Flutter apps. Discovers user flows, sets up the E2E framework if needed, writes tests covering the golden path and critical edge cases, runs them, and fixes failures. Primary tool is agent-browser (web). Falls back to Playwright (desktop/complex web), Maestro (iOS/Android/React Native/Flutter), or Computer Use (web, last resort).
+description: End-to-end test authoring and execution for web, mobile, React Native, or Flutter apps. Discovers user flows, sets up the E2E framework if needed, writes tests covering the golden path and critical edge cases, runs them, and fixes failures. Primary tool is agent-browser (web). Falls back to Playwright (desktop/complex web), Maestro (iOS/Android/React Native/Flutter), or Claude for Chrome (web, last resort).
 argument-hint: <feature, flow, or area to cover>
 ---
 
@@ -36,8 +36,8 @@ If a framework already exists, use it. If not, choose:
 
 | Platform | Primary | Fallback | Last resort |
 |----------|---------|---------|------------|
-| Web | **agent-browser** | Playwright (if agent-browser unavailable or insufficient) | Computer Use |
-| Desktop app | Playwright | — | Computer Use |
+| Web | **agent-browser** | Playwright (if agent-browser unavailable or insufficient) | Claude for Chrome (`/chrome`) |
+| Desktop app | Playwright | — | Computer Use (native macOS) |
 | iOS / Android (native) | **Maestro** | — | — |
 | React Native | **Maestro** | — | — |
 | Flutter | **Maestro** | — | — |
@@ -49,6 +49,8 @@ agent-browser --version 2>/dev/null && echo "AGENT_BROWSER_AVAILABLE" || echo "A
 npx playwright --version 2>/dev/null && echo "PLAYWRIGHT_AVAILABLE" || echo "PLAYWRIGHT_MISSING"
 maestro --version 2>/dev/null && echo "MAESTRO_AVAILABLE" || echo "MAESTRO_MISSING"
 ```
+
+For **Claude for Chrome** there is no CLI to version-check: it is the built-in browser automation that runs through the Claude in Chrome extension (the modern replacement for browser-based Computer Use). It is available when the extension is connected: confirm by attempting a tab-context call, or ask the user to run `/chrome` to connect. See the setup steps in Phase 2.
 
 **Always confirm the framework choice with the user before setup** (skip confirmation in `--verify-fix`/`--verify-feature` mode).
 
@@ -88,6 +90,20 @@ echo "Using: $PM"
 3. Confirm device/emulator: `maestro devices`
 4. Create `maestro/` folder at project root
 5. Write a trivial smoke flow to `maestro/smoke.yaml`, verify: `maestro test maestro/smoke.yaml`
+
+### Claude for Chrome (web, last resort)
+
+Claude for Chrome is built into Claude Code, so there is nothing to `npm install`. It drives a real Chrome (or Edge) window through the Claude in Chrome extension, sharing the browser's login state. Use it only when agent-browser and Playwright are both unavailable, or for interactive verification where a reusable test file is not required.
+
+**It cannot be enabled programmatically; the user must connect it.** When this is the chosen tool, check whether the extension is connected (attempt a tab-context call). If it is not connected, stop and ask the user to enable it, giving these steps:
+
+1. Install [Google Chrome](https://www.google.com/chrome/) or [Microsoft Edge](https://www.microsoft.com/edge) (Brave, Arc, and WSL are not supported).
+2. Install the **Claude in Chrome extension** (v1.0.36+) from the Chrome Web Store and sign in with the same Anthropic account as Claude Code. Requires a direct Anthropic plan (Pro, Max, Team, or Enterprise) — not available through Bedrock, Vertex AI, or Foundry.
+3. Make sure Claude Code is v2.0.73 or higher (`claude --version`).
+4. In this Claude Code session, run `/chrome` to connect the extension (or launch with `claude --chrome`). Run `/chrome` again any time to check status, reconnect, or pick which browser to use. Selecting "Enabled by default" avoids the flag each session.
+5. If "extension not detected" appears, restart Chrome (the first connection installs a native messaging host that Chrome reads on startup), then run `/chrome` → "Reconnect extension".
+
+Once connected, confirm with the user which browser to use, then proceed to Phase 4.
 
 If a framework already exists, read its config and confirm test directory and launch settings before proceeding.
 
@@ -200,9 +216,13 @@ agent-browser snapshot --json | jq '.elements[] | select(.text | test("Welcome")
 - No fixed waits: Maestro handles timing automatically; use `assertVisible` as the sync point
 - If an element has no stable text or ID, add a `testID` to the source
 
-### Computer Use (web — last resort)
+### Claude for Chrome (web, last resort)
 
-Fall back to Computer Use only when agent-browser and Playwright are both unavailable. Drive the actual UI directly using vision: launch the app, walk through each flow from the acceptance criteria, take screenshots at each step, and report pass/fail based on observed outcomes. Note in the summary that Computer Use was used.
+Fall back to Claude for Chrome only when agent-browser and Playwright are both unavailable, or when a flow needs a real authenticated browser session that those tools cannot reproduce. Confirm the extension is connected first (see Phase 2); if not, ask the user to run `/chrome`.
+
+Drive the real Chrome window through the `claude-in-chrome` browser tools (run `/mcp` → `claude-in-chrome` to see the full list): create a tab, navigate to the app, walk through each flow from the acceptance criteria, and assert the visible outcome at each step. Take a screenshot (or record a GIF) at each major step as proof. When Claude for Chrome hits a login page or CAPTCHA it pauses for the user to handle it manually; do not attempt to bypass it.
+
+This is agentic rather than file-based: it verifies flows live but does not produce a reusable test file. Note in the summary that Claude for Chrome was used and list the screenshot/GIF paths.
 
 Run every test/flow immediately after writing it. A passing golden-path test is the baseline before writing edge cases.
 
@@ -244,7 +264,7 @@ maestro test maestro/
 All tests must pass. If existing E2E tests are now failing, treat them as regressions and fix the cause before reporting done.
 
 Report:
-- Framework used (agent-browser / Playwright / Maestro / Computer Use)
+- Framework used (agent-browser / Playwright / Maestro / Claude for Chrome)
 - How many flows are now covered
 - How many tests were written (golden path vs. edge cases)
 - Screenshot paths (for agent-browser runs)
@@ -255,7 +275,7 @@ Report:
 ## Completion Checklist
 
 - [ ] Platform confirmed (web / iOS / Android / React Native / Flutter)
-- [ ] Framework chosen and confirmed with user (agent-browser / Playwright / Maestro / Computer Use)
+- [ ] Framework chosen and confirmed with user (agent-browser / Playwright / Maestro / Claude for Chrome)
 - [ ] App launch and base URL / app ID confirmed
 - [ ] E2E framework installed and configured
 - [ ] Flow inventory created and confirmed with user
