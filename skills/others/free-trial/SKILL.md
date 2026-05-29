@@ -10,6 +10,8 @@ You are implementing a free trial with proper expiry, gating, and upgrade flow. 
 
 **Trial length:** {{args}} days
 
+If `{{args}}` is empty, ask the user for the trial length in days (default to 14 if they have no preference) before proceeding, so every downstream calculation and email has a defined value.
+
 
 ## Phase 1: Interview
 

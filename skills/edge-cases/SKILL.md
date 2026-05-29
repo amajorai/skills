@@ -10,6 +10,8 @@ You are running a thorough edge case audit. Work through each phase in order. Do
 
 **Target:** {{args}}
 
+If `{{args}}` is empty, ask the user which feature, file, or area to harden before proceeding.
+
 
 ## Phase 1: Catalog
 

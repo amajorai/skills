@@ -10,6 +10,8 @@ You are converting a YouTube video into a reusable Claude Code skill file. Work 
 
 **YouTube URL:** {{args}}
 
+If `{{args}}` is empty or contains no parseable YouTube URL, ask the user to provide a YouTube URL before proceeding.
+
 
 ## Step 1: Extract Video ID
 
