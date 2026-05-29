@@ -15,6 +15,8 @@ You are auditing and fixing accessibility issues to WCAG 2.2 AA. Work through ea
 
 Run automated tools first to find the easy wins:
 
+> On Windows, run these bash snippets via the Bash tool / Git Bash; the package-manager detection and `$PM` expansion are POSIX-shell syntax that does not work in PowerShell.
+
 ```bash
 command -v bun >/dev/null 2>&1 && PM=bun || (command -v pnpm >/dev/null 2>&1 && PM=pnpm || PM=npm)
 ```

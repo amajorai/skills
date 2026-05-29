@@ -1,6 +1,7 @@
 ---
 name: distill-skill
 description: Scans conversation history (current session and/or past transcripts) to identify repeated multi-step workflows, then extracts them into new reusable Claude Code skills written to .claude/skills/<name>.md. Turns what you keep doing manually into a one-word command.
+argument-hint: <optional "history"/"all" to scan past transcripts, or a topic to filter by>
 ---
 
 # Distill Skill

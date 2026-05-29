@@ -16,6 +16,8 @@ If `{{args}}` is empty, ask for the target URL before running anything. If it's 
 
 Ensure Lighthouse is available: `npx lighthouse --version 2>/dev/null`
 
+> On Windows, run the multi-line bash commands and `2>/dev/null` (here and in Phase 5) via the Bash tool / Git Bash. PowerShell does not support `\` line continuation or `2>/dev/null` - use a single line with backtick continuation and `2>$null` instead.
+
 Run the baseline audit:
 
 ```bash

@@ -60,6 +60,8 @@ Produce a string inventory: estimated count of strings, location of most-used on
 
 ## Phase 3: Setup
 
+The shell snippets below assume bash. On Windows, run them via the Bash tool / Git Bash, or set `PM` manually to `bun`, `pnpm`, or `npm`.
+
 ### Paraglide (recommended)
 
 ```bash
@@ -77,6 +79,7 @@ Creates:
 ### next-intl
 
 ```bash
+command -v bun >/dev/null 2>&1 && PM=bun || (command -v pnpm >/dev/null 2>&1 && PM=pnpm || PM=npm)
 $PM add next-intl
 ```
 

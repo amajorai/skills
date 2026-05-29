@@ -52,6 +52,8 @@ Confirm with the user before implementing.
 
 ### Framework-specific setup
 
+> The install snippets below assume a POSIX shell. On Windows, run them through the Bash tool or Git Bash, not PowerShell (the `command -v`, redirection, and `&&`/`||` syntax will fail in PowerShell).
+
 **Next.js**: use `next/og` with `ImageResponse`:
 ```
 app/og/route.tsx  (or pages/api/og.tsx for Pages Router)
@@ -65,6 +67,7 @@ $PM add satori @resvg/resvg-js
 
 **Cloudflare Workers**: use `workers-og` (built on Satori, designed for the Workers edge runtime):
 ```bash
+command -v bun >/dev/null 2>&1 && PM=bun || (command -v pnpm >/dev/null 2>&1 && PM=pnpm || PM=npm)
 $PM add workers-og
 ```
 

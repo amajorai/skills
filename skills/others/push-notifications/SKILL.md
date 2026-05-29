@@ -31,6 +31,8 @@ Spawn **1 subagent** to:
 
 ## Phase 3: Web Push Setup
 
+The shell snippets in this skill assume a POSIX shell. On Windows, run them through the Bash tool or Git Bash, not PowerShell or cmd.
+
 ```bash
 command -v bun >/dev/null 2>&1 && PM=bun || (command -v pnpm >/dev/null 2>&1 && PM=pnpm || PM=npm)
 ```

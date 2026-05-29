@@ -188,6 +188,8 @@ bun create better-t-stack@latest <project-name> \
   (--install | --no-install)
 ```
 
+> The backslash (`\`) line-continuation form above is for bash/Git Bash. On Windows PowerShell, run the command as a single line (or use the Bash tool), since PowerShell uses a backtick (`` ` ``) for continuation and does not expand `~` to the home directory.
+
 ### Assembly rules
 
 - **Omit** any flag where the user chose `none` or skipped (except boolean flags below — pass those explicitly to avoid interactive prompts)

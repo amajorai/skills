@@ -88,11 +88,19 @@ Present the plan and confirm before implementing.
 
 ## Phase 4: Implement
 
-### Stripe (Web)
+First, detect the package manager so `$PM` is set for whichever provider subsection you follow:
 
 ```bash
 command -v bun >/dev/null 2>&1 && PM=bun || (command -v pnpm >/dev/null 2>&1 && PM=pnpm || PM=npm)
 ```
+
+> **Shell note:** This snippet assumes a POSIX shell. On Windows, run it via the Bash tool / Git Bash (PowerShell cannot run `command -v`, `>/dev/null 2>&1`, or `&&`/`||` as written). PowerShell equivalent:
+>
+> ```powershell
+> $PM = if (Get-Command bun -ErrorAction SilentlyContinue) { "bun" } elseif (Get-Command pnpm -ErrorAction SilentlyContinue) { "pnpm" } else { "npm" }
+> ```
+
+### Stripe (Web)
 
 1. Install: `$PM add stripe`
 2. Create customer on signup (or lazily on first checkout)

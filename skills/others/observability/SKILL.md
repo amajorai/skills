@@ -67,6 +67,7 @@ Detect the package manager:
 ```bash
 command -v bun >/dev/null 2>&1 && PM=bun || (command -v pnpm >/dev/null 2>&1 && PM=pnpm || PM=npm)
 ```
+> On Windows, run this via the Bash tool or Git Bash — PowerShell will not parse `command -v`, the `&&`/`||` chain, or the subshell. PowerShell equivalent: `$PM = (Get-Command bun -ErrorAction SilentlyContinue) ? 'bun' : ((Get-Command pnpm -ErrorAction SilentlyContinue) ? 'pnpm' : 'npm')` (then use `$PM` in place of the install commands below).
 
 1. Install: `$PM add @sentry/node @sentry/browser` (or framework-specific: `@sentry/nextjs`, `@sentry/react`)
 2. Initialize at the earliest possible entry point with:

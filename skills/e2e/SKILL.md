@@ -57,6 +57,8 @@ For **Claude for Chrome** there is no CLI to version-check: it is the built-in b
 
 ## Phase 2: Framework Setup (if needed)
 
+> **Shell note:** The shell snippets in this skill (the availability checks above, package-manager detection, `curl | bash`, and `jq` pipes) assume a POSIX shell. On Windows they will not run in the default PowerShell; run them via the Bash tool / Git Bash, or use the PowerShell equivalents (e.g. `agent-browser --version` then check the exit code, and detect the package manager with `Get-Command bun`).
+
 ### agent-browser (web — primary)
 
 1. Install: `npm install -g agent-browser`

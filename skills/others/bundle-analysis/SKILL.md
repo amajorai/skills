@@ -15,8 +15,10 @@ You are analyzing and optimizing the JavaScript bundle. Work through each phase 
 
 Generate a bundle analysis report:
 
+> **Windows:** run these bash snippets through the Bash tool or Git Bash, not PowerShell. The `command -v`, `&&`/`||` chains, and the inline `ANALYZE=true ...` prefix below are bash-only. In PowerShell the build step is `$env:ANALYZE = "true"; $PM run build`.
+
 ```bash
-command -v bun >/dev/null 2>&1 && PM=bun || (command -v pnpm >/dev/null 2>&1 && PM=pnpm || PM=npm)
+command -v bun >/dev/null 2>&1 && PM=bun || { command -v pnpm >/dev/null 2>&1 && PM=pnpm || PM=npm; }
 ```
 
 **Next.js**:

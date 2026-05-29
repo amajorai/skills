@@ -104,6 +104,8 @@ rg "createServer" $(opensrc path hono)/src
 ls $(opensrc path better-auth)/packages/better-auth/src
 ```
 
+These examples use POSIX `$(...)` command substitution with unix tools (`cat`, `rg`, `ls`), so they assume a POSIX shell. On Windows, run them via the Bash tool or Git Bash, or use the PowerShell equivalent (e.g. `Get-Content (opensrc path hono)/src/router/trie-router/router.ts`).
+
 Tell the agent: "Use `opensrc path <package>` to read the source of <package> before implementing."
 
 Add to `CLAUDE.md` so the agent uses it automatically: see Phase 4.
@@ -130,7 +132,7 @@ A `CLAUDE.md` at the project root is loaded into Claude Code's context on every 
 ## Context Tools
 - **Library docs**: Add `use context7` to any prompt about a library API
 - **Package source**: Use `opensrc path <package>` to read a dependency's actual source code
-  - Example: `cat $(opensrc path hono)/src/router/trie-router/router.ts`
+  - Example: `cat $(opensrc path hono)/src/router/trie-router/router.ts` (POSIX shell; on Windows use the Bash tool, Git Bash, or `Get-Content (opensrc path hono)/src/router/trie-router/router.ts`)
 
 ## Commands
 - `bun dev` / `npm run dev` / `pnpm dev` - start dev server

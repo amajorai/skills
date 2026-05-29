@@ -15,6 +15,8 @@ You are optimizing a web project for search engine visibility and ranking. **Do 
 
 Scan silently before asking anything. Adapt commands to the detected stack.
 
+These detection, audit, and verification commands are bash (`grep -r`, `head`, `awk`, `ls -la`, `curl`, `2>/dev/null`). On Windows, run them via the Bash tool or Git Bash, since they fail in PowerShell.
+
 ```bash
 ls package.json next.config.* astro.config.* nuxt.config.* vite.config.* gatsby-config.* remix.config.* 2>/dev/null | head -20
 cat package.json 2>/dev/null | grep -E '"next"|"astro"|"nuxt"|"gatsby"|"remix"|"vite"|"react"|"vue"|"svelte"' | head -10

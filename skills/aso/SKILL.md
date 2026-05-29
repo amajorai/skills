@@ -12,6 +12,8 @@ You are making a site fully agent-ready using Cloudflare AI Search and the stand
 
 ## Phase 1: Detect Current State
 
+Note: The shell snippets in this skill assume a POSIX shell. On Windows, run them via Git Bash or the Bash tool rather than PowerShell.
+
 Run silently before asking anything. Check what's already in place:
 
 ```bash

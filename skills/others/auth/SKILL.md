@@ -77,6 +77,14 @@ Confirm before implementing.
 
 ## Phase 4: Implement
 
+Detect the package manager from the lockfile and install Better Auth:
+
+- `bun.lockb` or `bun.lock` present - run `bun add better-auth`
+- `pnpm-lock.yaml` present - run `pnpm add better-auth`
+- otherwise - run `npm install better-auth`
+
+The snippet below detects this automatically, but it is bash-only. On Windows run it via the Bash tool / Git Bash, or just run the matching install command directly:
+
 ```bash
 command -v bun >/dev/null 2>&1 && PM=bun || (command -v pnpm >/dev/null 2>&1 && PM=pnpm || PM=npm)
 $PM add better-auth

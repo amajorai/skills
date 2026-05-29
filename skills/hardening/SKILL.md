@@ -10,6 +10,8 @@ You are hardening a Linux VPS. **Do not implement anything until the interview i
 
 **Target:** {{args}}
 
+If no target was supplied above (empty `{{args}}`), ask the user for the server IP or hostname before any SSH-dependent phase, and use that value (call it `HOST`) wherever a target is needed below.
+
 
 ## Privacy Rule — Redact Sensitive Values by Default
 
@@ -187,11 +189,17 @@ Do not disable password auth until the subagent reports SUCCESS.
 
 ## Phase 4: SSH Key Setup (if selected: A)
 
-Run on the **local machine**:
+Run on the **local machine** (use the captured `HOST` value, or `{{args}}` if it was supplied):
 
 ```bash
 ssh-keygen -t ed25519 -C "vps-hardening" -f ~/.ssh/id_ed25519_vps
-ssh-copy-id -i ~/.ssh/id_ed25519_vps.pub USER@{{args}}
+ssh-copy-id -i ~/.ssh/id_ed25519_vps.pub USER@HOST
+```
+
+On Windows, run these via Git Bash or WSL. Stock Windows OpenSSH has no `ssh-copy-id` — append the key manually instead:
+
+```bash
+cat ~/.ssh/id_ed25519_vps.pub | ssh USER@HOST "mkdir -p ~/.ssh && chmod 700 ~/.ssh && cat >> ~/.ssh/authorized_keys && chmod 600 ~/.ssh/authorized_keys"
 ```
 
 Then spawn a subagent to verify key auth from a clean shell:

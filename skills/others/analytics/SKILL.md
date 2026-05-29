@@ -54,6 +54,8 @@ Spawn **2 parallel subagents**:
 
 ### PostHog
 
+> The shell snippets below assume a POSIX shell. On Windows, run them via the Bash tool or Git Bash, or select the package manager manually (e.g. `bun add ...`) under PowerShell.
+
 ```bash
 command -v bun >/dev/null 2>&1 && PM=bun || (command -v pnpm >/dev/null 2>&1 && PM=pnpm || PM=npm)
 $PM add posthog-js  # frontend

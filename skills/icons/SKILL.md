@@ -8,6 +8,8 @@ argument-hint: [path/to/source-image.png]
 
 You are generating all platform icons from a single source image. Work through each step in order.
 
+> **Shell note:** The commands below assume a POSIX shell (constructs like `mkdir -p`, `cp`, `command -v`, and `2>/dev/null` do not work in PowerShell or cmd). On Windows, run them via the Bash tool / Git Bash.
+
 **Source image:** {{args}}
 
 

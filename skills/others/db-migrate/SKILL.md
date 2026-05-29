@@ -10,6 +10,8 @@ You are running a production database migration. Safety first: data loss is not 
 
 **Migration:** {{args}}
 
+If `{{args}}` is empty, ask the user which migration file or schema change to run before proceeding.
+
 
 ## Phase 1: Understand the Migration
 
@@ -43,6 +45,8 @@ Do not proceed to Phase 3 without confirming a backup exists.
 Run the migration against a staging or development database that mirrors production.
 
 Drizzle Kit has no `--dry-run` flag. To preview, generate the SQL with `npx drizzle-kit generate` and read the generated file in `drizzle/` before applying. Then apply against staging by pointing your config at the staging database:
+
+On Windows, run the bash snippets in this file via the Bash tool or Git Bash. PowerShell and cmd do not accept inline `VAR=value` prefixes, `$(...)` substitution, `/dev/null` redirects, or unix `head` pipes.
 
 ```bash
 command -v bun >/dev/null 2>&1 && PM=bun || (command -v pnpm >/dev/null 2>&1 && PM=pnpm || PM=npm)

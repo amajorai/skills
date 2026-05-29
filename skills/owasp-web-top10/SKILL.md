@@ -64,6 +64,8 @@ Collect findings before proceeding. Pass the combined map to every Phase 3 subag
 
 Spawn **one subagent per active category** (all 10 for full scope, A01..A05 for quick, just the chosen one for single). Pass the combined Phase 2 map to every subagent as context so they don't re-explore. Each subagent reads the codebase and reports findings in this format:
 
+> **Shell note:** the shell snippets below (the `||` audit fallback chains and the `git log -p -S ...` history scans) assume a POSIX shell. On Windows, run them via the Bash tool or Git Bash, not PowerShell, where `||` semantics and quoting differ.
+
 ```
 CATEGORY: <ID> - <Name>
 SEVERITY: Critical | High | Medium | Low | Pass

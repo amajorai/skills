@@ -38,6 +38,12 @@ Spawn **2 parallel subagents**:
 
 ## Phase 3: Provider Setup
 
+Detect the package manager once (used by every provider below):
+
+```bash
+command -v bun >/dev/null 2>&1 && PM=bun || (command -v pnpm >/dev/null 2>&1 && PM=pnpm || PM=npm)
+```
+
 ### Resend (CLI-driven)
 
 ```bash
@@ -55,10 +61,6 @@ resend domains verify <id>
 
 # Create an API key and copy it to .env
 resend api-keys create --name "Production" --permission full_access
-```
-
-```bash
-command -v bun >/dev/null 2>&1 && PM=bun || (command -v pnpm >/dev/null 2>&1 && PM=pnpm || PM=npm)
 ```
 
 Install SDK: `$PM add resend`
