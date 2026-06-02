@@ -15,9 +15,20 @@ EOF
 
 ## Per-selection options (append as selected)
 
+> ⚠️ **Socket activation (Ubuntu 22.10+/24.04):** a `Port` directive here is IGNORED —
+> `ssh.socket` owns the listening port and `systemctl restart sshd` does not change
+> it. When `SSH_SOCKET_ACTIVE` was detected, the port is driven via a `ssh.socket`
+> drop-in instead (SKILL.md Phase 7). Still write `Port NEW_PORT` below: it is
+> correct if socket activation is later disabled, and harmless otherwise. Keep a
+> `Port 22` line too until the new port is confirmed, so 22 stays reachable.
+
 ```bash
-# Change SSH port
-echo "Port NEW_PORT" >> /etc/ssh/sshd_config.d/hardened.conf
+# Change SSH port (see socket-activation caveat above).
+# ⚠️ sshd listens ONLY on the ports it is told once ANY Port is set — so a lone
+# `Port NEW_PORT` DROPS port 22 on the next restart and can lock you out. During
+# the transition (Case B / non-socket hosts) write BOTH ports; remove the 22 line
+# only after NEW_PORT is confirmed (SKILL.md Phase 7).
+{ echo "Port NEW_PORT"; echo "Port 22"; } >> /etc/ssh/sshd_config.d/hardened.conf
 
 # Disable root login
 echo "PermitRootLogin no" >> /etc/ssh/sshd_config.d/hardened.conf

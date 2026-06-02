@@ -43,7 +43,10 @@ sed -i 's/^#*KbdInteractiveAuthentication.*/KbdInteractiveAuthentication yes/' /
 grep -q "^AuthenticationMethods" /etc/ssh/sshd_config \
   || echo "AuthenticationMethods publickey,keyboard-interactive" >> /etc/ssh/sshd_config
 
-sshd -t && systemctl restart sshd
+# Apply. With socket activation (Ubuntu 24.04), restart the socket; otherwise the
+# service. Either way, KEEP your current session open and test in a new terminal.
+sshd -t && { systemctl restart ssh.socket 2>/dev/null || systemctl restart ssh 2>/dev/null \
+  || systemctl restart sshd; }
 ```
 
-> ⚠️ Test 2FA in a **new terminal** before closing your current session. If TOTP is misconfigured and you close your session, you are locked out.
+> ⚠️ Test 2FA in a **new terminal** (`ssh vibe-target`) before closing your current session. If TOTP is misconfigured and you close your session, you are locked out.

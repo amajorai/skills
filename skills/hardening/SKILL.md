@@ -18,6 +18,7 @@ If no target was supplied above (empty `{{args}}`), ask the user for the server 
 Never print the following in chat, even if you just ran a command that returned them:
 
 - Server IP addresses or hostnames
+- The chosen SSH port (custom/randomized port) — see "Redact by omission" below
 - API keys, personal access tokens, or bearer tokens
 - SSH private keys, fingerprints, or TOTP secret keys / QR code seeds
 - Passwords or passphrases
@@ -33,6 +34,35 @@ When one of these values would naturally appear in your response, replace it wit
 > 2FA configured. *(The TOTP secret and QR code are not shown in chat — scan the QR code from your terminal directly.)*
 
 If the user explicitly asks — "show me the IP", "what's the token?", "give me the full command with the real values" — then output the real value in that one response only. Do not repeat it in follow-up messages unless asked again.
+
+### Use the `vibe-target` SSH alias — never the raw IP
+
+The single biggest leak is embedding the literal IP into every `ssh user@IP` command and every verification-subagent prompt. Avoid it entirely: **write the IP into a local SSH alias once, then reference the alias `vibe-target` everywhere.** Do this on your **local machine** right after you have the `HOST`, `USER`, and current port:
+
+```bash
+# Append a Host block to ~/.ssh/config. The IP is written to the file once
+# and never echoed again — every later command uses the alias, not the IP.
+mkdir -p ~/.ssh && chmod 700 ~/.ssh
+cat >> ~/.ssh/config << EOF
+
+Host vibe-target
+    HostName $HOST
+    User $USER_ON_SERVER
+    Port 22
+    StrictHostKeyChecking accept-new
+EOF
+chmod 600 ~/.ssh/config
+```
+
+From here on, **all** SSH/scp commands and **all** subagent prompts use `ssh vibe-target …` / `scp … vibe-target:…` — never `user@<IP>`. After the SSH-port change is confirmed (Phase 7), update the alias's `Port` line to the new port (`sed -i 's/^    Port .*/    Port NEW_PORT/' ~/.ssh/config`) so subsequent connections keep working without ever printing the port.
+
+### Redact by omission — never the "value (kept private)" anti-pattern
+
+Do **not** write things like `New SSH port will be 56224 (kept private — ask me if you need it)`. That announces the exact value you claim to be hiding. Redact by omission instead:
+
+> A new random SSH port was chosen and applied. *(The port is not shown in chat — ask if you need it.)*
+
+SSH **public** keys are the one exception — they are public by design and are needed for UI registration, so they may be shown when a step requires pasting them somewhere.
 
 
 ## Phase 1: Detect Current State
@@ -57,9 +87,13 @@ systemctl is-active auditd 2>/dev/null && (auditctl -l 2>/dev/null | grep -q . &
 which docker 2>/dev/null && docker ps --format '{{.Names}}: {{.Ports}}' 2>/dev/null && echo "DOCKER_PRESENT" || echo "NO_DOCKER"
 grep -rE "NOPASSWD" /etc/sudoers /etc/sudoers.d/ 2>/dev/null && echo "NOPASSWD_PRESENT" || echo "NO_NOPASSWD"
 ls /etc/ssh/sshd_config.d/ 2>/dev/null
+# Is sshd started via systemd socket activation? (Ubuntu 22.10+/24.04 default.)
+# If so, the `Port` directive in sshd_config is IGNORED and `systemctl restart
+# sshd` does NOT change the listening port — see Phase 7.
+systemctl is-active ssh.socket 2>/dev/null | grep -q '^active$' && echo "SSH_SOCKET_ACTIVE" || echo "SSH_SOCKET_INACTIVE"
 ```
 
-Note: SSH port, password auth state, SSH key presence, cloud provider, open ports, Docker, auditd rules, NOPASSWD.
+Note: SSH port, password auth state, SSH key presence, cloud provider, open ports, Docker, auditd rules, NOPASSWD, **and whether sshd uses socket activation** (`SSH_SOCKET_ACTIVE`).
 
 
 ## Phase 2: Full Interview
@@ -75,6 +109,7 @@ First, show the server summary as a single text message (do not use AskUserQuest
 > - **Open ports:** [list]
 > - **Docker:** [present with ports: X,Y / not installed]
 > - **NOPASSWD sudo:** [found / none]
+> - **sshd socket activation:** [active — port set via ssh.socket / inactive]
 >
 > I'll ask 5 quick questions, then plan and implement everything in one pass.
 
@@ -140,9 +175,11 @@ After collecting answers, summarize the full plan in plain text and ask: **"Read
 Call `EnterPlanMode` (or switch to the strongest available model with `/model opus` if unavailable).
 
 Draft the implementation plan:
-1. List every selected step in safe execution order, respecting all dependencies (provider FW before UFW enable, UFW before sshd restart, etc.)
-2. Note every safety gate (subagent SSH verification checkpoints, backup steps, port 22 transition windows)
-3. Record the randomly generated SSH port that will be used (generate it now: `shuf -i 49152-65535 -n 1` — store it as `NEW_PORT` for the rest of the run)
+1. List every selected step in safe execution order, respecting all dependencies (provider FW before UFW enable, UFW before sshd/socket restart, etc.)
+2. Note every safety gate (subagent SSH+sudo verification checkpoints, backup steps, port 22 transition windows)
+3. Record the randomly generated SSH port that will be used (generate it now: `shuf -i 49152-65535 -n 1` — store it as `NEW_PORT` for the rest of the run). **Do not print `NEW_PORT` in the plan or anywhere in chat** — redact by omission (see the Privacy Rule). Refer to it as "a new random SSH port".
+4. **Lockout cross-check.** If the selections include "disable root login" and/or "lock root password", confirm the plan creates a non-root admin user with a verified escalation path (Phase 5 `SUDO_OK`) **before** those steps. If "tighten/remove NOPASSWD" (Q4) is also selected, confirm the admin user has a password set — otherwise removing NOPASSWD strips its only escalation path. Surface any such dependency in the plan text.
+5. **Socket-activation note.** If `SSH_SOCKET_ACTIVE` was detected and a port change is selected, the plan must drive the port via the `ssh.socket` drop-in (Phase 7), not via a plain `Port` directive + `restart sshd`.
 
 Present the plan. Do not proceed until the user approves. Call `ExitPlanMode` after approval.
 
@@ -157,7 +194,7 @@ Spawn a subagent to verify key auth works before proceeding (this is a separate 
 ```
 Agent({
   description: "Verify SSH key auth before disabling password auth",
-  prompt: "Run: ssh -o StrictHostKeyChecking=no -o PasswordAuthentication=no -o ConnectTimeout=15 USER@HOST echo 'KEY_AUTH_OK'. Report SUCCESS if output contains KEY_AUTH_OK, otherwise FAILURE with the exact error."
+  prompt: "Run: ssh -o StrictHostKeyChecking=no -o PasswordAuthentication=no -o ConnectTimeout=15 vibe-target echo 'KEY_AUTH_OK'. (vibe-target is the alias from the Privacy Rule — it hides the IP.) Report SUCCESS if output contains KEY_AUTH_OK, otherwise FAILURE with the exact error."
 })
 ```
 
@@ -171,7 +208,7 @@ Do not disable password auth until the subagent reports SUCCESS.
 > 1. Open NEW_PORT in UFW — **while keeping port 22 open in UFW too**
 > 2. Open NEW_PORT in the provider firewall — **while keeping port 22 open there too**
 > 3. Restart sshd
-> 4. Ask the user to verify in a **NEW terminal**: `ssh -p NEW_PORT USER@HOST echo "ok"`
+> 4. Ask the user to verify in a **NEW terminal**: `ssh -p NEW_PORT vibe-target echo "ok"` (the alias hides the IP)
 > 5. Only after step 4 succeeds: remove port 22 from UFW
 > 6. Only after step 5: remove port 22 from the provider firewall
 >
@@ -183,6 +220,26 @@ Do not disable password auth until the subagent reports SUCCESS.
 - EC2: port 22 must stay open in the Security Group until new port is confirmed.
 - DigitalOcean: port 22 must stay open in the Cloud Firewall until new port is confirmed.
 
+**If "disable root login" and/or "lock root password" selected:**
+
+> ❌ **ROOT LOCKOUT RULE — read before disabling root access.**
+>
+> Disabling root SSH login (Phase 6) and locking the root password (Phase 11)
+> are only safe once a **separate, non-root admin session is verified to BOTH
+> (a) SSH in AND (b) run `sudo`.** The Phase 5 subagent check (`SUDO_OK`) is that
+> gate. Until it passes:
+> 1. Do **not** add `PermitRootLogin no` to the SSH drop-in.
+> 2. Do **not** run `passwd -l root`.
+>
+> The trap: a user created with `--disabled-password` and no NOPASSWD entry can
+> log in but cannot escalate — disabling root then leaves no admin path and
+> requires the provider's web console to recover.
+>
+> **Lockout combo to flag in the plan:** "disable root login" + "lock root
+> password" + a non-root user that lacks working sudo = total admin lockout.
+> If both are selected, confirm the admin user's `SUDO_OK` first and surface the
+> dependency explicitly.
+
 **If no keys and user skipped key setup:**
 > ❌ Cannot safely disable password auth. Either help them set up keys first or skip that step.
 
@@ -191,15 +248,18 @@ Do not disable password auth until the subagent reports SUCCESS.
 
 Run on the **local machine** (use the captured `HOST` value, or `{{args}}` if it was supplied):
 
+> Set up the `vibe-target` SSH alias first (see the Privacy Rule) so none of the
+> commands below print the raw IP. They all reference `vibe-target`.
+
 ```bash
 ssh-keygen -t ed25519 -C "vps-hardening" -f ~/.ssh/id_ed25519_vps
-ssh-copy-id -i ~/.ssh/id_ed25519_vps.pub USER@HOST
+ssh-copy-id -i ~/.ssh/id_ed25519_vps.pub vibe-target
 ```
 
 On Windows, run these via Git Bash or WSL. Stock Windows OpenSSH has no `ssh-copy-id` — append the key manually instead:
 
 ```bash
-cat ~/.ssh/id_ed25519_vps.pub | ssh USER@HOST "mkdir -p ~/.ssh && chmod 700 ~/.ssh && cat >> ~/.ssh/authorized_keys && chmod 600 ~/.ssh/authorized_keys"
+cat ~/.ssh/id_ed25519_vps.pub | ssh vibe-target "mkdir -p ~/.ssh && chmod 700 ~/.ssh && cat >> ~/.ssh/authorized_keys && chmod 600 ~/.ssh/authorized_keys"
 ```
 
 Then spawn a subagent to verify key auth from a clean shell:
@@ -207,7 +267,7 @@ Then spawn a subagent to verify key auth from a clean shell:
 ```
 Agent({
   description: "Verify new SSH key works",
-  prompt: "Run: ssh -o StrictHostKeyChecking=no -o PasswordAuthentication=no -o ConnectTimeout=15 -i ~/.ssh/id_ed25519_vps USER@HOST echo 'KEY_OK'. Report SUCCESS if output contains KEY_OK, otherwise FAILURE with the exact error."
+  prompt: "Run: ssh -o StrictHostKeyChecking=no -o PasswordAuthentication=no -o ConnectTimeout=15 -i ~/.ssh/id_ed25519_vps vibe-target echo 'KEY_OK'. (vibe-target is the alias from the Privacy Rule — it hides the IP.) Report SUCCESS if output contains KEY_OK, otherwise FAILURE with the exact error."
 })
 ```
 
@@ -216,25 +276,60 @@ Do not continue until the subagent reports SUCCESS.
 
 ## Phase 5: Create Non-Root Sudo User (if selected: B)
 
+> ❌ **The #1 cause of "I hardened my box and got locked out of admin":** a non-root
+> user is created **without a working escalation path**, then root login is
+> disabled (Phase 6) and/or the root password is locked (Phase 11) — leaving
+> nobody who can run `sudo`. Recovery then needs the provider's web console.
+> **A non-root user is not "ready" until it can both SSH in AND run `sudo`.**
+
+`adduser` without `--disabled-password` prompts interactively for a password and
+will hang in a non-interactive run. Create the user non-interactively, and give it
+a working sudo path. On a **key-only** server (the usual case — no password to
+type) use passwordless sudo:
+
 ```bash
-adduser --gecos "" USERNAME
+adduser --disabled-password --gecos "" USERNAME
 usermod -aG sudo USERNAME
 mkdir -p /home/USERNAME/.ssh
 cp /root/.ssh/authorized_keys /home/USERNAME/.ssh/
 chown -R USERNAME:USERNAME /home/USERNAME/.ssh
 chmod 700 /home/USERNAME/.ssh && chmod 600 /home/USERNAME/.ssh/authorized_keys
+
+# Working escalation path. Key-only server → passwordless sudo (there is no
+# password to enter). Mirrors the cloud-init `ubuntu ALL=(ALL) NOPASSWD:ALL`
+# default. visudo -c validates before it can take effect.
+echo "USERNAME ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/90-USERNAME-vibe
+chmod 440 /etc/sudoers.d/90-USERNAME-vibe
+visudo -c
 ```
 
-Spawn a subagent to verify the new user can SSH in (separate shell, clean state):
+> **Want password-protected sudo instead of NOPASSWD?** Set a real password with
+> `passwd USERNAME` and skip the sudoers drop-in. Do **not** leave a
+> `--disabled-password` user with no NOPASSWD entry — it cannot escalate at all.
+> Note the interplay with Question 4's "tighten NOPASSWD" option: if the user
+> wants NOPASSWD removed server-wide, they **must** set a password here, or they
+> lose the only escalation path.
+
+Spawn a subagent to verify the new user can SSH in **and escalate** (separate
+shell, clean state — this is the truth source, not just connectivity):
 
 ```
 Agent({
-  description: "Verify SSH as new non-root user",
-  prompt: "Run: ssh -o StrictHostKeyChecking=no -o ConnectTimeout=15 USERNAME@HOST echo 'USER_OK'. Report SUCCESS if output contains USER_OK, otherwise FAILURE with the exact error."
+  description: "Verify SSH + sudo as new non-root user",
+  prompt: "Run: ssh -o StrictHostKeyChecking=no -o ConnectTimeout=15 -l USERNAME vibe-target 'whoami && sudo -n true && echo SUDO_OK'. (vibe-target is the alias to the server; -l USERNAME logs in as the new user. Usernames are not secret — only the IP is, and the alias hides it.) Report SUCCESS only if the output contains SUDO_OK. Otherwise report FAILURE with the exact error — FAILURE means the user exists but cannot run sudo (e.g. created with --disabled-password and no NOPASSWD entry, or a password is required)."
 })
 ```
 
-Do not continue until the subagent reports SUCCESS.
+Do not continue until the subagent reports SUCCESS (`SUDO_OK`). A user that can
+SSH in but cannot `sudo` is **not** a safe replacement for root — treat it as a
+blocker and fix the escalation path before any Phase 6 / Phase 11 step.
+
+Once `SUDO_OK` is confirmed, point the alias at the new admin user so every later
+step connects as it (not root):
+
+```bash
+sed -i 's/^    User .*/    User USERNAME/' ~/.ssh/config
+```
 
 
 ## Phase 6: Harden SSH (if selected: C)
@@ -253,6 +348,13 @@ Build the drop-in including **only** the lines for what the user selected. See [
 ```bash
 sshd -t && echo "Config OK"
 ```
+
+> ⚠️ **Socket activation (`SSH_SOCKET_ACTIVE` from Phase 1):** if you are changing
+> the port, the `Port` directive in the drop-in is **not enough** — on Ubuntu
+> 22.10+/24.04 the listening port is owned by `ssh.socket`, and `Port` is ignored.
+> Phase 7 drives the port through a `ssh.socket` drop-in instead. Still include
+> `Port NEW_PORT` in the sshd drop-in (it is correct if socket activation is ever
+> disabled, and harmless otherwise).
 
 **Do not restart sshd here — do it after UFW is configured.**
 
@@ -292,11 +394,32 @@ ufw status verbose
 
 **⛔ STOP HERE if provider firewall selected.** Run Phase 8 Part 1 (open NEW_PORT there, keep port 22 open) before restarting sshd. Return here after Phase 8 Part 1 is done.
 
-Now restart sshd:
+Now apply the new port. **The command depends on whether sshd uses socket activation** (`SSH_SOCKET_ACTIVE` from Phase 1):
+
+**Case A — socket activation active (`SSH_SOCKET_ACTIVE`, e.g. Ubuntu 22.10+/24.04):**
+`systemctl restart sshd` will **not** change the port — `ssh.socket` owns it. Drive the port through a socket drop-in that listens on **both** the old and new port during the transition (this is the keep-22-open safety rule, enforced at the socket layer):
 
 ```bash
-systemctl restart sshd
-ss -tlnp | grep ssh
+mkdir -p /etc/systemd/system/ssh.socket.d
+cat > /etc/systemd/system/ssh.socket.d/listen.conf << EOF
+[Socket]
+ListenStream=
+ListenStream=22
+ListenStream=NEW_PORT
+EOF
+systemctl daemon-reload
+systemctl restart ssh.socket
+ss -tlnp | grep ssh    # should now show BOTH 22 and NEW_PORT listening
+```
+
+**Case B — no socket activation (`SSH_SOCKET_INACTIVE`):** the `Port` directive in the drop-in is authoritative. **It must list BOTH ports** — a lone `Port NEW_PORT` makes sshd listen on the new port *only* and drops 22, which is exactly how you get locked out. The `references/ssh-config.md` port block already writes both `Port NEW_PORT` and `Port 22`; confirm both lines are present, then restart:
+
+```bash
+grep -E '^Port (22|NEW_PORT)$' /etc/ssh/sshd_config.d/hardened.conf   # expect BOTH lines
+# If `Port 22` is missing, add it before restarting:
+grep -q '^Port 22$' /etc/ssh/sshd_config.d/hardened.conf || echo "Port 22" >> /etc/ssh/sshd_config.d/hardened.conf
+sshd -t && { systemctl restart ssh 2>/dev/null || systemctl restart sshd; }
+ss -tlnp | grep ssh    # should show BOTH 22 and NEW_PORT listening
 ```
 
 Spawn a subagent to verify the new SSH port from a completely separate shell (this is the source of truth — not just checking if sshd is listening, but actually connecting through all firewall layers):
@@ -304,15 +427,35 @@ Spawn a subagent to verify the new SSH port from a completely separate shell (th
 ```
 Agent({
   description: "Verify SSH on new port through all firewall layers",
-  prompt: "Run: ssh -o StrictHostKeyChecking=no -o ConnectTimeout=15 -p NEW_PORT USER@HOST echo 'NEW_PORT_OK'. Report SUCCESS if output contains NEW_PORT_OK, otherwise FAILURE with the exact error. This test goes through UFW and the provider firewall — a failure means one of those layers is still blocking the port."
+  prompt: "Run: ssh -o StrictHostKeyChecking=no -o ConnectTimeout=15 -p NEW_PORT vibe-target echo 'NEW_PORT_OK'. (vibe-target is the alias from the Privacy Rule — it hides the IP.) Report SUCCESS if output contains NEW_PORT_OK, otherwise FAILURE with the exact error. This test goes through UFW and the provider firewall — a failure means one of those layers is still blocking the port, or (on Ubuntu 24.04) ssh.socket was not updated."
 })
 ```
 
-If the subagent reports FAILURE: **do NOT remove port 22**. Diagnose — check `systemctl status sshd`, `ss -tlnp | grep ssh`, `ufw status verbose`, and whether the provider firewall has the new port open.
+If the subagent reports FAILURE: **do NOT remove port 22**. Diagnose — check `systemctl status ssh ssh.socket sshd`, `ss -tlnp | grep ssh` (is NEW_PORT actually listening? if only 22 shows, the socket drop-in did not apply), `ufw status verbose`, and whether the provider firewall has the new port open.
 
-**Only after the subagent reports SUCCESS**, remove port 22 from UFW:
+**Only after the subagent reports SUCCESS**, point the alias at the new port and close port 22.
+
+First, on your **local machine**, update the alias so later connections use the new port (no IP/port printed in chat):
 
 ```bash
+# LOCAL machine — edits your local ~/.ssh/config, not the server's:
+sed -i 's/^    Port .*/    Port NEW_PORT/' ~/.ssh/config
+```
+
+Then, on the **server**, stop listening on 22 and remove it from UFW. Run the branch for your case:
+
+```bash
+#  - Case A (socket activation): drop the ListenStream=22 line and reload the socket:
+if systemctl is-active ssh.socket 2>/dev/null | grep -q '^active$'; then
+  sed -i '/^ListenStream=22$/d' /etc/systemd/system/ssh.socket.d/listen.conf
+  systemctl daemon-reload && systemctl restart ssh.socket
+else
+  #  - Case B (no socket activation): drop the `Port 22` line and restart the service:
+  sed -i '/^Port 22$/d' /etc/ssh/sshd_config.d/hardened.conf
+  sshd -t && { systemctl restart ssh 2>/dev/null || systemctl restart sshd; }
+fi
+ss -tlnp | grep ssh    # confirm 22 is gone and NEW_PORT remains
+
 ufw delete allow 22/tcp
 ufw status verbose
 ```
@@ -429,7 +572,10 @@ grep -q "^Banner" /etc/ssh/sshd_config \
   && sed -i "s|^Banner.*|Banner /etc/issue.net|" /etc/ssh/sshd_config \
   || echo "Banner /etc/issue.net" >> /etc/ssh/sshd_config
 
-sshd -t && systemctl reload sshd
+# Apply the config. With socket activation, per-connection sshd instances read the
+# config fresh, so a service reload may not exist — fall back gracefully.
+sshd -t && { systemctl reload ssh 2>/dev/null || systemctl reload sshd 2>/dev/null \
+  || systemctl restart ssh.socket 2>/dev/null || true; }
 ```
 
 
